@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Saw,Learnt,To think">
+        <meta property="og:title" content="hexo+github半小时搭建博客">
     
 
     <!--Open Graph Description-->
@@ -31,7 +31,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -42,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>Saw,Learnt,To think</title>
+    <title>hexo+github半小时搭建博客 - Saw,Learnt,To think</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
@@ -146,13 +146,13 @@
 
     <div class="post-header">
         <h1 class="title">
-            <a href="/2019/09/04/hexo+github半小时搭建博客/">
-                Untitled
+            <a href="/2019/10/13/hexo+github半小时搭建博客/">
+                hexo+github半小时搭建博客
             </a>
         </h1>
         <div class="post-info">
             
-                <span class="date">2019-09-04</span>
+                <span class="date">2019-10-13</span>
             
             
             
@@ -202,11 +202,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>新建一个仓库</p>
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/26.png" alt="26"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/26.png" alt="26"></p>
 </li>
 </ul>
 <p>  注意仓库名的命名要和你GitHub账户名一致，操作 如下所示：</p>
-<p>  <img src="/2019/09/04/hexo+github半小时搭建博客/27.png" alt="27"></p>
+<p>  <img src="/2019/10/13/hexo+github半小时搭建博客/27.png" alt="27"></p>
 <ul>
 <li><p>设置hexo配置文件</p>
 <p>你在配置hexo环境的时候，生成了一个hexo的文件，命令为：“hexo init /home/Myblog”， 因此，我们先要进入这个目录</p>
@@ -215,7 +215,7 @@
 <p>修改配置文件配置,将方框部分内容替换为你的GitHub账户名</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim _config.yml</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/28.png" alt="28"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/28.png" alt="28"></p>
 </li>
 <li><p>生成ssh key</p>
 </li>
@@ -224,27 +224,27 @@
 <p>复制生成的public key, 输入以下命令，将生成的内容复制</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/29.png" alt="29"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/29.png" alt="29"></p>
 </li>
 <li><p>设置GitHub的ssh</p>
 <p>先打开你的GitHub账户页面， 进入setting</p>
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/30.png" alt="30"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/30.png" alt="30"></p>
 <p>新建一个ssh密钥</p>
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/31.png" alt="31"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/31.png" alt="31"></p>
 <p>在下方红色框框内，粘贴刚才生成的public key</p>
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/32.png" alt="32"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/32.png" alt="32"></p>
 </li>
 <li><p>测试ssh是否布置成功</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 
 <p>如下显示，则说明布置成功</p>
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/33.png" alt="33"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/33.png" alt="33"></p>
 </li>
 <li><p>现在一切都已经完成，将本地的博客推送到GitHub</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean  //清除缓存文件db.json和已生成的静态文件public</span><br><span class="line">hexo g   //生成网站静态文件到默认设置的public文件夹</span><br><span class="line">hexo d   //部署网站到设定的仓库</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>访问自己的博客</p>
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/34.png" alt="34"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/34.png" alt="34"></p>
 </li>
 </ul>
 <p>在浏览器中输入上图红色框框中的内容，即可访问自己的博客</p>
@@ -254,13 +254,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /home/Myblog/source/_posts</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>将Markdown笔记文件复制到这个目录里，并创建一个同名文件夹(用于存放图片)，如图所示：</p>
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/35.png" alt="35"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/35.png" alt="35"></p>
 </li>
 <li><p>图片的引用，要用相对地址，如下图所示</p>
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/36.png" alt="36"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/36.png" alt="36"></p>
 </li>
 <li><p>修改hexo目录下的_config.yml</p>
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/37.png" alt="37"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/37.png" alt="37"></p>
 </li>
 </ul>
 <ul>
@@ -273,7 +273,7 @@
 <li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hexo/node_modules/hexo-asset-image/index.js</span><br></pre></td></tr></table></figure>
 
 <p>将对应位置修改为红色框中内容</p>
-<p><img src="/2019/09/04/hexo+github半小时搭建博客/38.png" alt="38"></p>
+<p><img src="/2019/10/13/hexo+github半小时搭建博客/38.png" alt="38"></p>
 </li>
 <li><p>部署到GitHub</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean  //清除缓存文件db.json和已生成的静态文件public</span><br><span class="line">hexo g   //生成网站静态文件到默认设置的public文件夹</span><br><span class="line">hexo d   //部署网站到设定的仓库</span><br></pre></td></tr></table></figure>
@@ -285,6 +285,11 @@
 
     
 
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/Web网站/">#Web网站</a>
+        </div>
     
 
     <!-- Comments -->
@@ -317,11 +322,11 @@
         <ul>
             
             <li>
-                <a class="footer-post" href="/2019/09/19/Hadoop及Spark安装笔记/">Hadoop及Spark安装笔记</a>
+                <a class="footer-post" href="/2019/10/13/hexo+github半小时搭建博客/">hexo+github半小时搭建博客</a>
             </li>
             
             <li>
-                <a class="footer-post" href="/2019/09/04/hexo+github半小时搭建博客/">Untitled</a>
+                <a class="footer-post" href="/2019/09/19/Hadoop及Spark安装笔记/">Hadoop及Spark安装笔记</a>
             </li>
             
             <li>
