@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="较为简单的Web题，以做备忘">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Lorewalker">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="CTF-Web题WriteUp-简单">
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Saw,Learnt,To think">
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article">
+    
+
+    <!--Page Cover-->
+    
+
+    <meta name="twitter:card" content="summary">
+    
+
+    <!-- Title -->
+    
+    <title>CTF-Web题WriteUp-简单 - Saw,Learnt,To think</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Google Analytics -->
+    
+
+
+</head>
+
+
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-pattern"></div>
+
+<!-- Menu -->
+<!--Menu Links and Overlay-->
+<div class="menu-bg">
+    <div class="menu-container">
+        <ul>
+            
+            <li class="menu-item">
+                <a href="/">
+                    主页
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/archives">
+                    目录
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/about.html">
+                    关于
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/tags">
+                    标签
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/categories">
+                    分类
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="/contact.html">
+                    联系我
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</div>
+
+<!--Hamburger Icon-->
+<nav>
+    <a href="#menu"></a>
+</nav>
+
+<div class="container">
+
+    <!-- Main Content -->
+    <div class="row">
+    <div class="col-sm-12">
+
+        <!--Title and Logo-->
+        <header>
+    <div class="logo">
+        <a href="/"><i class="logo-icon fa fa-cube" aria-hidden="true"></i></a>
+        
+    </div>
+</header>
+
+        <section class="main">
+            
+<div class="post">
+
+    <div class="post-header">
+        <h1 class="title">
+            <a href="/2019/09/10/CTF-Web题-简单/">
+                CTF-Web题WriteUp-简单
+            </a>
+        </h1>
+        <div class="post-info">
+            
+                <span class="date">2019-09-10</span>
+            
+            
+            
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Gallery -->
+        
+
+        <!-- Post Content -->
+        <h3 id="较为简单的Web题，以做备忘"><a href="#较为简单的Web题，以做备忘" class="headerlink" title="较为简单的Web题，以做备忘"></a>较为简单的Web题，以做备忘</h3><a id="more"></a>
+
+<h3 id="暴力破解题"><a href="#暴力破解题" class="headerlink" title="==暴力破解题=="></a>==暴力破解题==</h3><h4 id="①弱口令暴力破解"><a href="#①弱口令暴力破解" class="headerlink" title="①弱口令暴力破解"></a>①弱口令暴力破解</h4><p>将请求拦截发送到 burpsuite Intruder</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/20.png" alt="20"></p>
+<h4 id="②设置常用字典"><a href="#②设置常用字典" class="headerlink" title="②设置常用字典"></a>②设置常用字典</h4><p><img src="/2019/09/10/CTF-Web题-简单/21.png" alt="21"></p>
+<h4 id="③观察返回包的-Length-发现flag"><a href="#③观察返回包的-Length-发现flag" class="headerlink" title="③观察返回包的 Length, 发现flag"></a>③观察返回包的 Length, 发现flag</h4><p><img src="/2019/09/10/CTF-Web题-简单/19.png" alt="19"></p>
+<h3 id="MD5验证"><a href="#MD5验证" class="headerlink" title="==MD5验证=="></a>==MD5验证==</h3><h4 id="①MD5弱类型比较"><a href="#①MD5弱类型比较" class="headerlink" title="①MD5弱类型比较"></a>①MD5弱类型比较</h4><p><strong>思路：传入两个加密后开头为0e的不想等值就可以绕过了</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if($_POST[&apos;param1&apos;]!=$_POST[&apos;param2&apos;] &amp;&amp; md5($_POST[&apos;param1&apos;])==md5($_POST[&apos;param2&apos;]))&#123;</span><br><span class="line">                                                 die(&quot;success!&quot;);</span><br><span class="line">                                          &#125;</span><br></pre></td></tr></table></figure>
+
+<p>例：240610708、QNKCDZO、aabg7XSs、aabC9RqS</p>
+<p>==解题：param1=240610708&amp;param2=QNKCDZO==</p>
+<h4 id="②MD5强类型比较"><a href="#②MD5强类型比较" class="headerlink" title="②MD5强类型比较"></a>②MD5强类型比较</h4><p><strong>思路：传入两个数组，数组的值不相等，造成MD5加密时报错产生NULL=NULL的情况，绕过比较</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if($_POST[&apos;param1&apos;]!==$_POST[&apos;param2&apos;] &amp;&amp; md5($_POST[&apos;param1&apos;])===md5($_POST[&apos;param2&apos;]))&#123;</span><br><span class="line">                                                 die(&quot;success!&quot;);</span><br><span class="line">                                          &#125;</span><br></pre></td></tr></table></figure>
+
+<p>==解题：param1[]=1&amp;param2[]=a==</p>
+<h4 id="③MD5字符串类"><a href="#③MD5字符串类" class="headerlink" title="③MD5字符串类"></a>③MD5字符串类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if((string)$_POST[&apos;param1&apos;]!==(string)$_POST[&apos;param2&apos;] &amp;&amp; md5($_POST[&apos;param1&apos;])===md5($_POST[&apos;param2&apos;]))&#123;</span><br><span class="line">                                   die(&quot;success!);</span><br><span class="line">                            &#125;</span><br></pre></td></tr></table></figure>
+
+<p>利用，快速MD5 碰撞生成器(<a href="http://www.win.tue.nl/hashclash/fastcoll_v1.0.0.5.exe.zip" target="_blank" rel="noopener">fastcoll_v1.0.0.5.exe.zip </a>)</p>
+<ul>
+<li><p>步骤一：</p>
+<p>创建一个文本文件。写入M 。命名为1.txt</p>
+</li>
+<li><p>步骤二：</p>
+<p>运行fastcoll 输入以下参数。 -p 是源文件 -o 是输出文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastcoll_v1.0.0.5.exe -p 1.txt -o 1.txt 2.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>步骤三:</p>
+<p>创建test.php文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">function  readmyfile($path)&#123;</span><br><span class="line">    $fh = fopen($path, &quot;rb&quot;);</span><br><span class="line">    $data = fread($fh, filesize($path));</span><br><span class="line">    fclose($fh);</span><br><span class="line">    return $data;</span><br><span class="line">&#125;</span><br><span class="line">echo &apos;二进制hash &apos;. md5( (readmyfile(&quot;1.txt&quot;)));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo  &apos;URLENCODE &apos;. urlencode(readmyfile(&quot;1.txt&quot;));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo &apos;URLENCODE hash &apos;.md5(urlencode (readmyfile(&quot;1.txt&quot;)));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo &apos;二进制hash &apos;.md5( (readmyfile(&quot;2.txt&quot;)));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo  &apos;URLENCODE &apos;.  urlencode(readmyfile(&quot;2.txt&quot;));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">echo &apos;URLENCODE hash &apos;.md5( urlencode(readmyfile(&quot;2.txt&quot;)));</span><br><span class="line">echo &quot;&lt;br&gt;&lt;br&gt;\r\n&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>URLENCODE后跟的字符串即为所需内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2</span><br><span class="line"></span><br><span class="line">M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="==信息收集=="></a>==信息收集==</h3><h4 id="①检查源码"><a href="#①检查源码" class="headerlink" title="①检查源码"></a>①检查源码</h4><p>目标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.cn-hack.cn/qs/5.htm</span><br></pre></td></tr></table></figure>
+
+<p>右键查看源码，或按下“F12”键</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/1.png" alt="1"></p>
+<h4 id="②代理截获"><a href="#②代理截获" class="headerlink" title="②代理截获"></a>②代理截获</h4><p>目标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123.206.87.240:9009/hd.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/09/10/CTF-Web题-简单/2.png" alt="2"></p>
+<h4 id="③前端代码类"><a href="#③前端代码类" class="headerlink" title="③前端代码类"></a>③前端代码类</h4><p>目标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123.206.87.240:8002/yanzhengma</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/09/10/CTF-Web题-简单/3.png" alt="3"></p>
+<h4 id="④JSP类题目"><a href="#④JSP类题目" class="headerlink" title="④JSP类题目"></a>④JSP类题目</h4><p>目标</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123.206.87.240:8002/web5/</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/09/10/CTF-Web题-简单/4.png" alt="4"></p>
+<p>FUCK一共有6个字符</p>
+<ul>
+<li>！</li>
+<li>+</li>
+<li>(</li>
+<li>)</li>
+<li>[</li>
+<li>]</li>
+</ul>
+<p><img src="/2019/09/10/CTF-Web题-简单/5.png" alt="5"></p>
+<p>复制后，在控制台粘贴回车即可</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/6.png" alt="6"></p>
+<h4 id="⑤备份题-backup"><a href="#⑤备份题-backup" class="headerlink" title="⑤备份题(backup)"></a>⑤备份题(backup)</h4><p><strong>目标如下:</strong></p>
+<p>题目位于攻防世界的新手-web-backup题中</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/14.png" alt="14"></p>
+<p>解题思路如下:</p>
+<ul>
+<li><p>题目给出是备份, 并且进去网址时, 给了一个 index.php的 信息</p>
+</li>
+<li><p>那么就先访问 http://……….index.php网页</p>
+</li>
+<li><p>发现和原网页是一个网页</p>
+</li>
+<li><p>一般习惯上来说, 备份文件都是在 文件名尾部加上” .bak “</p>
+</li>
+<li><p>因此我们访问 http://……….index.php.bak</p>
+</li>
+<li><p>下载了一个文件, 用记事本或者vs code 打开, 内容中就存在 flag</p>
+<p>如下所示</p>
+</li>
+</ul>
+<p><img src="/2019/09/10/CTF-Web题-简单/15.png" alt="15"></p>
+<h3 id="命令执行"><a href="#命令执行" class="headerlink" title="==命令执行=="></a>==命令执行==</h3><h4 id="①最简单的命令执行"><a href="#①最简单的命令执行" class="headerlink" title="①最简单的命令执行"></a>①最简单的命令执行</h4><p>在输入框, 输入” ;ls -alh /home “ , 发现flag</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/24.png" alt="24"></p>
+<p>输入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;cat /home/flag.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/09/10/CTF-Web题-简单/25.png" alt="25"></p>
+<h3 id="webshell题"><a href="#webshell题" class="headerlink" title="==webshell题=="></a>==webshell题==</h3><h4 id="①最简单的webshell"><a href="#①最简单的webshell" class="headerlink" title="①最简单的webshell"></a>①最简单的webshell</h4><p><img src="/2019/09/10/CTF-Web题-简单/22.png" alt="22"></p>
+<p>得到的提示如上, 那么直接用中国菜刀连接就可以了</p>
+<p>右键添加, 输入网址和 shell 密码即可</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/23.png" alt="23"></p>
+<h3 id="http协议题"><a href="#http协议题" class="headerlink" title="http协议题"></a>http协议题</h3><h4 id="①修改referer"><a href="#①修改referer" class="headerlink" title="①修改referer"></a>①修改referer</h4><p>要求从哪个网页访问</p>
+<p>目标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">123.206.87.240:9009/from.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/09/10/CTF-Web题-简单/7.png" alt="7"></p>
+<h4 id="②要求IP访问-某主机或本地地址"><a href="#②要求IP访问-某主机或本地地址" class="headerlink" title="②要求IP访问(某主机或本地地址)"></a>②要求IP访问(某主机或本地地址)</h4><p><img src="/2019/09/10/CTF-Web题-简单/8.png" alt="8"></p>
+<p>修改,   X-Forwarded-For:127.0.0.1</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/9.png" alt="9"></p>
+<h4 id="③要求国家地区访问"><a href="#③要求国家地区访问" class="headerlink" title="③要求国家地区访问"></a>③要求国家地区访问</h4><p><img src="/2019/09/10/CTF-Web题-简单/10.png" alt="10"></p>
+<p>国家地区要求，一般修改，Accept-Language</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/11.png" alt="11"></p>
+<h4 id="④要求哪一个浏览器-品牌电脑-手机访问"><a href="#④要求哪一个浏览器-品牌电脑-手机访问" class="headerlink" title="④要求哪一个浏览器/品牌电脑/手机访问"></a>④要求哪一个浏览器/品牌电脑/手机访问</h4><p><img src="/2019/09/10/CTF-Web题-简单/12.png" alt="12"></p>
+<p>修改User_Agent字段</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/13.png" alt="13"></p>
+<h4 id="⑤一个不能按的按钮-disable-button"><a href="#⑤一个不能按的按钮-disable-button" class="headerlink" title="⑤一个不能按的按钮(disable_button)"></a>⑤一个不能按的按钮(disable_button)</h4><p>题目位于:  攻防世界-新手-web-disable_button</p>
+<p>打开有如下所示:</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/16.png" alt="16"></p>
+<p><strong>分析</strong></p>
+<ul>
+<li>发现方法是 post</li>
+<li>发现变量名是 auth</li>
+<li>发现变量名的值是 flag</li>
+</ul>
+<p>因此, 就可以得出结论, 按一下操作可得到flag</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/17.png" alt="17"></p>
+<h3 id="代码审计题"><a href="#代码审计题" class="headerlink" title="==代码审计题=="></a>==代码审计题==</h3><h4 id="1-2-输入密码-simple-js-—解法一"><a href="#1-2-输入密码-simple-js-—解法一" class="headerlink" title="1.2 输入密码(simple_js)—解法一"></a>1.2 输入密码(simple_js)—解法一</h4><h5 id="①源代码为"><a href="#①源代码为" class="headerlink" title="①源代码为:"></a>①<strong>源代码为:</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function dechiffre(pass_enc)&#123;</span><br><span class="line">        var pass = &quot;70,65,85,88,32,80,65,83,83,87,79,82,68,32,72,65,72,65&quot;;</span><br><span class="line">        var tab  = pass_enc.split(&apos;,&apos;);</span><br><span class="line">        var tab2 = pass.split(&apos;,&apos;);</span><br><span class="line">        var i,j,k,l=0,m,n,o,p = &quot;&quot;;</span><br><span class="line">        i = 0;</span><br><span class="line">        j = tab.length;</span><br><span class="line">        k = j + (l) + (n=0);</span><br><span class="line">        n = tab2.length;</span><br><span class="line">        for(i = (o=0); i &lt; (k = j = n); i++ )&#123;</span><br><span class="line">        	o = tab[i-l];</span><br><span class="line">        	p += String.fromCharCode((o = tab2[i]));</span><br><span class="line">          if(i == 5)break;</span><br><span class="line">          &#125;</span><br><span class="line">        for(i = (o=0); i &lt; (k = j = n); i++ )&#123;</span><br><span class="line">          o = tab[i-l];</span><br><span class="line">          if(i &gt; 5 &amp;&amp; i &lt; k-1)</span><br><span class="line">            p += String.fromCharCode((o = tab2[i]));</span><br><span class="line">        &#125;</span><br><span class="line">        p += String.fromCharCode(tab2[17]);</span><br><span class="line">        pass = p;return pass;</span><br><span class="line">&#125;</span><br><span class="line">    String[&quot;fromCharCode&quot;](dechiffre(&quot;\x35\x35\x2c\x35\x36\x2c\x35\x34\x2c\x37\x39\x2c\x31\x31\x35\x2c\x36\x39\x2c\x31\x31\x34\x2c\x31\x31\x36\x2c\x31\x30\x37\x2c\x34\x39\x2c\x35\x30&quot;));</span><br><span class="line"></span><br><span class="line">    h = window.prompt(&apos;Enter password&apos;);</span><br><span class="line">    alert( dechiffre(h) );</span><br></pre></td></tr></table></figure>
+
+<h5 id="②整理之后如下所示"><a href="#②整理之后如下所示" class="headerlink" title="②整理之后如下所示:"></a>②<strong>整理之后如下所示:</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function dechiffre(pass_enc) &#123;</span><br><span class="line">    var pass = &quot;70,65,85,88,32,80,65,83,83,87,79,82,68,32,72,65,72,65&quot;;</span><br><span class="line">    var tab = pass_enc.split(&apos;,&apos;);</span><br><span class="line">    var tab2 = pass.split(&apos;,&apos;);</span><br><span class="line">    var i, j, k, l = 0, m, n, o, p = &quot;&quot;;</span><br><span class="line">    i = 0;</span><br><span class="line">    j = tab.length;</span><br><span class="line">    k = j + (l) + (n = 0);</span><br><span class="line">    n = tab2.length;</span><br><span class="line">    for (i = (o = 0); i &lt; (k = j = n); i++) &#123;</span><br><span class="line">        o = tab[i - l];</span><br><span class="line">        p += String.fromCharCode((o = tab2[i]));</span><br><span class="line">        if (i == 5) break;</span><br><span class="line">    &#125;</span><br><span class="line">    for (i = (o = 0); i &lt; (k = j = n); i++) &#123;</span><br><span class="line">        o = tab[i - l];</span><br><span class="line">        if (i &gt; 5 &amp;&amp; i &lt; k - 1) p += String.fromCharCode((o = tab2[i]));</span><br><span class="line">    &#125;</span><br><span class="line">    p += String.fromCharCode(tab2[17]);</span><br><span class="line">    pass = p;</span><br><span class="line">    return pass;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="③去除无关的变量"><a href="#③去除无关的变量" class="headerlink" title="③去除无关的变量"></a><strong>③去除无关的变量</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function dechiffre() &#123;</span><br><span class="line">    var pass = &quot;70,65,85,88,32,80,65,83,83,87,79,82,68,32,72,65,72,65&quot;;</span><br><span class="line">    var tab2 = pass.split(&apos;,&apos;);</span><br><span class="line">    var i, n, p = &quot;&quot;;</span><br><span class="line">    n = tab2.length;</span><br><span class="line">    for (i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        p += String.fromCharCode(tab2[i]);</span><br><span class="line">        if (i == 5) break;</span><br><span class="line">    &#125;</span><br><span class="line">    for (i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        if (i &gt; 5 &amp;&amp; i &lt; n - 1) p += String.fromCharCode(tab2[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    p += String.fromCharCode(tab2[17]);</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="④合并循环语句以及末尾一句"><a href="#④合并循环语句以及末尾一句" class="headerlink" title="④合并循环语句以及末尾一句"></a>④合并循环语句以及末尾一句</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function dechiffre() &#123;</span><br><span class="line">    var pass = &quot;70,65,85,88,32,80,65,83,83,87,79,82,68,32,72,65,72,65&quot;;</span><br><span class="line">    var tab2 = pass.split(&apos;,&apos;);</span><br><span class="line">    var i;</span><br><span class="line">    var p = &quot;&quot;;</span><br><span class="line">    for (i = 0; i &lt; tab2.length; i++) &#123;</span><br><span class="line">        p += String.fromCharCode(tab2[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="⑤将下发的可以代码放入pass变量-保存代码-为1-html并打开-即可看到密码"><a href="#⑤将下发的可以代码放入pass变量-保存代码-为1-html并打开-即可看到密码" class="headerlink" title="⑤将下发的可以代码放入pass变量, 保存代码,为1.html并打开, 即可看到密码"></a><strong>⑤将下发的可以代码放入pass变量, 保存代码,为1.html并打开, 即可看到密码</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;JS&lt;/title&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">function dechiffre() &#123;</span><br><span class="line">    var pass = &quot;\x35\x35\x2c\x35\x36\x2c\x35\x34\x2c\x37\x39\x2c\x31\x31\x35\x2c\x36\x39\x2c\x31\x31\x34\x2c\x31\x31\x36\x2c\x31\x30\x37\x2c\x34\x39\x2c\x35\x30&quot;;</span><br><span class="line">    var tab2 = pass.split(&apos;,&apos;);</span><br><span class="line">    var i;</span><br><span class="line">    var p = &quot;&quot;;</span><br><span class="line">    for (i = 0; i &lt; tab2.length; i++) &#123;</span><br><span class="line">        p += String.fromCharCode(tab2[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line">alert(dechiffre());</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-输入密码-simple-js-—解法二"><a href="#1-2-输入密码-simple-js-—解法二" class="headerlink" title="1.2 输入密码(simple_js)—解法二"></a>1.2 输入密码(simple_js)—解法二</h4><p>发现代码一团浆糊, 将 下方可以乱码放到python中输出, 在依次转化为char类型. 具体如下所示</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/18.png" alt="18"></p>
+<p>发现解除一串字符串,</p>
+<p>根据题目描述格式 , Cyberpeace{xxxxxxxxx} </p>
+<p>输入flag:  Cyberpeace{786OsErtk12} </p>
+<h4 id="2-PHP代码审计"><a href="#2-PHP代码审计" class="headerlink" title="2. PHP代码审计"></a>2. PHP代码审计</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">show_source(__FILE__);</span><br><span class="line">include(&quot;config.php&quot;);</span><br><span class="line">$a=@$_GET[&apos;a&apos;];</span><br><span class="line">$b=@$_GET[&apos;b&apos;];</span><br><span class="line">if($a==0 and $a)&#123;</span><br><span class="line">    echo $flag1;</span><br><span class="line">&#125;</span><br><span class="line">if(is_numeric($b))&#123;</span><br><span class="line">    exit();</span><br><span class="line">&#125;</span><br><span class="line">if($b&gt;1234)&#123;</span><br><span class="line">    echo $flag2;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释</strong></p>
+<ul>
+<li><p>变量 $a 的值为 “a” 时 , 在比较运算符, 判断的时候, 自动转化为 0</p>
+<p>同样”a1” , “a1234”, “aaa” , 都自动转化为0</p>
+</li>
+<li><p>代码中又对, 变量 $b ,做了不能输入数字的过滤处理</p>
+<p>那么, 我们只需要在数字的最后赋值 ,一个字母过去即可</p>
+</li>
+</ul>
+<p>解题如下</p>
+<p><img src="/2019/09/10/CTF-Web题-简单/26.png" alt="26"></p>
+
+    </div>
+
+    
+
+    
+        <div class="post-tags">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <a href="/tags/Web安全/">#Web安全</a>
+        </div>
+    
+
+    <!-- Comments -->
+    
+
+</div>
+        </section>
+
+    </div>
+</div>
+
+
+</div>
+
+<!-- Footer -->
+<div class="push"></div>
+
+<footer class="footer-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 footer-about">
+                <h2>About</h2>
+                <p>
+                    I'm looking for way to find every individual of the way.
+                </p>
+            </div>
+            
+    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 recent-posts">
+        <h2>Recent Posts</h2>
+        <ul>
+            
+            <li>
+                <a class="footer-post" href="/2019/10/13/hexo+github半小时搭建博客/">hexo+github半小时搭建博客</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/09/19/Hadoop及Spark安装笔记/">Hadoop及Spark安装笔记</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/09/10/CTF-Web题-简单/">CTF-Web题WriteUp-简单</a>
+            </li>
+            
+            <li>
+                <a class="footer-post" href="/2019/08/07/微信聊天记录教程/">Mac_微信聊天记录教程</a>
+            </li>
+            
+        </ul>
+    </div>
+
+
+
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-inline footer-social-icons">
+                    
+                    <li class="list-inline-item">
+                        <a href="https://github.com/SanLorewalker">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-github"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="mailto:727794974@qq.com">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="list-inline-item">
+                        <a href="\#">
+                            <span class="footer-icon-container">
+                                <i class="fa fa-rss"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="footer-copyright">
+                    @Lorewalker. All right reserved
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- After footer scripts -->
+
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Tween Max -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/main.js"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
