@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>/2020/02/17/XSS%E8%81%94%E7%B3%BB/</loc>
+    <lastmod>2020-02-17</lastmod>
+  </url>  <url>
+    <loc>/2020/02/12/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/</loc>
+    <lastmod>2020-02-17</lastmod>
+  </url>  <url>
     <loc>/2020/02/13/AI-WEB-2.0%E2%80%94%E2%80%94Workthrough/</loc>
     <lastmod>2020-02-16</lastmod>
   </url>  <url>
@@ -62,9 +68,6 @@
     <lastmod>2020-02-13</lastmod>
   </url>  <url>
     <loc>/2019/08/28/SQL%E6%B3%A8%E5%85%A5-GET%E5%8F%82%E6%95%B0/</loc>
-    <lastmod>2020-02-13</lastmod>
-  </url>  <url>
-    <loc>/2020/02/12/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/</loc>
     <lastmod>2020-02-13</lastmod>
   </url>  <url>
     <loc>/2019/08/26/FTP%E6%9C%8D%E5%8A%A1%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/</loc>

