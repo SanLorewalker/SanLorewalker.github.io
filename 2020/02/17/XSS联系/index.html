@@ -30,7 +30,7 @@
 <meta property="og:image" content="/2020/02/17/XSS联系/12.png">
 <meta property="og:image" content="/2020/02/17/XSS联系/13.png">
 <meta property="og:image" content="/2020/02/17/XSS联系/14.png">
-<meta property="og:updated_time" content="2020-02-17T14:35:14.304Z">
+<meta property="og:updated_time" content="2020-02-17T14:43:32.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS漏洞练习与正则练习">
 <meta name="twitter:description" content="前言​    一个在线的XSS漏洞练习网站, 记录笔记以加深印象 ​    网址: https://xss.haozi.me/#/0x00 背景知识 正则匹配  /用于正则的开始和结束, 即正则表达式的边界符  \用于转义, 匹配一些特定字符的本身  ^匹配输入字符串的起始  $匹配输入字符串的结尾  +匹配一次或多次  *匹配零次或多次  ?匹配零次或一次  .匹配除换行符 \n 之外的任何单字">
@@ -215,6 +215,8 @@
 </ul>
 </li>
 </ul>
+<a id="more"></a>
+
 <h3 id="0X00-直接注入"><a href="#0X00-直接注入" class="headerlink" title="0X00 直接注入"></a>0X00 直接注入</h3><ul>
 <li><p>后台源码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function render (input) &#123;</span><br><span class="line">  return &apos;&lt;div&gt;&apos; + input + &apos;&lt;/div&gt;&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
