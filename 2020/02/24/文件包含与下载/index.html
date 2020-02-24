@@ -6,26 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href>
-  <title>RCE(命令执行)手工测试 | Saw,Learnt,To think</title>
+  <title>任意文件读取与下载 | Saw,Learnt,To think</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0X00 前言 RCE Remote Command Execute(远程命令执行), 直接向后台服务器注入操作系统命令或者代码, 从而控制后台系统  漏洞产生的原因 一般如系统在设计上需要给用户提供远程命令的接口 常见的有路由器,防火墙,入侵检测的web管理界面上 常见的功能, 如ping命令等 若是没有严格的用户输入过滤, 就会产生RCE漏洞">
-<meta name="keywords" content="Pikachu靶机系列">
+  <meta name="description" content="0X00 前言 文件包含与下载  在web应用中, 一般当我们点击下载链接, 变会向后台发送一个下载请求,它会包含下载文件名称, 而后台收到这个请求, 会将文件名对应的文件Response给浏览器, 从而完成下载.  不安全问题 若后台收到文件名, 没有对其进行安全过滤的话,会依法任意文件">
+<meta name="keywords" content="渗透知识">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RCE(命令执行)手工测试">
-<meta property="og:url" content="/2020/02/21/RCE(命令执行)手工测试/index.html">
+<meta property="og:title" content="任意文件读取与下载">
+<meta property="og:url" content="/2020/02/24/文件包含与下载/index.html">
 <meta property="og:site_name" content="Saw,Learnt,To think">
-<meta property="og:description" content="0X00 前言 RCE Remote Command Execute(远程命令执行), 直接向后台服务器注入操作系统命令或者代码, 从而控制后台系统  漏洞产生的原因 一般如系统在设计上需要给用户提供远程命令的接口 常见的有路由器,防火墙,入侵检测的web管理界面上 常见的功能, 如ping命令等 若是没有严格的用户输入过滤, 就会产生RCE漏洞">
+<meta property="og:description" content="0X00 前言 文件包含与下载  在web应用中, 一般当我们点击下载链接, 变会向后台发送一个下载请求,它会包含下载文件名称, 而后台收到这个请求, 会将文件名对应的文件Response给浏览器, 从而完成下载.  不安全问题 若后台收到文件名, 没有对其进行安全过滤的话,会依法任意文件">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="/2020/02/21/RCE(命令执行)手工测试/1.png">
-<meta property="og:image" content="/2020/02/21/RCE(命令执行)手工测试/3.png">
-<meta property="og:image" content="/2020/02/21/RCE(命令执行)手工测试/4.png">
-<meta property="og:image" content="/2020/02/21/RCE(命令执行)手工测试/5.png">
-<meta property="og:image" content="/2020/02/21/RCE(命令执行)手工测试/2.png">
-<meta property="og:updated_time" content="2020-02-22T01:35:41.363Z">
+<meta property="og:image" content="/2020/02/24/文件包含与下载/1.png">
+<meta property="og:image" content="/2020/02/24/文件包含与下载/2.png">
+<meta property="og:image" content="/2020/02/24/文件包含与下载/3.png">
+<meta property="og:image" content="/2020/02/24/文件包含与下载/4.png">
+<meta property="og:updated_time" content="2020-02-24T02:18:23.806Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RCE(命令执行)手工测试">
-<meta name="twitter:description" content="0X00 前言 RCE Remote Command Execute(远程命令执行), 直接向后台服务器注入操作系统命令或者代码, 从而控制后台系统  漏洞产生的原因 一般如系统在设计上需要给用户提供远程命令的接口 常见的有路由器,防火墙,入侵检测的web管理界面上 常见的功能, 如ping命令等 若是没有严格的用户输入过滤, 就会产生RCE漏洞">
-<meta name="twitter:image" content="/2020/02/21/RCE(命令执行)手工测试/1.png">
+<meta name="twitter:title" content="任意文件读取与下载">
+<meta name="twitter:description" content="0X00 前言 文件包含与下载  在web应用中, 一般当我们点击下载链接, 变会向后台发送一个下载请求,它会包含下载文件名称, 而后台收到这个请求, 会将文件名对应的文件Response给浏览器, 从而完成下载.  不安全问题 若后台收到文件名, 没有对其进行安全过滤的话,会依法任意文件">
+<meta name="twitter:image" content="/2020/02/24/文件包含与下载/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Saw,Learnt,To think" type="application/atom+xml">
   
@@ -153,20 +152,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-RCE(命令执行)手工测试" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-文件包含与下载" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      RCE(命令执行)手工测试
+      任意文件读取与下载
     </h1>
   
 
         
-        <a href="/2020/02/21/RCE(命令执行)手工测试/" class="archive-article-date">
-  	<time datetime="2020-02-21T01:35:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-21</time>
+        <a href="/2020/02/24/文件包含与下载/" class="archive-article-date">
+  	<time datetime="2020-02-24T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-24</time>
 </a>
         
       </header>
@@ -174,61 +173,64 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00 前言"></a>0X00 前言</h3><ul>
-<li><p>RCE</p>
-<p>Remote Command Execute(远程命令执行), 直接向后台服务器注入操作系统命令或者代码, 从而控制后台系统</p>
+<li><p>文件包含与下载</p>
+<ul>
+<li><p>在web应用中, 一般当我们点击下载链接, 变会向后台发送一个下载请求,它会包含下载文件名称, 而后台收到这个请求, 会将文件名对应的文件Response给浏览器, 从而完成下载.</p>
 </li>
-<li><p>漏洞产生的原因</p>
-<p>一般如系统在设计上需要给用户提供远程命令的接口</p>
-<p>常见的有路由器,防火墙,入侵检测的web管理界面上</p>
-<p>常见的功能, 如ping命令等</p>
-<p>若是没有严格的用户输入过滤, 就会产生RCE漏洞</p>
+<li><p>不安全问题</p>
+<p>若后台收到文件名, 没有对其进行安全过滤的话,会依法任意文件</p>
+</li>
+</ul>
 </li>
 </ul>
 <a id="more"></a>
 
-<h3 id="0X01-exec-“ping”"><a href="#0X01-exec-“ping”" class="headerlink" title="0X01 exec “ping”"></a>0X01 exec “ping”</h3><ul>
-<li><p>分析</p>
-<p>界面上让输入IP地址的一个<code>ping</code>命令功能界面</p>
-<p>利用<code>;</code>等操作系统命令绕过<code>ping</code>命令</p>
-</li>
-<li><p>操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#分号隔开执行多个命令</span><br><span class="line">;ls</span><br><span class="line">#同时执行两个命令</span><br><span class="line">&amp;ls</span><br><span class="line">#先执行第一个命令, 再执行第二个命令</span><br><span class="line">127.0.0.1&amp;&amp;pwd</span><br><span class="line">#管道符执行多个命令</span><br><span class="line">|pwd</span><br><span class="line">||pwd</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/02/21/RCE(命令执行)手工测试/1.png" alt="1"></p>
-</li>
-<li><p>源代码审计</p>
-<p><img src="/2020/02/21/RCE(命令执行)手工测试/3.png" alt="3"></p>
-</li>
-</ul>
-<h3 id="0X02-exec-“eval”"><a href="#0X02-exec-“eval”" class="headerlink" title="0X02 exec “eval”"></a>0X02 exec “eval”</h3><ul>
+
+
+
+<h3 id="0X01-DoraBox-FileRead"><a href="#0X01-DoraBox-FileRead" class="headerlink" title="0X01 DoraBox-FileRead"></a>0X01 DoraBox-FileRead</h3><ul>
 <li><p>分析</p>
 <ul>
-<li><p>输入命令时有乱码, 应为靶场是放着windows操作系统的原因, 所以需要修改一下注册表</p>
-<ol>
-<li><p>同时按”win + R” ，并输入 regedit 进入注册表</p>
+<li>打开显示是一个文件名输入的提交框, 随便输入会显示<code>file not exists</code></li>
+<li>输入常见的模糊测试<code>../../../</code>观察到没有报错</li>
+</ul>
 </li>
-<li><p>找到 HKEY_CURRENT_USER\Console%SystemRoot%_system32_cmd.exe，如果该项下已存在 %SystemRoot%_system32_cmd.exe\CodePage 项，则把值改为十进制 “65001”，点击确定即可；如果不存在，在该项下新建一个 DWORD（32位值），命名为 “CodePage”，值设为 “65001”。然后关闭注册表管理器</p>
+<li><p>操作</p>
+<ul>
+<li><p>读取本地密码文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../../../../etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/02/24/文件包含与下载/1.png" alt="1"></p>
 </li>
-<li><p>如下所示</p>
-<p><img src="/2020/02/21/RCE(命令执行)手工测试/4.png" alt="4"></p>
+<li><p>查看是否存在远程文件包含</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<p>很不幸, 并没有</p>
 </li>
-</ol>
+</ul>
 </li>
-<li><p>这里输入<code>127.0.0.1</code>, 就提示不正确了,既然不是ping功能</p>
-<p>那么就猜测是不是<code>eval</code>执行函数功能</p>
+<li><p>源码审计</p>
+<p><img src="/2020/02/24/文件包含与下载/2.png" alt="2"></p>
+<p>关键代码位于红框处, 直接获取了用户输入的<code>$_REQUEST[&#39;filename&#39;]</code>变量, 没没有经过安全判断, 而是直接判断存在就输出了文件内容, 因此就产生了漏洞</p>
+</li>
+</ul>
+<h3 id="0X02-Pikachu之Unsafe-Filedownload"><a href="#0X02-Pikachu之Unsafe-Filedownload" class="headerlink" title="0X02 Pikachu之Unsafe Filedownload"></a>0X02 Pikachu之Unsafe Filedownload</h3><ul>
+<li><p>分析</p>
+<ul>
+<li><p>打开页面, 点击名字时就可以直接下载了,具体看不到相关内容, 利用burpsuite查看相关数据包</p>
+</li>
+<li><p>burpsuite抓到的数据包分析, 观察到是<code>get</code>请求, 相关的数据放在<code>filename</code>变量中</p>
 </li>
 </ul>
 </li>
 <li><p>操作</p>
-<p>输入phpinfo();试试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phpinfo();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filename=../../../../../etc/passwd</span><br></pre></td></tr></table></figure>
 
-<p>成功执行</p>
-<p><img src="/2020/02/21/RCE(命令执行)手工测试/5.png" alt="5"></p>
+<p><img src="/2020/02/24/文件包含与下载/3.png" alt="3"></p>
 </li>
-<li><p>源代码分析</p>
-<p><img src="/2020/02/21/RCE(命令执行)手工测试/2.png" alt="2"></p>
-<p>对用户的输入直接放到了<code>eval</code>函数中执行, 没有经过过滤, 所以就导致了RCE漏洞</p>
+<li><p>源码审计</p>
+<p><img src="/2020/02/24/文件包含与下载/4.png" alt="4"></p>
 </li>
 </ul>
 
@@ -275,7 +277,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Pikachu靶机系列</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透知识</a>
         		</li>
       		
 		</ul>
@@ -331,7 +333,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:/2020/02/21/RCE(命令执行)手工测试/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:/2020/02/24/文件包含与下载/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -345,18 +347,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/02/21/SSRF漏洞手工测试/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          SSRF漏洞手工测试
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/02/20/DoraBox靶场之CSRF训练/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">DoraBox靶场之CSRF训练</div>
+    <a href="/2020/02/23/xxe-lab靶场练习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">xxe-lab靶场练习专题</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -484,10 +477,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">VulnHub靶机系列</a>
               </li>
              
@@ -496,7 +485,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,11 +505,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
               </li>
              
               <li class="article-tag-list-item">

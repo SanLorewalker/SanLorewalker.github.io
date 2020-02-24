@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href>
-  <title>Archives | Saw,Learnt,To think</title>
+  <title>RCE(命令执行)手工测试 | Saw,Learnt,To think</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Saw,Learnt,To think">
-<meta property="og:url" content="/archives/page/5/index.html">
+  <meta name="description" content="0X00 前言 RCE Remote Command Execute(远程命令执行), 直接向后台服务器注入操作系统命令或者代码, 从而控制后台系统  漏洞产生的原因 一般如系统在设计上需要给用户提供远程命令的接口 常见的有路由器,防火墙,入侵检测的web管理界面上 常见的功能, 如ping命令等 若是没有严格的用户输入过滤, 就会产生RCE漏洞">
+<meta name="keywords" content="Pikachu靶机系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RCE(命令执行)手工测试">
+<meta property="og:url" content="/2020/02/22/RCE(命令执行)手工测试/index.html">
 <meta property="og:site_name" content="Saw,Learnt,To think">
+<meta property="og:description" content="0X00 前言 RCE Remote Command Execute(远程命令执行), 直接向后台服务器注入操作系统命令或者代码, 从而控制后台系统  漏洞产生的原因 一般如系统在设计上需要给用户提供远程命令的接口 常见的有路由器,防火墙,入侵检测的web管理界面上 常见的功能, 如ping命令等 若是没有严格的用户输入过滤, 就会产生RCE漏洞">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="/2020/02/22/RCE(命令执行)手工测试/1.png">
+<meta property="og:image" content="/2020/02/22/RCE(命令执行)手工测试/3.png">
+<meta property="og:image" content="/2020/02/22/RCE(命令执行)手工测试/4.png">
+<meta property="og:image" content="/2020/02/22/RCE(命令执行)手工测试/5.png">
+<meta property="og:image" content="/2020/02/22/RCE(命令执行)手工测试/2.png">
+<meta property="og:updated_time" content="2020-02-24T01:20:51.343Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Saw,Learnt,To think">
+<meta name="twitter:title" content="RCE(命令执行)手工测试">
+<meta name="twitter:description" content="0X00 前言 RCE Remote Command Execute(远程命令执行), 直接向后台服务器注入操作系统命令或者代码, 从而控制后台系统  漏洞产生的原因 一般如系统在设计上需要给用户提供远程命令的接口 常见的有路由器,防火墙,入侵检测的web管理界面上 常见的功能, 如ping命令等 若是没有严格的用户输入过滤, 就会产生RCE漏洞">
+<meta name="twitter:image" content="/2020/02/22/RCE(命令执行)手工测试/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Saw,Learnt,To think" type="application/atom+xml">
   
@@ -142,177 +153,242 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-RCE(命令执行)手工测试" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RCE(命令执行)手工测试
+    </h1>
+  
+
+        
+        <a href="/2020/02/22/RCE(命令执行)手工测试/" class="archive-article-date">
+  	<time datetime="2020-02-22T01:35:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-22</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00 前言"></a>0X00 前言</h3><ul>
+<li><p>RCE</p>
+<p>Remote Command Execute(远程命令执行), 直接向后台服务器注入操作系统命令或者代码, 从而控制后台系统</p>
+</li>
+<li><p>漏洞产生的原因</p>
+<p>一般如系统在设计上需要给用户提供远程命令的接口</p>
+<p>常见的有路由器,防火墙,入侵检测的web管理界面上</p>
+<p>常见的功能, 如ping命令等</p>
+<p>若是没有严格的用户输入过滤, 就会产生RCE漏洞</p>
+</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="0X01-exec-“ping”"><a href="#0X01-exec-“ping”" class="headerlink" title="0X01 exec “ping”"></a>0X01 exec “ping”</h3><ul>
+<li><p>分析</p>
+<p>界面上让输入IP地址的一个<code>ping</code>命令功能界面</p>
+<p>利用<code>;</code>等操作系统命令绕过<code>ping</code>命令</p>
+</li>
+<li><p>操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#分号隔开执行多个命令</span><br><span class="line">;ls</span><br><span class="line">#同时执行两个命令</span><br><span class="line">&amp;ls</span><br><span class="line">#先执行第一个命令, 再执行第二个命令</span><br><span class="line">127.0.0.1&amp;&amp;pwd</span><br><span class="line">#管道符执行多个命令</span><br><span class="line">|pwd</span><br><span class="line">||pwd</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/02/22/RCE(命令执行)手工测试/1.png" alt="1"></p>
+</li>
+<li><p>源代码审计</p>
+<p><img src="/2020/02/22/RCE(命令执行)手工测试/3.png" alt="3"></p>
+</li>
+</ul>
+<h3 id="0X02-exec-“eval”"><a href="#0X02-exec-“eval”" class="headerlink" title="0X02 exec “eval”"></a>0X02 exec “eval”</h3><ul>
+<li><p>分析</p>
+<ul>
+<li><p>输入命令时有乱码, 应为靶场是放着windows操作系统的原因, 所以需要修改一下注册表</p>
+<ol>
+<li><p>同时按”win + R” ，并输入 regedit 进入注册表</p>
+</li>
+<li><p>找到 HKEY_CURRENT_USER\Console%SystemRoot%_system32_cmd.exe，如果该项下已存在 %SystemRoot%_system32_cmd.exe\CodePage 项，则把值改为十进制 “65001”，点击确定即可；如果不存在，在该项下新建一个 DWORD（32位值），命名为 “CodePage”，值设为 “65001”。然后关闭注册表管理器</p>
+</li>
+<li><p>如下所示</p>
+<p><img src="/2020/02/22/RCE(命令执行)手工测试/4.png" alt="4"></p>
+</li>
+</ol>
+</li>
+<li><p>这里输入<code>127.0.0.1</code>, 就提示不正确了,既然不是ping功能</p>
+<p>那么就猜测是不是<code>eval</code>执行函数功能</p>
+</li>
+</ul>
+</li>
+<li><p>操作</p>
+<p>输入phpinfo();试试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">phpinfo();</span><br></pre></td></tr></table></figure>
+
+<p>成功执行</p>
+<p><img src="/2020/02/22/RCE(命令执行)手工测试/5.png" alt="5"></p>
+</li>
+<li><p>源代码分析</p>
+<p><img src="/2020/02/22/RCE(命令执行)手工测试/2.png" alt="2"></p>
+<p>对用户的输入直接放到了<code>eval</code>函数中执行, 没有经过过滤, 所以就导致了RCE漏洞</p>
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃辣条<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/25/SSH服务测试/" class="archive-article-date">
-  	<time datetime="2019-08-25T05:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/25/SSH服务测试/">SSH服务测试</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">CTF靶机系列</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Pikachu靶机系列</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:/2020/02/22/RCE(命令执行)手工测试/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/24/SSH密钥泄露/" class="archive-article-date">
-  	<time datetime="2019-08-24T02:30:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/02/23/xxe-lab靶场练习/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          xxe-lab靶场练习专题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/21/SSRF漏洞手工测试/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SSRF漏洞手工测试</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/24/SSH密钥泄露/">SSH密钥泄露</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">CTF靶机系列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/微信聊天记录教程/" class="archive-article-date">
-  	<time datetime="2019-08-07T07:35:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/微信聊天记录教程/">微信聊天记录导出教程</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">计算机小技巧</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/01/随笔/博客建立的第一天/" class="archive-article-date">
-  	<time datetime="2019-08-01T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/01/随笔/博客建立的第一天/">博客建立的第一天</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/4/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><span class="page-number current">5</span>
-    </nav>
   
 
 
@@ -338,8 +414,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
