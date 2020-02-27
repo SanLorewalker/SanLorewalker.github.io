@@ -144,6 +144,284 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-XSS漏洞手工测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/18/XSS漏洞手工测试/">XSS漏洞手工测试</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/18/XSS漏洞手工测试/" class="archive-article-date">
+  	<time datetime="2020-02-18T08:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="0X01-反射型XSS-get"><a href="#0X01-反射型XSS-get" class="headerlink" title="0X01 反射型XSS(get)"></a>0X01 反射型XSS(get)</h3><ul>
+<li><p>思路</p>
+<p>按下F12, 输入的内容都会原封不动的显示在网页代码中,所以直接注入即可</p>
+<p>但是有长度限制, 修改<code>maxlength</code>即可</p>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2020/02/18/XSS漏洞手工测试/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Pikachu靶机系列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/18/XSS漏洞手工测试/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-XSS联系" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/17/XSS联系/">XSS漏洞练习与正则练习</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/17/XSS联系/" class="archive-article-date">
+  	<time datetime="2020-02-17T02:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>​    一个在线的XSS漏洞练习网站, 记录笔记以加深印象</p>
+<p>​    网址: <a href="https://xss.haozi.me/#/0x00" target="_blank" rel="noopener">https://xss.haozi.me/#/0x00</a></p>
+<h3 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h3><ul>
+<li><p>正则匹配</p>
+<ul>
+<li><p><code>/</code>用于正则的开始和结束, 即正则表达式的边界符</p>
+</li>
+<li><p><code>\</code>用于转义, 匹配一些特定字符的本身</p>
+</li>
+<li><p><code>^</code>匹配输入字符串的起始</p>
+</li>
+<li><p><code>$</code>匹配输入字符串的结尾</p>
+</li>
+<li><p><code>+</code>匹配一次或多次</p>
+</li>
+<li><p><code>*</code>匹配零次或多次</p>
+</li>
+<li><p><code>?</code>匹配零次或一次</p>
+</li>
+<li><p><code>.</code>匹配除换行符 \n 之外的任何单字符</p>
+</li>
+<li><p><code>()</code>: 匹配小括号中的字符串</p>
+<p>如: (abc|def), 匹配abc或def</p>
+</li>
+<li><p><code>[]</code>: 匹配中括号中的字符</p>
+<p>如:[a-zA-Z0-9] , 匹配一个英文字符或一个数字</p>
+</li>
+<li><p>{}: 匹配在它之前表达式匹配出来的元素出现的次数</p>
+<p>如:[0-9]{0,9} 表示长度为 0 到 9 的数字字符串</p>
+</li>
+</ul>
+</li>
+</ul>
+        
+          <a class="article-more-a" href="/2020/02/17/XSS联系/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透知识</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/17/XSS联系/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-pikachu漏洞平台之SQL Inject漏洞手工测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/16/pikachu漏洞平台之SQL Inject漏洞手工测试/">pikachu漏洞平台之SQL Inject漏洞手工测试</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/16/pikachu漏洞平台之SQL Inject漏洞手工测试/" class="archive-article-date">
+  	<time datetime="2020-02-16T14:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="0X01-数字型注入-post"><a href="#0X01-数字型注入-post" class="headerlink" title="0X01 数字型注入(post)"></a>0X01 数字型注入(post)</h3><ul>
+<li><p>思路</p>
+<p>随便提交下拉菜单选择,  发现放回两行结果,猜测是查询了两个字段的内容,只考猜测的话不是很准确, 用操作实验一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  #无报错</span><br><span class="line">  id=1 order by 1</span><br><span class="line">  #无报错</span><br><span class="line">id=1 order by 2</span><br><span class="line">  #报错</span><br><span class="line">id=1 order by 3</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<p>  那么, 很明显, 这里做了两个字段的查询, 和我们猜测的一致, 这样后台数据库可能做了如下操作</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$id = $_POST[&apos;id&apos;];</span><br><span class="line">select column1,column2 from table1 where id = $id</span><br></pre></td></tr></table></figure>
+
+
+<p>  也就是说, 下拉菜单的选择的数据会发送$id</p>
+<p>  题目是想让我们绕过语句<code>select column1,column2 from table1 where id = $id</code></p>
+        
+          <a class="article-more-a" href="/2020/02/16/pikachu漏洞平台之SQL Inject漏洞手工测试/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Pikachu靶机系列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/16/pikachu漏洞平台之SQL Inject漏洞手工测试/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Five86-2——WordPress插件漏洞及sudo循环提权" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -696,243 +974,6 @@
 
 
   
-    <article id="post-校内安洵CTF" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/23/校内安洵CTF/">校内安洵CTF</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/23/校内安洵CTF/" class="archive-article-date">
-  	<time datetime="2019-11-23T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="0X00-签到"><a href="#0X00-签到" class="headerlink" title="0X00 签到"></a>0X00 签到</h3><p>flag{2019_ddaa}</p>
-        
-          <a class="article-more-a" href="/2019/11/23/校内安洵CTF/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CTF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/23/校内安洵CTF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-杂项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/10/杂项/">攻防世界-Misc题-简单</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/10/杂项/" class="archive-article-date">
-  	<time datetime="2019-11-10T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="文件审计"><a href="#文件审计" class="headerlink" title="文件审计"></a>文件审计</h1><h3 id="①linux查看系统文件隐藏内容-ext3"><a href="#①linux查看系统文件隐藏内容-ext3" class="headerlink" title="①linux查看系统文件隐藏内容)(ext3)"></a>①linux查看系统文件隐藏内容)(ext3)</h3><ul>
-<li>题目来源： 攻防世界</li>
-<li>题目描述：今天是菜狗的生日，他收到了一个linux系统光盘</li>
-<li>题目场景： 暂无</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/11/10/杂项/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CTF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/10/杂项/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-攻防世界-Web题-进阶(一)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/07/攻防世界-Web题-进阶(一)/">攻防世界-Web题-进阶(一)</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/07/攻防世界-Web题-进阶(一)/" class="archive-article-date">
-  	<time datetime="2019-11-07T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="细心检查类"><a href="#细心检查类" class="headerlink" title="细心检查类"></a>细心检查类</h1><h4 id="①baby-web"><a href="#①baby-web" class="headerlink" title="①baby_web"></a>①baby_web</h4><ul>
-<li><p>题目来源： 攻防世界</p>
-</li>
-<li><p>题目描述：想想初始页面是哪个</p>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2019/11/07/攻防世界-Web题-进阶(一)/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CTF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/07/攻防世界-Web题-进阶(一)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1036,15 +1077,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Pikachu靶机系列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">DoraBox靶场</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1052,11 +1085,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python_Hacker</a>
+                <a href="javascript:void(0)" class="js-tag color5">DoraBox靶场</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1064,11 +1101,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python_Hacker</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
               </li>
              
               <li class="article-tag-list-item">
