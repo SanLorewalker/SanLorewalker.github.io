@@ -144,6 +144,184 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PHP反序列化和敏感信息泄露" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/28/PHP反序列化和敏感信息泄露/">PHP反序列化和敏感信息泄露</a>
+    </h1>
+  
+
+        
+        <a href="/2020/02/28/PHP反序列化和敏感信息泄露/" class="archive-article-date">
+  	<time datetime="2020-02-28T02:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00 前言"></a>0X00 前言</h3><ul>
+<li><p>PHP反序列化</p>
+<p>原理及利用请见, [PHP序列化漏洞][<a href="https://sanlorewalker.github.io/2019/10/30/%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/]" target="_blank" rel="noopener">https://sanlorewalker.github.io/2019/10/30/%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/]</a></p>
+<ul>
+<li><p>序列化, serialize()</p>
+<p>即将一个<code>对象</code>转化为在网络中容易传输的<code>字符串</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class S&#123;</span><br><span class="line">        public $test=&quot;pikachu&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    $s=new S(); //创建一个对象</span><br><span class="line">    serialize($s); //把这个对象进行序列化</span><br><span class="line">   </span><br><span class="line">序列化后得到的结果是这个样子的:O:1:&quot;S&quot;:1:&#123;s:4:&quot;test&quot;;s:7:&quot;pikachu&quot;;&#125;</span><br><span class="line">        O:代表object</span><br><span class="line">        1:代表对象名字长度为一个字符</span><br><span class="line">        S:对象的名称</span><br><span class="line">        1:代表对象里面有一个变量</span><br><span class="line">        s:数据类型</span><br><span class="line">        4:变量名称的长度</span><br><span class="line">        test:变量名称</span><br><span class="line">        s:数据类型</span><br><span class="line">        7:变量值的长度</span><br><span class="line">        pikachu:变量值</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>反序列化</p>
+<p>将在网络中传输的<code>字符串</code>还原为<code>对象</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$u=unserialize(&quot;O:1:&quot;S&quot;:1:&#123;s:4:&quot;test&quot;;s:7:&quot;pikachu&quot;;&#125;&quot;);</span><br><span class="line">    echo $u-&gt;test; //得到的结果为pikachu</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>魔术方法回忆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">__construct()：当一个对象创建时被调用</span><br><span class="line">__destruct()：当一个对象销毁时被调用</span><br><span class="line">__toString()：当一个对象被当作一个字符串使用</span><br><span class="line">__sleep() ：在对象在被序列化之前运行</span><br><span class="line">__wakeup：将在序列化之后立即被调用</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>敏感文件泄露</p>
+<ul>
+<li><p>产生原因</p>
+<p>网站代码设计疏忽, 导致一些数据显式在前端</p>
+</li>
+<li><p>一般利用</p>
+<ol>
+<li>通过访问url下的目录，可以直接列出目录下的文件列表</li>
+<li>输入错误的url参数后报错信息里面包含操作系统、中间件、开发语言的版本或其他信息</li>
+<li>前端的源码（html,css,js）里面包含了敏感信息，比如后台登录地址、内网接口信息、甚至账号密码等</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="0X01-PHP反序列化"><a href="#0X01-PHP反序列化" class="headerlink" title="0X01 PHP反序列化"></a>0X01 PHP反序列化</h3><ul>
+<li><p>分析</p>
+<ul>
+<li>随便输入测试, 返回都是<code>大兄弟,来点劲爆点儿的!</code>, 所以,没有具体的源代码分析是无法做出这道题目的</li>
+<li>想办法获得当前<code>unser.php</code>的源码, 再进行PHP反序列化</li>
+</ul>
+</li>
+<li><p>操作</p>
+<ul>
+<li><p>获取<code>unser.php</code>源码</p>
+<ol>
+<li><p>直接在靶场文件中查看源码</p>
+</li>
+<li><p>利用该靶场中的文件下载漏洞, 获取该<code>unser.php</code>源码</p>
+<p><img src="/2020/02/28/PHP反序列化和敏感信息泄露/1.png" alt="1"></p>
+</li>
+</ol>
+</li>
+<li><p>审计<code>unser.php</code>源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class S&#123;</span><br><span class="line">    var $test = &quot;pikachu&quot;;</span><br><span class="line">    function __construct()&#123;</span><br><span class="line">        echo $this-&gt;test;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$html=&apos;&apos;;</span><br><span class="line">if(isset($_POST[&apos;o&apos;]))&#123;</span><br><span class="line">    $s = $_POST[&apos;o&apos;];</span><br><span class="line">    if(!@$unser = unserialize($s))&#123;</span><br><span class="line">        $html.=&quot;&lt;p&gt;大兄弟,来点劲爆点儿的!&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        $html.=&quot;&lt;p&gt;&#123;$unser-&gt;test&#125;&lt;/p&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>定义了一个<code>S</code>类, 用到了魔术方法, <code>_construct</code></li>
+<li><code>@</code>的作用, 错误控制运算符,抑制报错 </li>
+<li>将用户的输入反序列化, 并做判断</li>
+</ol>
+</li>
+<li><p>生成payload</p>
+<p>新建test.php, 内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class S&#123;</span><br><span class="line">     var $test = &quot;&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$t = S();</span><br><span class="line">echo serialize($t);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>放在有PHP环境下, 网页打开, 即会显示如下payload</p>
+<p>同样, 也可以不执行, 根据序列化的知识, 自己构造</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:1:&quot;S&quot;:1:&#123;s:4:&quot;test&quot;;s:29:&quot;&lt;script&gt;alert(&apos;xss&apos;)&lt;/script&gt;&quot;;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将payload输入</p>
+<p><img src="/2020/02/28/PHP反序列化和敏感信息泄露/2.png" alt="2"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="0X02-敏感信息泄露"><a href="#0X02-敏感信息泄露" class="headerlink" title="0X02 敏感信息泄露"></a>0X02 敏感信息泄露</h3><ul>
+<li><p>分析</p>
+<ul>
+<li><p>打开是一个用户登入界面, 右键源码, 找到注释中有<code>&lt;!-- 测试账号:lili/123456--&gt;</code>, 但是输入错误,</p>
+</li>
+<li><p>测试<code>SQL注入</code>漏洞中得到的账号:kobe/123456, 成功进入, 进入后直接就显示一段文字内容</p>
+</li>
+<li><p>观察其URL<code>http://192.168.0.108/pikachu/vul/infoleak/abc.php</code>, 这里怀疑,直接访问也可得到内容</p>
+</li>
+</ul>
+</li>
+<li><p>操作</p>
+<ul>
+<li><p>直接访问URL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.0.108/pikachu/vul/infoleak/abc.php</span><br></pre></td></tr></table></figure>
+
+<p>果然可以直接访问, 这里就是一处因为程序员设置不当造成的泄露</p>
+</li>
+<li><p>访问上一层路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.0.108/pikachu/vul/infoleak</span><br></pre></td></tr></table></figure>
+
+<p>许多时候可以直接查看上一层路径,获得相关的信息</p>
+<p><img src="/2020/02/28/PHP反序列化和敏感信息泄露/3.png" alt="3"></p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Pikachu靶机系列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/28/PHP反序列化和敏感信息泄露/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-越权操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -920,95 +1098,6 @@
 
 
   
-    <article id="post-CSRF漏洞手工测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/19/CSRF漏洞手工测试/">CSRF漏洞手工测试</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/19/CSRF漏洞手工测试/" class="archive-article-date">
-  	<time datetime="2020-02-19T10:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="0X00-背景知识"><a href="#0X00-背景知识" class="headerlink" title="0X00 背景知识"></a>0X00 背景知识</h3><ul>
-<li><p>一般流程</p>
-<p>​    黑客创建一个恶意的链接，当受害者点击时，链接就会通过受害者已建立的身份认证的网站进行各种恶意操作。黑客是不知道是否成功的，只能等待一段时间后，到对应的网站上去尝试恶意链接中的伪造</p>
-</li>
-<li><p>CSRF攻击条件</p>
-<ul>
-<li><p>目标网站没有对修改个人信息的操作进行CSRF防御处理</p>
-<p>因此, 判断一个网站有没有CSRF漏洞, 其实就是判断对关键信息(密码等)的操作(增删改)是否容易被伪造</p>
-</li>
-<li><p>目标处于登入状态(即已经登入了目标网站)</p>
-</li>
-</ul>
-</li>
-</ul>
-        
-          <a class="article-more-a" href="/2020/02/19/CSRF漏洞手工测试/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Pikachu靶机系列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/19/CSRF漏洞手工测试/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1116,11 +1205,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1132,11 +1221,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
+                <a href="javascript:void(0)" class="js-tag color4">Python_Hacker</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python_Hacker</a>
+                <a href="javascript:void(0)" class="js-tag color4">大数据</a>
               </li>
              
               <li class="article-tag-list-item">
