@@ -2,16 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>/2018/12/16/%E7%9F%A5%E8%AF%86%E8%A1%A8%E7%A4%BA/</loc>
+    <loc>/2020/02/13/AI-WEB-2.0%E2%80%94%E2%80%94Workthrough/</loc>
     
-    <lastmod>2020-03-11T10:07:19.219Z</lastmod>
+    <lastmod>2020-03-11T14:20:43.226Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/09/19/CVE-2019-0708%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</loc>
+    
+    <lastmod>2020-03-11T14:09:11.649Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2018/10/16/CVE-2017-11882%E6%BC%8F%E6%B4%9E(word%E6%96%87%E6%A1%A3%E6%8D%86%E7%BB%91)%E5%A4%8D%E7%8E%B0/</loc>
+    
+    <lastmod>2020-03-11T14:00:01.414Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2018/10/05/%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</loc>
+    
+    <lastmod>2020-03-11T13:44:14.338Z</lastmod>
     
   </url>
   
   <url>
     <loc>/2020/03/01/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E6%88%98/</loc>
     
-    <lastmod>2020-03-11T10:07:18.539Z</lastmod>
+    <lastmod>2020-03-11T10:18:34.882Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2018/12/16/%E7%9F%A5%E8%AF%86%E8%A1%A8%E7%A4%BA/</loc>
+    
+    <lastmod>2020-03-11T10:07:19.219Z</lastmod>
     
   </url>
   
@@ -229,13 +257,6 @@
     <loc>/2020/02/12/AI-WEB-1.0%E2%80%94%E2%80%94Workthrough/</loc>
     
     <lastmod>2020-02-17T01:56:27.174Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>/2020/02/13/AI-WEB-2.0%E2%80%94%E2%80%94Workthrough/</loc>
-    
-    <lastmod>2020-02-16T14:21:14.602Z</lastmod>
     
   </url>
   
