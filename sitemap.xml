@@ -2,6 +2,83 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>/2019/12/21/Android%E5%AD%A6%E4%B9%A0(%E5%8D%81%E4%B8%80)%EF%BC%9Ahandler%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6/</loc>
+    
+    <lastmod>2020-03-12T08:33:12.181Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/11/29/Android%E5%AD%A6%E4%B9%A0(%E5%8D%81)%EF%BC%9ABroadcastReceive%E4%BB%A5%E5%8F%8ARunable/</loc>
+    
+    <lastmod>2020-03-12T08:33:10.043Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/09/25/Android%E5%AD%A6%E4%B9%A0(%E4%BA%94)%EF%BC%9AAndroid%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E9%9B%86/</loc>
+    
+    <lastmod>2020-03-12T08:32:12.251Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/09/24/Android%E5%AD%A6%E4%B9%A0(%E5%9B%9B)%EF%BC%9A%E6%8E%A7%E5%88%B6UI%E7%95%8C%E9%9D%A2%E5%B8%83%E5%B1%80/</loc>
+    
+    <lastmod>2020-03-12T08:31:51.208Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/09/23/Android%E5%AD%A6%E4%B9%A0(%E4%B8%89)%EF%BC%9A%E8%AE%A4%E8%AF%86Android%E7%9A%84view:ViewGroup/</loc>
+    
+    <lastmod>2020-03-12T08:31:47.947Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/10/18/Android%E5%AD%A6%E4%B9%A0(%20%E4%B9%9D)%EF%BC%9A%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+    
+    <lastmod>2020-03-12T08:01:27.303Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/10/17/Android%E5%AD%A6%E4%B9%A0(%20%E5%85%AB)%EF%BC%9AIntent/</loc>
+    
+    <lastmod>2020-03-12T08:00:36.369Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/10/11/Android%E5%AD%A6%E4%B9%A0(%E4%B8%83)%EF%BC%9A%E6%96%87%E6%9C%AC%E4%B8%8E%E6%8C%89%E9%92%AE%E5%AE%9E%E7%8E%B0/</loc>
+    
+    <lastmod>2020-03-12T07:59:39.234Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/09/26/Android%E5%AD%A6%E4%B9%A0(%E5%85%AD)%EF%BC%9A%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86/</loc>
+    
+    <lastmod>2020-03-12T07:58:04.924Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/09/22/Android%E5%AD%A6%E4%B9%A0(%E4%BA%8C)%EF%BC%9A%E8%BF%9E%E6%8E%A5%E6%89%8B%E6%9C%BA%E8%BF%90%E8%A1%8C%E5%BA%94%E7%94%A8/</loc>
+    
+    <lastmod>2020-03-12T07:38:40.186Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>/2019/09/21/Android%E5%AD%A6%E4%B9%A0(%E4%B8%80)%EF%BC%9A%E5%AE%89%E8%A3%85%E5%8F%8A%E8%BF%90%E8%A1%8ChelloWord%E7%A8%8B%E5%BA%8F/</loc>
+    
+    <lastmod>2020-03-12T07:37:26.764Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>/2019/10/04/JAVA%E5%AD%A6%E4%B9%A0(%E5%85%AD)---java%E6%96%B9%E6%B3%95/</loc>
     
     <lastmod>2020-03-12T07:29:52.788Z</lastmod>
