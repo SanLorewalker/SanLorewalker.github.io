@@ -144,6 +144,252 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-机器学习--分类模型原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/02/机器学习--分类模型原理/">机器学习--分类模型原理</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/02/机器学习--分类模型原理/" class="archive-article-date">
+  	<time datetime="2019-04-02T07:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Logistic-Regression-逻辑回归"><a href="#Logistic-Regression-逻辑回归" class="headerlink" title="Logistic Regression (逻辑回归)"></a>Logistic Regression (逻辑回归)</h1><p><img src="/2019/04/02/机器学习--分类模型原理/15.png" alt="15"></p>
+<p>现实生活中的收集到的数据不是都能利用线性回归模型来拟合的，比如上图所示。上图的数据是一些离散的点，对应的应变量只有两个值：要么是0，要么是1。<font color="red">这就是分类问题的显著特点</font></p>
+<p>上图利用简单线性回归模型拟合出来的结果并不是很好，很显然，<font color="red">线性模型不适用与分类问题！</font></p>
+<p><font color="red">在分类问题里有一个重要的观点，预测应变量的值的实际效果是不如预测应变量等于某个值得概率！</font>比如说：当Age = 50 的时候，对应在线性模型中的应变量值为0.68，那么我们就可以说，Age = 50时，y = 1的概率为0.68</p>
+        
+          <a class="article-more-a" href="/2019/04/02/机器学习--分类模型原理/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/02/机器学习--分类模型原理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-机器学习--聚类模型原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/02/机器学习--聚类模型原理/">机器学习--聚类模型原理</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/02/机器学习--聚类模型原理/" class="archive-article-date">
+  	<time datetime="2019-04-02T07:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="K-Means-K平均"><a href="#K-Means-K平均" class="headerlink" title="K-Means(K平均)"></a>K-Means(K平均)</h1><p><img src="/2019/04/02/机器学习--聚类模型原理/65.png" alt="65"></p>
+<h3 id="K-means算法步骤"><a href="#K-means算法步骤" class="headerlink" title="K-means算法步骤"></a>K-means算法步骤</h3><p>步骤一：</p>
+<p>​    选择想要分类的个数 K</p>
+<p>步骤二：</p>
+<p>​    在平面中随机选择K个点，这K个点会当做为初始化的中心点(不需要是数据集中的数据，可以是数据空间中的K个随机点)</p>
+<p>步骤三：</p>
+<p>​    对于数据集中的每一个点，要确定这些点属于K个初始化中心点所对应的哪一类(K个中心点就定义了K个类别)，对数据集的每一个点进行分类的确定，即将数据集中的每一个点分配给中心点确定的K个类(一般根据欧式距离来确定所属的类)</p>
+<p>步骤四：</p>
+<p>​    重新选择K个的中心点</p>
+<p>步骤五：</p>
+<p>​    1.如果中心点对于数据集分配的结果和之前分配的结果是相同的，那么就找到了最佳的聚类结果</p>
+<p>​    2.如果中心点对于数据集分配的结果和之前分配的结果是不相同的，那么跳转到步骤三进行循环</p>
+        
+          <a class="article-more-a" href="/2019/04/02/机器学习--聚类模型原理/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/02/机器学习--聚类模型原理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-机器学习--回归分析原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/12/机器学习--回归分析原理/">机器学习--回归分析原理</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/12/机器学习--回归分析原理/" class="archive-article-date">
+  	<time datetime="2019-03-12T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Simple-Linesar-Regression-简单线性回归"><a href="#Simple-Linesar-Regression-简单线性回归" class="headerlink" title="Simple Linesar Regression(简单线性回归)"></a>Simple Linesar Regression(简单线性回归)</h1><h3 id="标准模板："><a href="#标准模板：" class="headerlink" title="标准模板："></a>标准模板：</h3><p>$$<br>y = b_{0} + b_{1}*x<br>$$</p>
+<p>y：    Dependent variable(DV，应变量)</p>
+<p>x1:     Independent variable(IV, 自变量)</p>
+<p>b1:    Conefficient(参数)</p>
+<p>b0:    Constant(常数)</p>
+        
+          <a class="article-more-a" href="/2019/03/12/机器学习--回归分析原理/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">人工智能</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/12/机器学习--回归分析原理/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PySpark_基础与推荐模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -786,86 +1032,9 @@
 
 
   
-    <article id="post-永恒之蓝漏洞复现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/05/永恒之蓝漏洞复现/">永恒之蓝漏洞复现</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/05/永恒之蓝漏洞复现/" class="archive-article-date">
-  	<time datetime="2018-10-05T13:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="永恒之蓝介绍"><a href="#永恒之蓝介绍" class="headerlink" title="永恒之蓝介绍"></a>永恒之蓝介绍</h3><p>​    永恒之蓝（英语：EternalBlue）是美国国家安全局开发的漏洞利用程序，于2017年4月14日被黑客组织影子掮客泄漏。该工具利用445/TCP端口的档案分享协议的漏洞进行散播</p>
-<p>​    “永恒之蓝”可远程攻击Windows的445端口（文件共享），如果系统没有安装今年3月的微软补丁（MS17-010），无需用户任何操作，只要开机上网，“永恒之蓝”就能在电脑里执行任意代码，植入勒索病毒等恶意程序</p>
-        
-          <a class="article-more-a" href="/2018/10/05/永恒之蓝漏洞复现/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">漏洞复现</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/05/永恒之蓝漏洞复现/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
+      <a class="extend prev" rel="prev" href="/page/9/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">Next &raquo;</a>
     </nav>
   
 
@@ -986,19 +1155,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Docker容器</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Python_Hacker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">CTF靶机系列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1010,6 +1171,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Python_Hacker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">知识图谱</a>
               </li>
              
@@ -1018,11 +1187,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">人工智能</a>
+                <a href="javascript:void(0)" class="js-tag color4">区块链</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">区块链</a>
+                <a href="javascript:void(0)" class="js-tag color5">人工智能</a>
               </li>
              
               <li class="article-tag-list-item">
